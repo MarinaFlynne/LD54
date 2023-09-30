@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://brrda866lga7a"]
+[gd_scene load_steps=9 format=3 uid="uid://brrda866lga7a"]
 
 [ext_resource type="Script" path="res://Scenes/catching_game.gd" id="1_ifqeg"]
 [ext_resource type="Texture2D" uid="uid://kg5ow8xmuoah" path="res://Sprites/CatchingGame/outerCircleBorder.png" id="2_dtblr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c4sw8uf01cfjf" path="res://Sprites/CatchingGame/InnerCircle.png" id="4_u85qu"]
 [ext_resource type="Texture2D" uid="uid://b8c5xb4ljr7p4" path="res://Sprites/CatchingGame/arrow.png" id="5_umdod"]
 [ext_resource type="Texture2D" uid="uid://bnadpud76cfna" path="res://Sprites/CatchingGame/heart_grey.png" id="6_jqkgm"]
+[ext_resource type="Texture2D" uid="uid://c7gfrmb0ulgqn" path="res://Sprites/CatchingGame/heart_red.png" id="7_ulxp7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnjj0"]
 size = Vector2(3, 7)
@@ -14,8 +15,9 @@ size = Vector2(3, 7)
 position = Vector2(296, 188)
 scale = Vector2(3, 3)
 script = ExtResource("1_ifqeg")
-rotation_speed = 100
+rotation_speed = 200
 rects_list = [[0.8, 90], [1.0, 240], [1.5, 0]]
+metadata/_edit_group_ = true
 
 [node name="OuterCircle" type="Sprite2D" parent="."]
 texture = ExtResource("3_pwfat")
@@ -35,6 +37,8 @@ position = Vector2(0, -20)
 texture = ExtResource("5_umdod")
 
 [node name="ArrowCollider" type="Area2D" parent="ArrowPivot"]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArrowPivot/ArrowCollider"]
 position = Vector2(0, -28.5)
@@ -46,15 +50,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -35.6667
-offset_right = 36.0
-offset_bottom = 35.3333
+offset_left = -16.0
+offset_top = -11.0
+offset_right = 15.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-value = 50.0
+value = 1.0
 fill_mode = 3
 texture_under = ExtResource("6_jqkgm")
+texture_progress = ExtResource("7_ulxp7")
 
 [connection signal="area_entered" from="ArrowPivot/ArrowCollider" to="." method="_on_arrow_collider_area_entered"]
 [connection signal="area_exited" from="ArrowPivot/ArrowCollider" to="." method="_on_arrow_collider_area_exited"]
+[connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]

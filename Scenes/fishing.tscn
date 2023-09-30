@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://oufcurw8k2ex"]
+
+[ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/sky_afternoon.png" id="1_0w343"]
+[ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
+[ext_resource type="Texture2D" uid="uid://mh76swdkx38a" path="res://Sprites/Ocean/ocean_afternoon.png" id="2_7ns47"]
+[ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/sky_morning.png" id="3_kcujd"]
+[ext_resource type="Texture2D" uid="uid://p4kkwxmpuwro" path="res://Sprites/CatchingGame/rod.png" id="3_psujj"]
+[ext_resource type="Texture2D" uid="uid://bb6crnvqyaum7" path="res://Sprites/sky_night.png" id="4_2kxdc"]
+[ext_resource type="Texture2D" uid="uid://c3b0vjhrsjpj4" path="res://Sprites/Ocean/ocean_morning.png" id="5_fv55p"]
+[ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
+[ext_resource type="Texture2D" uid="uid://dkq7fhwckrala" path="res://Sprites/Ocean/ocean_night.png" id="7_g1gey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pniyi"]
+size = Vector2(1154, 408)
+
+[node name="Fishing" type="Node2D"]
+script = ExtResource("1_cb4ro")
+
+[node name="SkyAfternoon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("1_0w343")
+
+[node name="SkyMorning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("3_kcujd")
+
+[node name="SkyNight" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("4_2kxdc")
+
+[node name="OceanAfternoon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("2_7ns47")
+
+[node name="OceanMorning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("5_fv55p")
+
+[node name="OceanNight" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("7_g1gey")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="WaterCollider" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterCollider"]
+position = Vector2(575, 444)
+shape = SubResource("RectangleShape2D_pniyi")
+
+[node name="FishingRod" type="Sprite2D" parent="."]
+position = Vector2(944, 208)
+scale = Vector2(3, 3)
+texture = ExtResource("3_psujj")
+
+[node name="AttachPoint" type="Node2D" parent="FishingRod"]
+position = Vector2(-16, -3.33334)
+
+[node name="FishingLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 3.0
+default_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="Hook" parent="." instance=ExtResource("5_s578x")]
+position = Vector2(828, 169)
+
+[node name="Throw" type="Button" parent="."]
+offset_left = 98.0
+offset_top = 19.0
+offset_right = 155.0
+offset_bottom = 50.0
+text = "Throw"
+
+[node name="Reload" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 81.0
+offset_bottom = 48.0
+text = "Reload"
+
+[connection signal="body_entered" from="WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
+[connection signal="body_exited" from="WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
+[connection signal="pressed" from="Throw" to="Hook" method="_on_button_pressed"]
