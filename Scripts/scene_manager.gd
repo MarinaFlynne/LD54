@@ -16,8 +16,6 @@ var m_CurrentSceneAlias: String = ""
 # Description: Find the initial scene as defined in the project settings
 func _ready() -> void:
 	var mainScene : StringName = ProjectSettings.get_setting("application/run/main_scene")
-	print(mainScene)
-	print(Scenes.find_key(mainScene))
 	m_CurrentSceneAlias = Scenes.find_key(mainScene)
 
 # Description: Add a new scene to the scene collection

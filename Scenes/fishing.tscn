@@ -1,51 +1,484 @@
-[gd_scene load_steps=11 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=112 format=3 uid="uid://oufcurw8k2ex"]
 
-[ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/sky_afternoon.png" id="1_0w343"]
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://mh76swdkx38a" path="res://Sprites/Ocean/ocean_afternoon.png" id="2_7ns47"]
-[ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/sky_morning.png" id="3_kcujd"]
+[ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
+[ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/Sky/sky_morning.png" id="3_nd2gq"]
 [ext_resource type="Texture2D" uid="uid://p4kkwxmpuwro" path="res://Sprites/CatchingGame/rod.png" id="3_psujj"]
-[ext_resource type="Texture2D" uid="uid://bb6crnvqyaum7" path="res://Sprites/sky_night.png" id="4_2kxdc"]
+[ext_resource type="Texture2D" uid="uid://b4l5v5dy4jf4m" path="res://Sprites/Sky/Night/frame_000_delay-0.2s.png" id="4_e07kt"]
 [ext_resource type="Texture2D" uid="uid://c3b0vjhrsjpj4" path="res://Sprites/Ocean/ocean_morning.png" id="5_fv55p"]
 [ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
+[ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
+[ext_resource type="Texture2D" uid="uid://banynmad34o0f" path="res://Sprites/Sky/Night/frame_002_delay-0.2s.png" id="6_2thhj"]
 [ext_resource type="Texture2D" uid="uid://dkq7fhwckrala" path="res://Sprites/Ocean/ocean_night.png" id="7_g1gey"]
+[ext_resource type="Texture2D" uid="uid://dknlcakiounox" path="res://Sprites/Sky/Night/frame_003_delay-0.2s.png" id="7_v0v41"]
+[ext_resource type="Texture2D" uid="uid://chq8ed2jo0j03" path="res://Sprites/Sky/Night/frame_004_delay-0.2s.png" id="8_lgorf"]
+[ext_resource type="Texture2D" uid="uid://fy30pu4clpno" path="res://Sprites/Sky/Night/frame_005_delay-0.2s.png" id="9_06gj2"]
+[ext_resource type="Texture2D" uid="uid://by76btbgtf1n0" path="res://Sprites/Sky/clouds_afternoon.png" id="10_c2qv7"]
+[ext_resource type="Texture2D" uid="uid://4ysgp5ke6p0b" path="res://Sprites/Sky/Night/frame_006_delay-0.2s.png" id="10_jp8tj"]
+[ext_resource type="Texture2D" uid="uid://bai7upim01vc8" path="res://Sprites/Sky/Night/frame_007_delay-0.2s.png" id="11_ulgsx"]
+[ext_resource type="Texture2D" uid="uid://b5lqkocmv3owy" path="res://Sprites/Sky/Night/frame_008_delay-0.2s.png" id="12_gcxdm"]
+[ext_resource type="Texture2D" uid="uid://da6itpw5c78kr" path="res://Sprites/Sky/Night/frame_009_delay-0.2s.png" id="13_qwpas"]
+[ext_resource type="Texture2D" uid="uid://bl4dj65o0ihn7" path="res://Sprites/Sky/Night/frame_010_delay-0.2s.png" id="14_an38y"]
+[ext_resource type="Texture2D" uid="uid://bfk1r72j7yo28" path="res://Sprites/Sky/Night/frame_011_delay-0.2s.png" id="15_jk8cv"]
+[ext_resource type="Texture2D" uid="uid://l1jeoxqkn5uo" path="res://Sprites/Sky/Night/frame_012_delay-0.2s.png" id="16_l0ay5"]
+[ext_resource type="Texture2D" uid="uid://c23n3powmytr" path="res://Sprites/Sky/Night/frame_013_delay-0.2s.png" id="17_2aov7"]
+[ext_resource type="Texture2D" uid="uid://daymised3xhhp" path="res://Sprites/Sky/Night/frame_014_delay-0.2s.png" id="18_to70v"]
+[ext_resource type="Texture2D" uid="uid://ccsmdwxbow0qs" path="res://Sprites/Sky/Night/frame_015_delay-0.2s.png" id="19_3mglq"]
+[ext_resource type="Texture2D" uid="uid://bxuehudg7xqtf" path="res://Sprites/Sky/Night/frame_016_delay-0.2s.png" id="20_p0g44"]
+[ext_resource type="Texture2D" uid="uid://beer21o6o5cu0" path="res://Sprites/Sky/Night/frame_017_delay-0.2s.png" id="21_r7634"]
+[ext_resource type="Texture2D" uid="uid://3hs3ykmsrldj" path="res://Sprites/Sky/Night/frame_018_delay-0.2s.png" id="22_exvy4"]
+[ext_resource type="Texture2D" uid="uid://d1glx1brn1gbm" path="res://Sprites/Sky/Night/frame_019_delay-0.2s.png" id="23_c4jpj"]
+[ext_resource type="Texture2D" uid="uid://fgjbjghxew26" path="res://Sprites/Sky/Night/frame_020_delay-0.2s.png" id="24_fv3e7"]
+[ext_resource type="Texture2D" uid="uid://covfnf2x5ygol" path="res://Sprites/Sky/Night/frame_021_delay-0.2s.png" id="25_xvtbb"]
+[ext_resource type="Texture2D" uid="uid://bscgs7q6jk8ux" path="res://Sprites/Sky/Night/frame_022_delay-0.2s.png" id="26_ffrx7"]
+[ext_resource type="Texture2D" uid="uid://b3nxtlr100anw" path="res://Sprites/Sky/Night/frame_023_delay-0.2s.png" id="27_6sdf7"]
+[ext_resource type="Texture2D" uid="uid://belckoxoji76q" path="res://Sprites/Sky/Night/frame_024_delay-0.2s.png" id="28_uq2ca"]
+[ext_resource type="Texture2D" uid="uid://bgkgwcximq2iq" path="res://Sprites/Sky/Night/frame_025_delay-0.2s.png" id="29_8d34i"]
+[ext_resource type="Texture2D" uid="uid://6j8iqynmnbqj" path="res://Sprites/Sky/Night/frame_026_delay-0.2s.png" id="30_v2o6u"]
+[ext_resource type="Texture2D" uid="uid://c8dr17k240q8o" path="res://Sprites/Sky/Night/frame_027_delay-0.2s.png" id="31_qjk5v"]
+[ext_resource type="Texture2D" uid="uid://bslq61hjt6pkf" path="res://Sprites/Sky/Night/frame_028_delay-0.2s.png" id="32_h8ntv"]
+[ext_resource type="Texture2D" uid="uid://dxurp7fl21jvp" path="res://Sprites/Sky/Night/frame_029_delay-0.2s.png" id="33_71no2"]
+[ext_resource type="Texture2D" uid="uid://cy8euartn4d0k" path="res://Sprites/Sky/Night/frame_030_delay-0.2s.png" id="34_ct5aa"]
+[ext_resource type="Texture2D" uid="uid://dk0tfdxeq245v" path="res://Sprites/Sky/Night/frame_031_delay-0.2s.png" id="35_xwkdo"]
+[ext_resource type="Texture2D" uid="uid://bjukxutq43mey" path="res://Sprites/Sky/Night/frame_032_delay-0.2s.png" id="36_4w7pb"]
+[ext_resource type="Texture2D" uid="uid://dghrl224av8fn" path="res://Sprites/Sky/Night/frame_033_delay-0.2s.png" id="37_opjwx"]
+[ext_resource type="Texture2D" uid="uid://ctcugx0nccoml" path="res://Sprites/Sky/Night/frame_034_delay-0.2s.png" id="38_rlfa1"]
+[ext_resource type="Texture2D" uid="uid://du3xaonx031na" path="res://Sprites/Sky/Night/frame_035_delay-0.2s.png" id="39_e8sxf"]
+[ext_resource type="Texture2D" uid="uid://w2jggt8fwdb4" path="res://Sprites/Sky/Night/frame_036_delay-0.2s.png" id="40_ucfal"]
+[ext_resource type="Texture2D" uid="uid://dfb8jymk7v4u5" path="res://Sprites/Sky/Night/frame_037_delay-0.2s.png" id="41_3eyry"]
+[ext_resource type="Texture2D" uid="uid://dywfhhoxmts3n" path="res://Sprites/Sky/Night/frame_038_delay-0.2s.png" id="42_8lwh6"]
+[ext_resource type="Texture2D" uid="uid://cp64bh1ovi8v5" path="res://Sprites/Sky/Night/frame_039_delay-0.2s.png" id="43_iamrd"]
+[ext_resource type="Texture2D" uid="uid://dr6koxnhij82j" path="res://Sprites/Sky/Night/frame_040_delay-0.2s.png" id="44_28b2y"]
+[ext_resource type="Texture2D" uid="uid://ce6pnw6dgusgk" path="res://Sprites/Sky/Night/frame_041_delay-0.2s.png" id="45_g103i"]
+[ext_resource type="Texture2D" uid="uid://cqjlib0txhx4s" path="res://Sprites/Sky/Night/frame_042_delay-0.2s.png" id="46_gk8fm"]
+[ext_resource type="Texture2D" uid="uid://bs70upst2gf4y" path="res://Sprites/Sky/Night/frame_043_delay-0.2s.png" id="47_qjp1q"]
+[ext_resource type="Texture2D" uid="uid://dydad3eedoi5t" path="res://Sprites/Sky/Night/frame_044_delay-0.2s.png" id="48_65cf8"]
+[ext_resource type="Texture2D" uid="uid://d0v46f4x87n8l" path="res://Sprites/Sky/Night/frame_045_delay-0.2s.png" id="49_qvuy6"]
+[ext_resource type="Texture2D" uid="uid://omplbcs025ac" path="res://Sprites/Sky/Night/frame_046_delay-0.2s.png" id="50_onj3x"]
+[ext_resource type="Texture2D" uid="uid://ckl62tbqups07" path="res://Sprites/Sky/Night/frame_047_delay-0.2s.png" id="51_b5scu"]
+[ext_resource type="Texture2D" uid="uid://c0wtr84j8jft7" path="res://Sprites/Sky/Night/frame_048_delay-0.2s.png" id="52_ka736"]
+[ext_resource type="Texture2D" uid="uid://x5ljoqrgflu" path="res://Sprites/Sky/Night/frame_049_delay-0.2s.png" id="53_hvb5i"]
+[ext_resource type="Texture2D" uid="uid://dv7wmu0h87iul" path="res://Sprites/Sky/Night/frame_050_delay-0.2s.png" id="54_55qud"]
+[ext_resource type="Texture2D" uid="uid://cv3xeg4w8hj2x" path="res://Sprites/Sky/Night/frame_051_delay-0.2s.png" id="55_13yie"]
+[ext_resource type="Texture2D" uid="uid://cu144w8r5vkrx" path="res://Sprites/Sky/Night/frame_052_delay-0.2s.png" id="56_ftcui"]
+[ext_resource type="Texture2D" uid="uid://dkd3sd2qu6m5" path="res://Sprites/Sky/Night/frame_053_delay-0.2s.png" id="57_10wwf"]
+[ext_resource type="Texture2D" uid="uid://wcj7dlflyq1" path="res://Sprites/Sky/Night/frame_054_delay-0.2s.png" id="58_hwt5f"]
+[ext_resource type="Texture2D" uid="uid://70rg2je7mom6" path="res://Sprites/Sky/Night/frame_055_delay-0.2s.png" id="59_6h48o"]
+[ext_resource type="Texture2D" uid="uid://bivv1xwmbuka2" path="res://Sprites/Sky/Night/frame_056_delay-0.2s.png" id="60_imlci"]
+[ext_resource type="Texture2D" uid="uid://dug1pfph33dr1" path="res://Sprites/Sky/Night/frame_057_delay-0.2s.png" id="61_emfl3"]
+[ext_resource type="Texture2D" uid="uid://be5qomueugni0" path="res://Sprites/Sky/Night/frame_058_delay-0.2s.png" id="62_pt4s4"]
+[ext_resource type="Texture2D" uid="uid://se56e7bld6ku" path="res://Sprites/Sky/Night/frame_059_delay-0.2s.png" id="63_5jx3u"]
+[ext_resource type="Texture2D" uid="uid://ulsefg3aausx" path="res://Sprites/Sky/Night/frame_060_delay-0.2s.png" id="64_288oj"]
+[ext_resource type="Texture2D" uid="uid://bj003nogy2elj" path="res://Sprites/Sky/Night/frame_061_delay-0.2s.png" id="65_0rrwn"]
+[ext_resource type="Texture2D" uid="uid://clnn6ojyj0hwg" path="res://Sprites/Sky/Night/frame_062_delay-0.2s.png" id="66_xr36y"]
+[ext_resource type="Texture2D" uid="uid://bmkrpobw0aiam" path="res://Sprites/Sky/Night/frame_063_delay-0.2s.png" id="67_q3cmo"]
+[ext_resource type="Texture2D" uid="uid://bpdh7a50pe5ld" path="res://Sprites/Sky/Night/frame_064_delay-0.2s.png" id="68_rrq8q"]
+[ext_resource type="Texture2D" uid="uid://cuq6pih8df7l1" path="res://Sprites/Sky/Night/frame_065_delay-0.2s.png" id="69_j0hi8"]
+[ext_resource type="Texture2D" uid="uid://c42wjxaaepsy8" path="res://Sprites/Sky/Night/frame_066_delay-0.2s.png" id="70_2jyr2"]
+[ext_resource type="Texture2D" uid="uid://b10ogkrhwheh3" path="res://Sprites/Sky/Night/frame_067_delay-0.2s.png" id="71_iunb1"]
+[ext_resource type="Texture2D" uid="uid://djv6lyluikeg" path="res://Sprites/Sky/Night/frame_068_delay-0.2s.png" id="72_1x3qb"]
+[ext_resource type="Texture2D" uid="uid://cdyxnda8sbvpt" path="res://Sprites/Sky/Night/frame_069_delay-0.2s.png" id="73_4sicv"]
+[ext_resource type="Texture2D" uid="uid://cj05jd1r6i2iy" path="res://Sprites/Sky/Night/frame_070_delay-0.2s.png" id="74_ntdh3"]
+[ext_resource type="Texture2D" uid="uid://c01y1tqy30w35" path="res://Sprites/Sky/Night/frame_071_delay-0.2s.png" id="75_wem5i"]
+[ext_resource type="Texture2D" uid="uid://2fosmjkaeb62" path="res://Sprites/Sky/Night/frame_072_delay-0.2s.png" id="76_i2cta"]
+[ext_resource type="Texture2D" uid="uid://dtt38axlkddb6" path="res://Sprites/Sky/Night/frame_073_delay-0.2s.png" id="77_qxey4"]
+[ext_resource type="Texture2D" uid="uid://uv7f6fvs1f3k" path="res://Sprites/Sky/Night/frame_074_delay-0.2s.png" id="78_dt714"]
+[ext_resource type="Texture2D" uid="uid://cura2hpl6bwis" path="res://Sprites/Sky/Night/frame_075_delay-0.2s.png" id="79_kqjb2"]
+[ext_resource type="Texture2D" uid="uid://ca7xsdbctsgg8" path="res://Sprites/Sky/Night/frame_076_delay-0.2s.png" id="80_gx3ox"]
+[ext_resource type="Texture2D" uid="uid://ebwgbmgdwa7y" path="res://Sprites/Sky/Night/frame_077_delay-0.2s.png" id="81_j5uje"]
+[ext_resource type="Texture2D" uid="uid://dmygevvdb3b2o" path="res://Sprites/Sky/Night/frame_078_delay-0.2s.png" id="82_qksu3"]
+[ext_resource type="Texture2D" uid="uid://bcfhfrsspxpxf" path="res://Sprites/Sky/Night/frame_079_delay-0.2s.png" id="83_q6oju"]
+[ext_resource type="Texture2D" uid="uid://d2yvbx6wcl55c" path="res://Sprites/Sky/Night/frame_080_delay-0.2s.png" id="84_is462"]
+[ext_resource type="Texture2D" uid="uid://dw6fy2gru2kmh" path="res://Sprites/Sky/Night/frame_081_delay-0.2s.png" id="85_jeheq"]
+[ext_resource type="Texture2D" uid="uid://cgaarskngrop5" path="res://Sprites/Sky/Night/frame_082_delay-0.2s.png" id="86_ovldo"]
+[ext_resource type="Texture2D" uid="uid://ykdhlbmjpjsu" path="res://Sprites/Sky/Night/frame_083_delay-0.2s.png" id="87_bpsv8"]
+[ext_resource type="Texture2D" uid="uid://e8rjnpnh1ipw" path="res://Sprites/Sky/Night/frame_084_delay-0.2s.png" id="88_sbwas"]
+[ext_resource type="Texture2D" uid="uid://cdhbc00p5ivf7" path="res://Sprites/Sky/Night/frame_085_delay-0.2s.png" id="89_xindk"]
+[ext_resource type="Texture2D" uid="uid://bf8uqgj5cpi18" path="res://Sprites/Sky/Night/frame_086_delay-0.2s.png" id="90_brgi6"]
+[ext_resource type="Texture2D" uid="uid://ctuuv0fsyjxbw" path="res://Sprites/Sky/Night/frame_087_delay-0.2s.png" id="91_rm1kw"]
+[ext_resource type="Texture2D" uid="uid://du3tq1rqigwqa" path="res://Sprites/Sky/Night/frame_088_delay-0.2s.png" id="92_8e2mc"]
+[ext_resource type="Texture2D" uid="uid://cc5d6fx7selh2" path="res://Sprites/Sky/Night/frame_089_delay-0.2s.png" id="93_8xvxi"]
+[ext_resource type="Texture2D" uid="uid://c6v58bblmkgmq" path="res://Sprites/Sky/Night/frame_090_delay-0.2s.png" id="94_caxwu"]
+[ext_resource type="Texture2D" uid="uid://dd25ftnquac3j" path="res://Sprites/Sky/Night/frame_091_delay-0.2s.png" id="95_s6g2b"]
+[ext_resource type="Texture2D" uid="uid://cuy30rfbff11e" path="res://Sprites/Sky/Night/frame_092_delay-0.2s.png" id="96_ufqts"]
+[ext_resource type="Texture2D" uid="uid://w00l1bi2agga" path="res://Sprites/Sky/Night/frame_093_delay-0.2s.png" id="97_u0l0x"]
+[ext_resource type="Texture2D" uid="uid://dfyr3cooeq8ex" path="res://Sprites/Sky/Night/frame_094_delay-0.2s.png" id="98_ywe5r"]
+[ext_resource type="Texture2D" uid="uid://do5iqn540phue" path="res://Sprites/Sky/Night/frame_095_delay-0.2s.png" id="99_bqxyq"]
+[ext_resource type="Texture2D" uid="uid://dfnv7pt1gidua" path="res://Sprites/Sky/Night/frame_096_delay-0.2s.png" id="100_h4x3r"]
+[ext_resource type="Texture2D" uid="uid://ch73snhwf30mx" path="res://Sprites/Sky/Night/frame_097_delay-0.2s.png" id="101_neuuo"]
+[ext_resource type="Texture2D" uid="uid://c6d2x425ifxgl" path="res://Sprites/Sky/Night/frame_098_delay-0.2s.png" id="102_2ww5a"]
+[ext_resource type="Texture2D" uid="uid://cujfbrp14ax0i" path="res://Sprites/Sky/Night/frame_099_delay-0.2s.png" id="103_hh4w8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_e07kt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tvkf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2thhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_v0v41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lgorf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_06gj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jp8tj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ulgsx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gcxdm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_qwpas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an38y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jk8cv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_l0ay5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_2aov7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_to70v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3mglq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_p0g44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_r7634")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_exvy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_c4jpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_fv3e7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_xvtbb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ffrx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_6sdf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_uq2ca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_8d34i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_v2o6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_qjk5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_h8ntv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_71no2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_ct5aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_xwkdo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_4w7pb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_opjwx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_rlfa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_e8sxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_ucfal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_3eyry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_8lwh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_iamrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_28b2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_g103i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_gk8fm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_qjp1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_65cf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_qvuy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_onj3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_b5scu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_ka736")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_hvb5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_55qud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_13yie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_ftcui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_10wwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_hwt5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_6h48o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_imlci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_emfl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_pt4s4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_5jx3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_288oj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_0rrwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_xr36y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_q3cmo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_rrq8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_j0hi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_2jyr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_iunb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_1x3qb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_4sicv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_ntdh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_wem5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_i2cta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_qxey4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_dt714")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_kqjb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_gx3ox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_j5uje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_qksu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_q6oju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_is462")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_jeheq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_ovldo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_bpsv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_sbwas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_xindk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_brgi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_rm1kw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_8e2mc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_8xvxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_caxwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_s6g2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_ufqts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_u0l0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_ywe5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_bqxyq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_h4x3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_neuuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_2ww5a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_hh4w8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pniyi"]
 size = Vector2(1154, 408)
 
 [node name="Fishing" type="Node2D"]
 script = ExtResource("1_cb4ro")
+cloud_speed = 5
 
-[node name="SkyAfternoon" type="Sprite2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
+
+[node name="SkyAfternoon" type="Sprite2D" parent="Background"]
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
-texture = ExtResource("1_0w343")
+texture = ExtResource("2_oqc3f")
 
-[node name="SkyMorning" type="Sprite2D" parent="."]
+[node name="SkyMorning" type="Sprite2D" parent="Background"]
 visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
-texture = ExtResource("3_kcujd")
+texture = ExtResource("3_nd2gq")
 
-[node name="SkyNight" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(576, 324)
+[node name="SkyNight" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(576, 232)
 scale = Vector2(3, 3)
-texture = ExtResource("4_2kxdc")
+sprite_frames = SubResource("SpriteFrames_4yu7h")
+autoplay = "default"
 
-[node name="OceanAfternoon" type="Sprite2D" parent="."]
+[node name="Clouds" type="Node2D" parent="."]
+visible = false
+
+[node name="Cloud1" type="Node2D" parent="Clouds"]
+
+[node name="Afternoon" type="Sprite2D" parent="Clouds/Cloud1"]
+texture_repeat = 2
+position = Vector2(0, 103)
+scale = Vector2(3, 3)
+texture = ExtResource("10_c2qv7")
+
+[node name="Cloud2" type="Node2D" parent="Clouds"]
+position = Vector2(-2304, 0)
+
+[node name="Afternoon2" type="Sprite2D" parent="Clouds/Cloud2"]
+texture_repeat = 2
+position = Vector2(0, 103)
+scale = Vector2(3, 3)
+texture = ExtResource("10_c2qv7")
+
+[node name="Ocean" type="Node2D" parent="."]
+
+[node name="OceanAfternoon" type="Sprite2D" parent="Ocean"]
 visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("2_7ns47")
 
-[node name="OceanMorning" type="Sprite2D" parent="."]
+[node name="OceanMorning" type="Sprite2D" parent="Ocean"]
+visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("5_fv55p")
 
-[node name="OceanNight" type="Sprite2D" parent="."]
-visible = false
+[node name="OceanNight" type="Sprite2D" parent="Ocean"]
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("7_g1gey")

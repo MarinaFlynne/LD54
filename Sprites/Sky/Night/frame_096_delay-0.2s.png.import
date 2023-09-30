@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6hk6ecx8jbyh"
-path="res://.godot/imported/sky_afternoon.png-5920212dd880edfbbd114440361a202a.ctex"
+uid="uid://dfnv7pt1gidua"
+path="res://.godot/imported/frame_096_delay-0.2s.png-e4753554600d98b1441788a415cf7778.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/sky_afternoon.png"
-dest_files=["res://.godot/imported/sky_afternoon.png-5920212dd880edfbbd114440361a202a.ctex"]
+source_file="res://Sprites/Sky/Night/frame_096_delay-0.2s.png"
+dest_files=["res://.godot/imported/frame_096_delay-0.2s.png-e4753554600d98b1441788a415cf7778.ctex"]
 
 [params]
 
