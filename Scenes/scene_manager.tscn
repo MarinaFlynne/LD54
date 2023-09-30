@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7slxuevj50a0"]
+
+[ext_resource type="Script" path="res://Scripts/scene_manager.gd" id="1_8kyoy"]
+
+[node name="SceneManager" type="Node"]
+script = ExtResource("1_8kyoy")
+Scenes = {
+"fishing": &"res://Scenes/fishing.tscn",
+"main_menu": &"res://Scenes/main_menu.tscn"
+}

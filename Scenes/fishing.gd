@@ -20,5 +20,5 @@ func update_fishing_line():
 	$FishingLine.set_point_position(1, hook_point)
 
 
-func _on_button_pressed():
-	pass # Replace with function body.
+func _on_reload_pressed():
+	SceneManager.RestartScene()
