@@ -1,0 +1,130 @@
+[gd_scene load_steps=18 format=3 uid="uid://g5frwl5ljc6t"]
+
+[ext_resource type="Texture2D" uid="uid://bktrinvtlomam" path="res://Sprites/Fish/OrangeFish.png" id="1_qqssx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mwy0e"]
+bounce = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fu8x"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(0, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0gdq"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(31, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52iak"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(62, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obnbb"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(93, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6vgx"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(124, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s86nn"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(155, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mifub"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(186, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_263rl"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(217, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gqoy"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(248, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38kal"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(279, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_816ju"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(310, 0, 29, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q5bu"]
+atlas = ExtResource("1_qqssx")
+region = Rect2(341, 0, 29, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rs4rj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fu8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0gdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52iak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obnbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6vgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s86nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mifub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_263rl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gqoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38kal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_816ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q5bu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5m4u"]
+radius = 29.0
+height = 58.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i77gy"]
+radius = 14.0
+height = 42.0
+
+[node name="Fish1" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 80
+physics_material_override = SubResource("PhysicsMaterial_mwy0e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_rs4rj")
+autoplay = "default"
+frame = 9
+frame_progress = 0.738552
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-15, 1)
+rotation = 1.57171
+shape = SubResource("CapsuleShape2D_a5m4u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(21, 9)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_i77gy")

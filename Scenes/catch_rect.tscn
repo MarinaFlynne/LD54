@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvixkdkopirmb"]
 
-[ext_resource type="Script" path="res://CatchRect.gd" id="1_m460l"]
+[ext_resource type="Script" path="res://Scenes/CatchRect.gd" id="1_m460l"]
 [ext_resource type="Texture2D" uid="uid://djph3i8hd1f3e" path="res://Sprites/CatchingGame/rect.png" id="2_0xevu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5scox"]

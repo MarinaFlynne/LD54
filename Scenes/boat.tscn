@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcw5nev1y8mrt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nox"]
+size = Vector2(400, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf3w7"]
+radius = 16.0
+height = 96.0
+
+[node name="Boat" type="StaticBody2D"]
+collision_layer = 64
+collision_mask = 16
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 400.0
+offset_bottom = 20.0
+color = Color(0.254902, 0.180392, 0.172549, 1)
+
+[node name="RectangleCollision" type="CollisionShape2D" parent="."]
+position = Vector2(200, 10)
+shape = SubResource("RectangleShape2D_l0nox")
+
+[node name="WallCollision" type="CollisionShape2D" parent="."]
+position = Vector2(8, -24)
+shape = SubResource("CapsuleShape2D_rf3w7")
+
+[node name="WallCollision2" type="CollisionShape2D" parent="."]
+position = Vector2(392, -24)
+shape = SubResource("CapsuleShape2D_rf3w7")

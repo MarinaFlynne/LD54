@@ -13,6 +13,8 @@ var time = 0
 @export var AfternoonCloudPlayers: Array[NodePath]
 
 @export var cloud_speed = 200
+# controls the dampening for rigid body fish when they land in the water
+@export var rigid_fish_water_dampen = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -96,3 +98,11 @@ func _on_s_clock_timeout():
 		for path in AfternoonCloudPlayers:
 			var Aniplayer = get_node(path)
 			Aniplayer.play("FadeFast")
+
+
+func _on_fish_collider_body_entered(body):
+	# Fish rigidbody collision with water
+	if body is RigidBody2D:
+		# Slow down rigid body
+		var rigid_body = body
+		rigid_body.linear_damp = rigid_fish_water_dampen #adjust this to control amount of damping

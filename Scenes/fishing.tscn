@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=125 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://mh76swdkx38a" path="res://Sprites/Ocean/ocean_afternoon.png" id="2_7ns47"]
@@ -110,6 +110,8 @@
 [ext_resource type="Texture2D" uid="uid://c6d2x425ifxgl" path="res://Sprites/Sky/Night/frame_098_delay-0.2s.png" id="102_2ww5a"]
 [ext_resource type="Texture2D" uid="uid://cujfbrp14ax0i" path="res://Sprites/Sky/Night/frame_099_delay-0.2s.png" id="103_hh4w8"]
 [ext_resource type="Texture2D" uid="uid://i8tr2mx8glp2" path="res://Sprites/Sky/clouds_morning.png" id="105_v73lo"]
+[ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/fish_1.tscn" id="111_1kvje"]
+[ext_resource type="PackedScene" uid="uid://dcw5nev1y8mrt" path="res://Scenes/boat.tscn" id="112_pcy6c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -435,21 +437,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_rx8ql"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_1ok6y"]
 resource_name = "FadeFast"
 length = 15.0
@@ -464,6 +451,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rx8ql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yyp1v"]
@@ -513,6 +515,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pniyi"]
 size = Vector2(1154, 408)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygbm8"]
+size = Vector2(743, 405)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sf6t2"]
+size = Vector2(407, 353)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dynf"]
 size = Vector2(11.6667, 18)
 
@@ -522,6 +530,7 @@ MorningAnimPlayers = Array[NodePath]([NodePath("Background/SkyMorning/AnimationP
 AfternoonAnimPlayers = Array[NodePath]([NodePath("Background/SkyAfternoon/AnimationPlayer"), NodePath("Ocean/OceanAfternoon/AnimationPlayer")])
 AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/AnimationPlayer"), NodePath("Clouds/Cloud2/Afternoon/AnimationPlayer")])
 cloud_speed = 5
+rigid_fish_water_dampen = 12
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -632,14 +641,28 @@ libraries = {
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 
-[node name="WaterCollider" type="Area2D" parent="."]
-visible = false
+[node name="WaterColliders" type="Node2D" parent="."]
+
+[node name="WaterCollider" type="Area2D" parent="WaterColliders"]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterColliders/WaterCollider"]
+visible = false
 position = Vector2(575, 444)
 shape = SubResource("RectangleShape2D_pniyi")
+
+[node name="FishCollider" type="Area2D" parent="WaterColliders"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterColliders/FishCollider"]
+position = Vector2(372.5, 445.5)
+shape = SubResource("RectangleShape2D_ygbm8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WaterColliders/FishCollider"]
+position = Vector2(948.5, 471.5)
+shape = SubResource("RectangleShape2D_sf6t2")
 
 [node name="FishingRod" type="Sprite2D" parent="."]
 position = Vector2(944, 208)
@@ -654,6 +677,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishingRod/Area2D"]
+visible = false
 position = Vector2(-18.6667, 2.66666)
 shape = SubResource("RectangleShape2D_3dynf")
 
@@ -664,6 +688,7 @@ default_color = Color(0, 0, 0, 1)
 
 [node name="Hook" parent="." instance=ExtResource("5_s578x")]
 position = Vector2(894, 191)
+collision_mask = 1
 max_throw_velocity = Vector2(-760, -450)
 AttachPoint = NodePath("../FishingRod/AttachPoint")
 
@@ -686,8 +711,57 @@ show_percentage = false
 wait_time = 30.0
 autostart = true
 
-[connection signal="body_entered" from="WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
-[connection signal="body_exited" from="WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
+[node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
+position = Vector2(752, 272)
+
+[node name="Fish1" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(840, 120)
+
+[node name="Fish2" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(912, 80)
+
+[node name="Fish3" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(984, 152)
+
+[node name="Fish4" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(1008, 72)
+
+[node name="Fish5" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(1056, 0)
+
+[node name="Fish6" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(952, -8)
+
+[node name="Fish7" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(952, -8)
+
+[node name="Fish8" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(800, 48)
+
+[node name="Fish9" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(792, -16)
+
+[node name="Fish10" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(616, 16)
+
+[node name="Fish11" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(528, 32)
+
+[node name="Fish12" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(504, -28)
+
+[node name="Fish13" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(904, -112)
+
+[node name="Fish14" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(952, -200)
+
+[node name="Fish15" parent="." instance=ExtResource("111_1kvje")]
+position = Vector2(952, -200)
+
+[connection signal="body_entered" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
+[connection signal="body_exited" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
+[connection signal="body_entered" from="WaterColliders/FishCollider" to="." method="_on_fish_collider_body_entered"]
 [connection signal="body_entered" from="FishingRod/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="Reload" to="." method="_on_reload_pressed"]
 [connection signal="timeout" from="30sClock" to="." method="_on_s_clock_timeout"]
