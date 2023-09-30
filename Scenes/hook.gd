@@ -7,15 +7,24 @@ extends CharacterBody2D
 @export var max_throw_velocity = Vector2(-200, -400) # Adjust as needed
 
 @export var default_gravity_scale: float = 1
-@export var underwater_gravity_scale: float = 0.05
+@export var underwater_gravity_scale: float = 0.1
 @export var enter_water_velocity_scale: float = 0.1
-@export var drag_coefficient = 0.05 # Adjust as needed
+@export var drag_coefficient = 0.005 # Adjust as needed
 @export var drag_coefficient_x = 0.5 # Adjust as needed
+
+@export var nudge_speed = 20
+@export var pull_velocity = 200
+@export var AttachPoint: NodePath
+
 
 var gravity_scale: int = default_gravity_scale
 var in_water: bool = false
 var is_thrown: bool = false
 var gravity_on: bool = false
+
+# to store previous velocity for pulling
+var previous_velocity
+var returning_to_prev_velocity: bool
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -36,8 +45,10 @@ func _physics_process(delta):
 	else:
 		if in_water: 
 			gravity_scale = underwater_gravity_scale
-			var drag_force = -velocity.normalized().x * drag_coefficient_x * velocity.length()
-			velocity.x += drag_force * delta
+			var drag_force_x = -velocity.normalized().x * drag_coefficient_x * velocity.length()
+			velocity.x += drag_force_x * delta
+#			var drag_force_y = -velocity.normalized().y * drag_coefficient * velocity.length()
+#			velocity.y += drag_force_y * delta
 		else:
 			gravity_scale = default_gravity_scale
 	
@@ -45,16 +56,27 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * gravity_scale * delta 
 
-	
+	if returning_to_prev_velocity and velocity.y <= previous_velocity:
+		velocity.y += 4
+	elif returning_to_prev_velocity and velocity.y > previous_velocity:
+		returning_to_prev_velocity = false
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-#	var direction = Input.get_axis("ui_left", "ui_right")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+	# Nudge the hook left or right
+	if Input.is_action_just_pressed("nudge_hook_left"):
+		velocity.x = -1 * nudge_speed
+	elif Input.is_action_just_pressed("nudge_hook_right"):
+		velocity.x = 1 * nudge_speed
+	elif Input.is_action_just_pressed("pull_hook"):
+		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
+		velocity += pull_velocity * delta * direction_of_rod
+	elif Input.is_action_just_pressed("reel_in") and !returning_to_prev_velocity:
+		previous_velocity = velocity.y
+	elif Input.is_action_pressed("reel_in"):
+		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
+		velocity += pull_velocity * delta * direction_of_rod
+	elif Input.is_action_just_released("reel_in"):
+		returning_to_prev_velocity = true
+		pass
 	move_and_slide()
 
 
@@ -70,10 +92,6 @@ func _on_water_collider_body_exited(body):
 	in_water = false
 
 func throw(power):
-#	velocity = max_throw_velocity * (power / 100)
 	velocity = Vector2(max_throw_velocity.x * (power/100), max_throw_velocity.y * (power/100))
 	gravity_on = true
 	is_thrown = true
-
-func _on_button_pressed():
-	throw(20)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=121 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://mh76swdkx38a" path="res://Sprites/Ocean/ocean_afternoon.png" id="2_7ns47"]
@@ -109,6 +109,7 @@
 [ext_resource type="Texture2D" uid="uid://ch73snhwf30mx" path="res://Sprites/Sky/Night/frame_097_delay-0.2s.png" id="101_neuuo"]
 [ext_resource type="Texture2D" uid="uid://c6d2x425ifxgl" path="res://Sprites/Sky/Night/frame_098_delay-0.2s.png" id="102_2ww5a"]
 [ext_resource type="Texture2D" uid="uid://cujfbrp14ax0i" path="res://Sprites/Sky/Night/frame_099_delay-0.2s.png" id="103_hh4w8"]
+[ext_resource type="Texture2D" uid="uid://i8tr2mx8glp2" path="res://Sprites/Sky/clouds_morning.png" id="105_v73lo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -418,25 +419,111 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_y450w"]
+resource_name = "Fade"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rx8ql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1ok6y"]
+resource_name = "FadeFast"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yyp1v"]
+_data = {
+"Fade": SubResource("Animation_y450w"),
+"FadeFast": SubResource("Animation_1ok6y"),
+"RESET": SubResource("Animation_rx8ql")
+}
+
+[sub_resource type="Animation" id="Animation_2e2hg"]
+resource_name = "Fade"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_744by"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bkraw"]
+_data = {
+"Fade": SubResource("Animation_2e2hg"),
+"RESET": SubResource("Animation_744by")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pniyi"]
 size = Vector2(1154, 408)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dynf"]
+size = Vector2(11.6667, 18)
+
 [node name="Fishing" type="Node2D"]
 script = ExtResource("1_cb4ro")
+MorningAnimPlayers = Array[NodePath]([NodePath("Background/SkyMorning/AnimationPlayer"), NodePath("Clouds/Cloud1/Morning/AnimationPlayer"), NodePath("Clouds/Cloud2/Morning/AnimationPlayer"), NodePath("Ocean/OceanMorning/AnimationPlayer")])
+AfternoonAnimPlayers = Array[NodePath]([NodePath("Background/SkyAfternoon/AnimationPlayer"), NodePath("Ocean/OceanAfternoon/AnimationPlayer")])
+AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/AnimationPlayer"), NodePath("Clouds/Cloud2/Afternoon/AnimationPlayer")])
 cloud_speed = 5
 
 [node name="Background" type="Node2D" parent="."]
-
-[node name="SkyAfternoon" type="Sprite2D" parent="Background"]
-position = Vector2(576, 324)
-scale = Vector2(3, 3)
-texture = ExtResource("2_oqc3f")
-
-[node name="SkyMorning" type="Sprite2D" parent="Background"]
-visible = false
-position = Vector2(576, 324)
-scale = Vector2(3, 3)
-texture = ExtResource("3_nd2gq")
 
 [node name="SkyNight" type="AnimatedSprite2D" parent="Background"]
 position = Vector2(576, 232)
@@ -444,8 +531,27 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_4yu7h")
 autoplay = "default"
 
+[node name="SkyAfternoon" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("2_oqc3f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/SkyAfternoon"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
+[node name="SkyMorning" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("3_nd2gq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/SkyMorning"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
 [node name="Clouds" type="Node2D" parent="."]
-visible = false
 
 [node name="Cloud1" type="Node2D" parent="Clouds"]
 
@@ -455,39 +561,81 @@ position = Vector2(0, 103)
 scale = Vector2(3, 3)
 texture = ExtResource("10_c2qv7")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Clouds/Cloud1/Afternoon"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
+[node name="Morning" type="Sprite2D" parent="Clouds/Cloud1"]
+texture_repeat = 2
+position = Vector2(0, 103)
+scale = Vector2(3, 3)
+texture = ExtResource("105_v73lo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Clouds/Cloud1/Morning"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
 [node name="Cloud2" type="Node2D" parent="Clouds"]
 position = Vector2(-2304, 0)
 
-[node name="Afternoon2" type="Sprite2D" parent="Clouds/Cloud2"]
+[node name="Afternoon" type="Sprite2D" parent="Clouds/Cloud2"]
 texture_repeat = 2
 position = Vector2(0, 103)
 scale = Vector2(3, 3)
 texture = ExtResource("10_c2qv7")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Clouds/Cloud2/Afternoon"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
+[node name="Morning" type="Sprite2D" parent="Clouds/Cloud2"]
+texture_repeat = 2
+position = Vector2(0, 103)
+scale = Vector2(3, 3)
+texture = ExtResource("105_v73lo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Clouds/Cloud2/Morning"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
 [node name="Ocean" type="Node2D" parent="."]
-
-[node name="OceanAfternoon" type="Sprite2D" parent="Ocean"]
-visible = false
-position = Vector2(576, 324)
-scale = Vector2(3, 3)
-texture = ExtResource("2_7ns47")
-
-[node name="OceanMorning" type="Sprite2D" parent="Ocean"]
-visible = false
-position = Vector2(576, 324)
-scale = Vector2(3, 3)
-texture = ExtResource("5_fv55p")
 
 [node name="OceanNight" type="Sprite2D" parent="Ocean"]
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("7_g1gey")
 
+[node name="OceanAfternoon" type="Sprite2D" parent="Ocean"]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("2_7ns47")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ocean/OceanAfternoon"]
+libraries = {
+"": SubResource("AnimationLibrary_yyp1v")
+}
+
+[node name="OceanMorning" type="Sprite2D" parent="Ocean"]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("5_fv55p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ocean/OceanMorning"]
+libraries = {
+"": SubResource("AnimationLibrary_bkraw")
+}
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 
 [node name="WaterCollider" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterCollider"]
 position = Vector2(575, 444)
@@ -501,21 +649,23 @@ texture = ExtResource("3_psujj")
 [node name="AttachPoint" type="Node2D" parent="FishingRod"]
 position = Vector2(-16, -3.33334)
 
+[node name="Area2D" type="Area2D" parent="FishingRod"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishingRod/Area2D"]
+position = Vector2(-18.6667, 2.66666)
+shape = SubResource("RectangleShape2D_3dynf")
+
 [node name="FishingLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
-width = 3.0
-default_color = Color(0.152941, 0.152941, 0.152941, 1)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="Hook" parent="." instance=ExtResource("5_s578x")]
 position = Vector2(894, 191)
 max_throw_velocity = Vector2(-760, -450)
-
-[node name="Throw" type="Button" parent="."]
-offset_left = 98.0
-offset_top = 19.0
-offset_right = 155.0
-offset_bottom = 50.0
-text = "Throw"
+AttachPoint = NodePath("../FishingRod/AttachPoint")
 
 [node name="Reload" type="Button" parent="."]
 offset_left = 20.0
@@ -530,8 +680,14 @@ offset_top = 59.0
 offset_right = 1060.0
 offset_bottom = 179.0
 fill_mode = 3
+show_percentage = false
+
+[node name="30sClock" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
 
 [connection signal="body_entered" from="WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
-[connection signal="pressed" from="Throw" to="Hook" method="_on_button_pressed"]
+[connection signal="body_entered" from="FishingRod/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="Reload" to="." method="_on_reload_pressed"]
+[connection signal="timeout" from="30sClock" to="." method="_on_s_clock_timeout"]

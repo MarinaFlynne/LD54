@@ -8,6 +8,8 @@ size = Vector2(3.66667, 3.33333)
 
 [node name="Hook" type="CharacterBody2D"]
 scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 16
 script = ExtResource("1_7n8os")
 metadata/_edit_group_ = true
 
