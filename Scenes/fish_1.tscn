@@ -1,9 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://g5frwl5ljc6t"]
+[gd_scene load_steps=19 format=3 uid="uid://g5frwl5ljc6t"]
 
 [ext_resource type="Texture2D" uid="uid://bktrinvtlomam" path="res://Sprites/Fish/OrangeFish.png" id="1_qqssx"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mwy0e"]
-bounce = 1.0
+[ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_y12k8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fu8x"]
 atlas = ExtResource("1_qqssx")
@@ -105,10 +103,15 @@ height = 58.0
 radius = 14.0
 height = 42.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4a7l5"]
+radius = 15.0
+
 [node name="Fish1" type="RigidBody2D"]
-collision_layer = 16
-collision_mask = 80
-physics_material_override = SubResource("PhysicsMaterial_mwy0e")
+collision_layer = 144
+collision_mask = 0
+linear_damp_mode = 1
+script = ExtResource("1_y12k8")
+mouth_pos = NodePath("MouthPos")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -118,13 +121,24 @@ frame = 9
 frame_progress = 0.738552
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-15, 1)
 rotation = 1.57171
 shape = SubResource("CapsuleShape2D_a5m4u")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(21, 9)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_i77gy")
+
+[node name="MouthPos" type="Node2D" parent="."]
+position = Vector2(-38, 17)
+
+[node name="MouthArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
+position = Vector2(-36, 14)
+shape = SubResource("CircleShape2D_4a7l5")
+
+[connection signal="body_entered" from="MouthArea" to="." method="_on_mouth_area_body_entered"]

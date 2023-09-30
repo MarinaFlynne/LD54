@@ -65,8 +65,9 @@ reel_in={
 2d_physics/layer_3="Arrow"
 2d_physics/layer_4="Hook"
 2d_physics/layer_5="Fish"
-2d_physics/layer_6="Layer 6"
+2d_physics/layer_6="Fish_mouth"
 2d_physics/layer_7="Boat"
+2d_physics/layer_8="Despawn"
 
 [rendering]
 

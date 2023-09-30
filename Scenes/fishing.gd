@@ -16,6 +16,11 @@ var time = 0
 # controls the dampening for rigid body fish when they land in the water
 @export var rigid_fish_water_dampen = 10
 
+@export var fishes: Array[PackedScene]
+
+@export var fish_max_speed = 80
+@export var fish_min_speed = 30
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Hook.set_physics_process(false)
@@ -62,7 +67,13 @@ func throw_rod(power):
 	$Hook.set_physics_process(true)
 	$Hook.throw(power)
 	$ThrowProgress.hide()
-
+	AudioManager.play("res://SFX/rod_cast.wav")
+#	await get_tree().create_timer(0.1).timeout
+	AudioManager.play("res://SFX/rod_cast_CLICKTRACK.wav")
+	await $Hook.entered_water
+	AudioManager.stop_playing("res://SFX/rod_cast_CLICKTRACK.wav")
+	AudioManager.play("res://SFX/rod_hook_hitting_water.wav")
+	
 func update_fishing_line():
 	rod_point = $FishingRod/AttachPoint.get_global_position()
 	hook_point = $Hook.get_global_position()
@@ -105,4 +116,44 @@ func _on_fish_collider_body_entered(body):
 	if body is RigidBody2D:
 		# Slow down rigid body
 		var rigid_body = body
+		print("FISH ENTERED WATER")
 		rigid_body.linear_damp = rigid_fish_water_dampen #adjust this to control amount of damping
+
+# Spawn a fish
+func _on_fish_timer_timeout():
+	print("SPAWN FISH")
+	# Choose a random fish from the list
+	var index = randi_range(0, fishes.size()-1)
+	# choose which direction our fish will come from
+	var direction = randi_range(0, 1)
+	if direction == 0: direction = -1
+	# Instantiate our fish
+	var fish = fishes[index].instantiate()
+	
+	# Choose a random location on the Path2D corresponding to the direction
+	var spawn_location
+	if direction == 1:
+		spawn_location = get_node("SpawnPaths/FishSpawnPath1/FishSpawnLocation")
+	else: 
+		spawn_location = get_node("SpawnPaths/FishSpawnPath2/FishSpawnLocation")
+		
+	spawn_location.progress_ratio = randf()
+	
+	fish.position = spawn_location.position
+	
+	var speed = randi_range(fish_min_speed, fish_max_speed)
+	fish.init(speed, direction)
+	fish.enable_swim_physics()
+	add_child(fish)
+	fish.caught.connect(on_fish_caught)
+
+func _on_despawn_area_body_entered(body):
+	body.queue_free()
+
+func on_fish_caught(fish): 
+	print("FISH CAUGHT")
+	fish.disable_swim_physics()
+	var mouth = fish.get_mouth()
+	$Hook.attach(mouth)
+	fish.launch()
+	pass

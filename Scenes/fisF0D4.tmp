@@ -1,13 +1,16 @@
 [gd_scene load_steps=128 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
+[ext_resource type="Texture2D" uid="uid://mh76swdkx38a" path="res://Sprites/Ocean/ocean_afternoon.png" id="2_7ns47"]
 [ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
 [ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/Sky/sky_morning.png" id="3_nd2gq"]
 [ext_resource type="Texture2D" uid="uid://p4kkwxmpuwro" path="res://Sprites/CatchingGame/rod.png" id="3_psujj"]
 [ext_resource type="Texture2D" uid="uid://b4l5v5dy4jf4m" path="res://Sprites/Sky/Night/frame_000_delay-0.2s.png" id="4_e07kt"]
+[ext_resource type="Texture2D" uid="uid://c3b0vjhrsjpj4" path="res://Sprites/Ocean/ocean_morning.png" id="5_fv55p"]
 [ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
 [ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
 [ext_resource type="Texture2D" uid="uid://banynmad34o0f" path="res://Sprites/Sky/Night/frame_002_delay-0.2s.png" id="6_2thhj"]
+[ext_resource type="Texture2D" uid="uid://dkq7fhwckrala" path="res://Sprites/Ocean/ocean_night.png" id="7_g1gey"]
 [ext_resource type="Texture2D" uid="uid://dknlcakiounox" path="res://Sprites/Sky/Night/frame_003_delay-0.2s.png" id="7_v0v41"]
 [ext_resource type="Texture2D" uid="uid://chq8ed2jo0j03" path="res://Sprites/Sky/Night/frame_004_delay-0.2s.png" id="8_lgorf"]
 [ext_resource type="Texture2D" uid="uid://fy30pu4clpno" path="res://Sprites/Sky/Night/frame_005_delay-0.2s.png" id="9_06gj2"]
@@ -107,9 +110,6 @@
 [ext_resource type="Texture2D" uid="uid://c6d2x425ifxgl" path="res://Sprites/Sky/Night/frame_098_delay-0.2s.png" id="102_2ww5a"]
 [ext_resource type="Texture2D" uid="uid://cujfbrp14ax0i" path="res://Sprites/Sky/Night/frame_099_delay-0.2s.png" id="103_hh4w8"]
 [ext_resource type="Texture2D" uid="uid://i8tr2mx8glp2" path="res://Sprites/Sky/clouds_morning.png" id="105_v73lo"]
-[ext_resource type="Texture2D" uid="uid://b07q7x5tfeud6" path="res://Sprites/Ocean/long_ocean_night.png" id="107_0ciuu"]
-[ext_resource type="Texture2D" uid="uid://bquis7s2x308k" path="res://Sprites/Ocean/long_ocean_afternoon.png" id="108_xbq4q"]
-[ext_resource type="Texture2D" uid="uid://bbl3ada4fsklo" path="res://Sprites/Ocean/long_ocean_morning.png" id="109_5nlyq"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/fish_1.tscn" id="111_1kvje"]
 [ext_resource type="PackedScene" uid="uid://dcw5nev1y8mrt" path="res://Scenes/boat.tscn" id="112_pcy6c"]
 
@@ -513,13 +513,13 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pniyi"]
-size = Vector2(1154, 1512)
+size = Vector2(1154, 408)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ygbm8"]
-size = Vector2(743, 1509)
+size = Vector2(743, 405)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sf6t2"]
-size = Vector2(407, 1457)
+size = Vector2(407, 353)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dynf"]
 size = Vector2(11.6667, 18)
@@ -630,16 +630,14 @@ libraries = {
 [node name="Ocean" type="Node2D" parent="."]
 
 [node name="OceanNight" type="Sprite2D" parent="Ocean"]
-visible = false
-position = Vector2(577, 875)
+position = Vector2(576, 324)
 scale = Vector2(3, 3)
-texture = ExtResource("107_0ciuu")
+texture = ExtResource("7_g1gey")
 
 [node name="OceanAfternoon" type="Sprite2D" parent="Ocean"]
-visible = false
-position = Vector2(576, 876)
+position = Vector2(576, 324)
 scale = Vector2(3, 3)
-texture = ExtResource("108_xbq4q")
+texture = ExtResource("2_7ns47")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ocean/OceanAfternoon"]
 libraries = {
@@ -647,9 +645,9 @@ libraries = {
 }
 
 [node name="OceanMorning" type="Sprite2D" parent="Ocean"]
-position = Vector2(576, 876)
+position = Vector2(576, 324)
 scale = Vector2(3, 3)
-texture = ExtResource("109_5nlyq")
+texture = ExtResource("5_fv55p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ocean/OceanMorning"]
 libraries = {
@@ -662,12 +660,12 @@ position = Vector2(576, 324)
 [node name="WaterColliders" type="Node2D" parent="."]
 
 [node name="WaterCollider" type="Area2D" parent="WaterColliders"]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterColliders/WaterCollider"]
-position = Vector2(575, 996)
+visible = false
+position = Vector2(575, 444)
 shape = SubResource("RectangleShape2D_pniyi")
 
 [node name="FishCollider" type="Area2D" parent="WaterColliders"]
@@ -676,11 +674,11 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterColliders/FishCollider"]
-position = Vector2(372.5, 997.5)
+position = Vector2(372.5, 445.5)
 shape = SubResource("RectangleShape2D_ygbm8")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WaterColliders/FishCollider"]
-position = Vector2(948.5, 1023.5)
+position = Vector2(948.5, 471.5)
 shape = SubResource("RectangleShape2D_sf6t2")
 
 [node name="FishingRod" type="Sprite2D" parent="."]

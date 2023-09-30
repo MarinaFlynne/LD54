@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
-
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
+signal entered_water
 
 @export var max_throw_velocity = Vector2(-200, -400) # Adjust as needed
 
@@ -21,9 +19,12 @@ var gravity_scale: int = default_gravity_scale
 var in_water: bool = false
 var is_thrown: bool = false
 var gravity_on: bool = false
+var is_hooked: bool = false
+var is_attached: bool = false
+var attached_to
 
 # to store previous velocity for pulling
-var previous_velocity
+var previous_velocity = 0
 var returning_to_prev_velocity: bool
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -86,6 +87,7 @@ func _on_water_collision_body_entered(body):
 	# reduce velocity when landing in water
 	velocity.x *= 0.1
 	velocity.y = 30
+	entered_water.emit()
 
 
 func _on_water_collider_body_exited(body):
@@ -95,3 +97,15 @@ func throw(power):
 	velocity = Vector2(max_throw_velocity.x * (power/100), max_throw_velocity.y * (power/100))
 	gravity_on = true
 	is_thrown = true
+	
+func attach(attachment):
+	set_physics_process(false)
+	print(attachment)
+	print(attachment.position)
+	attached_to = attachment
+	is_attached = true
+
+func _process(delta):
+	if is_attached:
+		global_position = attached_to.global_position
+		pass
