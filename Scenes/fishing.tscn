@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=134 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
@@ -112,6 +112,7 @@
 [ext_resource type="Texture2D" uid="uid://bbl3ada4fsklo" path="res://Sprites/Ocean/long_ocean_morning.png" id="109_5nlyq"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/fish_1.tscn" id="111_1kvje"]
 [ext_resource type="PackedScene" uid="uid://dcw5nev1y8mrt" path="res://Scenes/boat.tscn" id="112_pcy6c"]
+[ext_resource type="PackedScene" uid="uid://brrda866lga7a" path="res://Scenes/catching_game.tscn" id="113_la3pm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -522,7 +523,7 @@ size = Vector2(743, 1509)
 size = Vector2(407, 1457)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dynf"]
-size = Vector2(11.6667, 18)
+size = Vector2(16.5001, 27.6667)
 
 [sub_resource type="Curve2D" id="Curve2D_hqej8"]
 _data = {
@@ -539,6 +540,49 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukvqj"]
 size = Vector2(64, 784)
 
+[sub_resource type="Animation" id="Animation_teevs"]
+resource_name = "Fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_754rp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vms0"]
+_data = {
+"Fade_in": SubResource("Animation_teevs"),
+"RESET": SubResource("Animation_754rp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi662"]
+size = Vector2(1154, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jitlq"]
+size = Vector2(20, 98)
+
 [node name="Fishing" type="Node2D"]
 script = ExtResource("1_cb4ro")
 MorningAnimPlayers = Array[NodePath]([NodePath("Background/SkyMorning/AnimationPlayer"), NodePath("Clouds/Cloud1/Morning/AnimationPlayer"), NodePath("Clouds/Cloud2/Morning/AnimationPlayer"), NodePath("Ocean/OceanMorning/AnimationPlayer")])
@@ -547,6 +591,7 @@ AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/Anima
 cloud_speed = 5
 rigid_fish_water_dampen = 12
 fishes = Array[PackedScene]([ExtResource("111_1kvje")])
+minigame = ExtResource("113_la3pm")
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -630,13 +675,11 @@ libraries = {
 [node name="Ocean" type="Node2D" parent="."]
 
 [node name="OceanNight" type="Sprite2D" parent="Ocean"]
-visible = false
 position = Vector2(577, 875)
 scale = Vector2(3, 3)
 texture = ExtResource("107_0ciuu")
 
 [node name="OceanAfternoon" type="Sprite2D" parent="Ocean"]
-visible = false
 position = Vector2(576, 876)
 scale = Vector2(3, 3)
 texture = ExtResource("108_xbq4q")
@@ -684,7 +727,7 @@ position = Vector2(948.5, 1023.5)
 shape = SubResource("RectangleShape2D_sf6t2")
 
 [node name="FishingRod" type="Sprite2D" parent="."]
-position = Vector2(944, 208)
+position = Vector2(840, 208)
 scale = Vector2(3, 3)
 texture = ExtResource("3_psujj")
 
@@ -696,8 +739,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishingRod/Area2D"]
-visible = false
-position = Vector2(-18.6667, 2.66666)
+position = Vector2(-16.2501, -2.16667)
 shape = SubResource("RectangleShape2D_3dynf")
 
 [node name="FishingLine" type="Line2D" parent="."]
@@ -706,9 +748,12 @@ width = 2.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="Hook" parent="." instance=ExtResource("5_s578x")]
-position = Vector2(894, 191)
+position = Vector2(792, 200)
 collision_mask = 1
 max_throw_velocity = Vector2(-760, -450)
+underwater_gravity_scale = 0.7
+enter_water_velocity_y = 50.0
+nudge_speed = 40
 AttachPoint = NodePath("../FishingRod/AttachPoint")
 
 [node name="Reload" type="Button" parent="."]
@@ -730,16 +775,13 @@ show_percentage = false
 wait_time = 30.0
 autostart = true
 
-[node name="Fish1" parent="." instance=ExtResource("111_1kvje")]
-visible = false
-position = Vector2(648, 456)
-
 [node name="FishTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
-position = Vector2(752, 272)
+position = Vector2(976, 248)
+collision_mask = 0
 
 [node name="SpawnPaths" type="Node2D" parent="."]
 
@@ -769,6 +811,41 @@ shape = SubResource("RectangleShape2D_ukvqj")
 position = Vector2(1312, 256)
 shape = SubResource("RectangleShape2D_ukvqj")
 
+[node name="MinigameLayer" type="CanvasLayer" parent="."]
+
+[node name="CatchingGame" parent="MinigameLayer" instance=ExtResource("113_la3pm")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(152, 120)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MinigameLayer/CatchingGame"]
+libraries = {
+"": SubResource("AnimationLibrary_3vms0")
+}
+
+[node name="FishCatchDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishCatchDetect"]
+position = Vector2(575, -147)
+shape = SubResource("RectangleShape2D_oi662")
+
+[node name="FishPlacementPos" type="Node2D" parent="."]
+position = Vector2(992, 32)
+
+[node name="DropGameBarrier" type="StaticBody2D" parent="."]
+position = Vector2(968, 112)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropGameBarrier"]
+position = Vector2(-120, -64)
+shape = SubResource("RectangleShape2D_jitlq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DropGameBarrier"]
+position = Vector2(176, -64)
+shape = SubResource("RectangleShape2D_jitlq")
+
 [connection signal="body_entered" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
 [connection signal="body_entered" from="WaterColliders/FishCollider" to="." method="_on_fish_collider_body_entered"]
@@ -777,3 +854,4 @@ shape = SubResource("RectangleShape2D_ukvqj")
 [connection signal="timeout" from="30sClock" to="." method="_on_s_clock_timeout"]
 [connection signal="timeout" from="FishTimer" to="." method="_on_fish_timer_timeout"]
 [connection signal="body_entered" from="DespawnArea" to="." method="_on_despawn_area_body_entered"]
+[connection signal="area_entered" from="FishCatchDetect" to="." method="_on_fish_catch_detect_area_entered"]

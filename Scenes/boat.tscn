@@ -1,29 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcw5nev1y8mrt"]
+[gd_scene load_steps=5 format=3 uid="uid://dcw5nev1y8mrt"]
+
+[ext_resource type="Texture2D" uid="uid://wvu4rwsuett7" path="res://Sprites/boat_open.png" id="1_4o7ho"]
+[ext_resource type="Texture2D" uid="uid://d2eydfobm6g2b" path="res://Sprites/boat_full.png" id="2_1442g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nox"]
-size = Vector2(400, 20)
+size = Vector2(106.667, 5.33333)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf3w7"]
-radius = 16.0
-height = 96.0
+radius = 8.0
+height = 16.0
 
 [node name="Boat" type="StaticBody2D"]
+scale = Vector2(3, 3)
 collision_layer = 64
 collision_mask = 16
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 400.0
-offset_bottom = 20.0
-color = Color(0.254902, 0.180392, 0.172549, 1)
-
 [node name="RectangleCollision" type="CollisionShape2D" parent="."]
-position = Vector2(200, 10)
+position = Vector2(2.66667, 5.33333)
 shape = SubResource("RectangleShape2D_l0nox")
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
-position = Vector2(8, -24)
+position = Vector2(-50.6667, 0)
 shape = SubResource("CapsuleShape2D_rf3w7")
 
 [node name="WallCollision2" type="CollisionShape2D" parent="."]
-position = Vector2(392, -24)
+position = Vector2(53.3333, 0)
 shape = SubResource("CapsuleShape2D_rf3w7")
+
+[node name="BoatInside" type="Sprite2D" parent="."]
+texture = ExtResource("1_4o7ho")
+
+[node name="BoatOutside" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_1442g")

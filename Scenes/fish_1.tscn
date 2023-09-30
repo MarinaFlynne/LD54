@@ -1,7 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://g5frwl5ljc6t"]
+[gd_scene load_steps=20 format=3 uid="uid://g5frwl5ljc6t"]
 
 [ext_resource type="Texture2D" uid="uid://bktrinvtlomam" path="res://Sprites/Fish/OrangeFish.png" id="1_qqssx"]
 [ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_y12k8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wvaan"]
+bounce = 0.4
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fu8x"]
 atlas = ExtResource("1_qqssx")
@@ -107,8 +110,9 @@ height = 42.0
 radius = 15.0
 
 [node name="Fish1" type="RigidBody2D"]
-collision_layer = 144
+collision_layer = 128
 collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_wvaan")
 linear_damp_mode = 1
 script = ExtResource("1_y12k8")
 mouth_pos = NodePath("MouthPos")

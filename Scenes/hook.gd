@@ -6,7 +6,8 @@ signal entered_water
 
 @export var default_gravity_scale: float = 1
 @export var underwater_gravity_scale: float = 0.1
-@export var enter_water_velocity_scale: float = 0.1
+@export var enter_water_velocity_y: float = 30
+@export var enter_water_velocity_x_scale: float = 0.1
 @export var drag_coefficient = 0.005 # Adjust as needed
 @export var drag_coefficient_x = 0.5 # Adjust as needed
 
@@ -21,6 +22,7 @@ var is_thrown: bool = false
 var gravity_on: bool = false
 var is_hooked: bool = false
 var is_attached: bool = false
+var in_catch_mode = true
 var attached_to
 
 # to store previous velocity for pulling
@@ -63,16 +65,16 @@ func _physics_process(delta):
 		returning_to_prev_velocity = false
 
 	# Nudge the hook left or right
-	if Input.is_action_just_pressed("nudge_hook_left"):
+	if Input.is_action_pressed("nudge_hook_left"):
 		velocity.x = -1 * nudge_speed
-	elif Input.is_action_just_pressed("nudge_hook_right"):
+	elif Input.is_action_pressed("nudge_hook_right"):
 		velocity.x = 1 * nudge_speed
 	elif Input.is_action_just_pressed("pull_hook"):
 		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
 		velocity += pull_velocity * delta * direction_of_rod
 	elif Input.is_action_just_pressed("reel_in") and !returning_to_prev_velocity:
 		previous_velocity = velocity.y
-	elif Input.is_action_pressed("reel_in"):
+	if Input.is_action_pressed("reel_in"):
 		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
 		velocity += pull_velocity * delta * direction_of_rod
 	elif Input.is_action_just_released("reel_in"):
@@ -85,8 +87,8 @@ func _on_water_collision_body_entered(body):
 	in_water = true
 #	is_thrown = false
 	# reduce velocity when landing in water
-	velocity.x *= 0.1
-	velocity.y = 30
+	velocity.x *= enter_water_velocity_x_scale
+	velocity.y = enter_water_velocity_y
 	entered_water.emit()
 
 
@@ -100,12 +102,18 @@ func throw(power):
 	
 func attach(attachment):
 	set_physics_process(false)
-	print(attachment)
-	print(attachment.position)
 	attached_to = attachment
 	is_attached = true
+	is_hooked = true
 
 func _process(delta):
 	if is_attached:
 		global_position = attached_to.global_position
 		pass
+
+func unattach():
+	is_attached = false
+	is_hooked = false
+	gravity_on = false
+	is_thrown = false
+	global_position = get_node(AttachPoint).global_position 

@@ -17,6 +17,7 @@ var time = 0
 @export var rigid_fish_water_dampen = 10
 
 @export var fishes: Array[PackedScene]
+@export var minigame: PackedScene
 
 @export var fish_max_speed = 80
 @export var fish_min_speed = 30
@@ -27,6 +28,7 @@ func _ready():
 	$Clouds/Cloud1/Afternoon.modulate = Color(1,1,1,0)
 	$Clouds/Cloud2/Afternoon.modulate = Color(1,1,1,0)
 	$ThrowProgress.hide()
+#	$MinigameLayer/CatchingGame.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -86,10 +88,11 @@ func _on_reload_pressed():
 
 
 func _on_area_2d_body_entered(body):
-	$Hook.set_physics_process(false)
-	$Hook.global_position = $FishingRod/AttachPoint.global_position
-	throw_enabled = true
-	pass # Replace with function body.
+	if ($Hook.in_catch_mode):
+		$Hook.set_physics_process(false)
+		$Hook.global_position = $FishingRod/AttachPoint.global_position
+		throw_enabled = true
+		pass # Replace with function body.
 
 
 func _on_s_clock_timeout():
@@ -116,12 +119,11 @@ func _on_fish_collider_body_entered(body):
 	if body is RigidBody2D:
 		# Slow down rigid body
 		var rigid_body = body
-		print("FISH ENTERED WATER")
 		rigid_body.linear_damp = rigid_fish_water_dampen #adjust this to control amount of damping
+		rigid_body.set_collision_mask_value(5, false)
 
 # Spawn a fish
 func _on_fish_timer_timeout():
-	print("SPAWN FISH")
 	# Choose a random fish from the list
 	var index = randi_range(0, fishes.size()-1)
 	# choose which direction our fish will come from
@@ -150,10 +152,53 @@ func _on_fish_timer_timeout():
 func _on_despawn_area_body_entered(body):
 	body.queue_free()
 
-func on_fish_caught(fish): 
-	print("FISH CAUGHT")
-	fish.disable_swim_physics()
-	var mouth = fish.get_mouth()
-	$Hook.attach(mouth)
-	fish.launch()
+func on_fish_caught(fish):
+	if not $Hook.is_hooked:
+		$Hook.in_catch_mode = false
+		var catch_game = $MinigameLayer/CatchingGame
+		fish.disable_swim_physics()
+		var mouth = fish.get_mouth()
+	#
+		catch_game.rects_list = fish.rects_list
+		catch_game.rotation_speed = fish.game_speed
+		
+		catch_game.init()
+		
+		$Hook.attach(mouth)
+		var win: bool
+		win = await catch_game.game_end
+		if win:
+			fish.launch()
+			pass
+		else:
+			$Hook.is_attached = false
+			$Hook.is_hooked = false
+			$Hook.set_physics_process(true)
+			$Hook.in_catch_mode = true
+			fish.physics = true
+			fish.enable_in_boat_physics()
+			fish.linear_damp = 0
+
+func start_boat_placement(scene_path: String):
+	await get_tree().create_timer(1).timeout
+	print("START BOAT PLACEMENT")
+	var fish_scene = load(scene_path)
+	var fish = fish_scene.instantiate()
+	fish.physics = true
+	fish.global_position = $FishPlacementPos.global_position
+	add_child(fish)
+	fish.start_drop_game()
+	await fish.drop_game_end
+	throw_enabled = true
+#	fish.enable_in_boat_physics()
+#	fish.position = 
 	pass
+
+func _on_fish_catch_detect_area_entered(area):
+	
+#	var body = area.get_parent()
+	$Hook.unattach()
+	
+	var scene_path = area.get_parent().scene
+	start_boat_placement(scene_path)
+	area.get_parent().queue_free()
