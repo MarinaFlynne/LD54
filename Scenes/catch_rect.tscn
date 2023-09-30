@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvixkdkopirmb"]
+
+[ext_resource type="Script" path="res://CatchRect.gd" id="1_m460l"]
+[ext_resource type="Texture2D" uid="uid://djph3i8hd1f3e" path="res://Sprites/CatchingGame/rect.png" id="2_0xevu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5scox"]
+size = Vector2(20, 12)
+
+[node name="CatchRect" type="Node2D"]
+script = ExtResource("1_m460l")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_5scox")
+
+[node name="RectSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -26)
+scale = Vector2(1, 1.2)
+texture = ExtResource("2_0xevu")
