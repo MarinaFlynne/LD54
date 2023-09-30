@@ -4,12 +4,13 @@ extends CharacterBody2D
 #const SPEED = 300.0
 #const JUMP_VELOCITY = -400.0
 
-var throw_velocity = Vector2(-200, -400) # Adjust as needed
+@export var max_throw_velocity = Vector2(-200, -400) # Adjust as needed
 
 @export var default_gravity_scale: float = 1
 @export var underwater_gravity_scale: float = 0.05
 @export var enter_water_velocity_scale: float = 0.1
-@export var drag_coefficient = 0.01 # Adjust as needed
+@export var drag_coefficient = 0.05 # Adjust as needed
+@export var drag_coefficient_x = 0.5 # Adjust as needed
 
 var gravity_scale: int = default_gravity_scale
 var in_water: bool = false
@@ -35,6 +36,8 @@ func _physics_process(delta):
 	else:
 		if in_water: 
 			gravity_scale = underwater_gravity_scale
+			var drag_force = -velocity.normalized().x * drag_coefficient_x * velocity.length()
+			velocity.x += drag_force * delta
 		else:
 			gravity_scale = default_gravity_scale
 	
@@ -59,15 +62,18 @@ func _on_water_collision_body_entered(body):
 	in_water = true
 #	is_thrown = false
 	# reduce velocity when landing in water
-	velocity.x = 0
+	velocity.x *= 0.1
 	velocity.y = 30
 
 
 func _on_water_collider_body_exited(body):
 	in_water = false
 
-
-func _on_button_pressed():
-	velocity = throw_velocity
+func throw(power):
+#	velocity = max_throw_velocity * (power / 100)
+	velocity = Vector2(max_throw_velocity.x * (power/100), max_throw_velocity.y * (power/100))
 	gravity_on = true
 	is_thrown = true
+
+func _on_button_pressed():
+	throw(20)

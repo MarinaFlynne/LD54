@@ -17,7 +17,6 @@ size = Vector2(1154, 408)
 script = ExtResource("1_cb4ro")
 
 [node name="SkyAfternoon" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("1_0w343")
@@ -29,6 +28,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("3_kcujd")
 
 [node name="SkyNight" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("4_2kxdc")
@@ -40,12 +40,12 @@ scale = Vector2(3, 3)
 texture = ExtResource("2_7ns47")
 
 [node name="OceanMorning" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("5_fv55p")
 
 [node name="OceanNight" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(576, 324)
 scale = Vector2(3, 3)
 texture = ExtResource("7_g1gey")
@@ -74,7 +74,8 @@ width = 3.0
 default_color = Color(0.152941, 0.152941, 0.152941, 1)
 
 [node name="Hook" parent="." instance=ExtResource("5_s578x")]
-position = Vector2(828, 169)
+position = Vector2(894, 191)
+max_throw_velocity = Vector2(-760, -450)
 
 [node name="Throw" type="Button" parent="."]
 offset_left = 98.0
@@ -89,6 +90,13 @@ offset_top = 17.0
 offset_right = 81.0
 offset_bottom = 48.0
 text = "Reload"
+
+[node name="ThrowProgress" type="ProgressBar" parent="."]
+offset_left = 1040.0
+offset_top = 59.0
+offset_right = 1060.0
+offset_bottom = 179.0
+fill_mode = 3
 
 [connection signal="body_entered" from="WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
