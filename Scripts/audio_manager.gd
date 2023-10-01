@@ -27,7 +27,6 @@ func _on_stream_finished(stream):
 	in_use.remove_at(in_use.find(stream))
 	
 func play(sound_path: String, volume = 0):
-	print(volume)
 	queue.append([sound_path, volume])
 	if not available.is_empty():
 		return available[0]

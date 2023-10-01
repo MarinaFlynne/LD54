@@ -116,7 +116,7 @@ collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_wvaan")
 linear_damp_mode = 1
 script = ExtResource("1_y12k8")
-mouth_pos = NodePath("MouthPos")
+fish_name = "Minafish"
 scene = "res://Scenes/Fish/fish_1.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

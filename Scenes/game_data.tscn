@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfgrmrtpecwja"]
+
+[ext_resource type="Script" path="res://GameData.gd" id="1_tt837"]
+
+[node name="GameData" type="Node"]
+script = ExtResource("1_tt837")
+fish_list_worth = {
+"Barred Conger": 60,
+"Blue Pilchard": 15,
+"Minafish": 40,
+"Scissortail Damselfish": 10,
+"Squid": 80
+}

@@ -47,6 +47,7 @@ func _process(delta):
 				entered = false
 				first_input_made = true
 				if $ProgressBar.value < 100:
+					AudioManager.play("res://SFX/success.wav", -18)
 					$ProgressBar.value += heart_fill_percent
 				pass
 			pass
@@ -54,6 +55,7 @@ func _process(delta):
 			if Input.is_action_just_pressed("letter_1"):
 				if first_input_made:
 					$ProgressBar.value -= heart_deplete_percent
+					AudioManager.play("res://SFX/fail.wav", -18)
 				first_input_made = true
 
 func create_rect(x_scale, rotation_degs):
@@ -82,11 +84,14 @@ func _on_arrow_collider_area_exited(area):
 
 func _on_progress_bar_value_changed(value):
 	if $ProgressBar.value == 100:
+		AudioManager.play("res://SFX/fish_CAUGHT.wav", -13)
 		game_end.emit(true)
+		
 		game_on = false
 		# play sound effect
 		$AnimationPlayer.play_backwards("Fade_in")
 	if $ProgressBar.value == 0:
+		AudioManager.play("res://SFX/SlamFX.wav", -17)
 		game_end.emit(false)
 		game_on = false
 		# play lose sound effect

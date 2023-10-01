@@ -1,11 +1,11 @@
 extends RigidBody2D
 
 var default_gravity_scale: float
-@export var swim_speed: float
+var swim_speed: float
 # direction that the fish swim. either -1 (left) or 1 (right)
-@export var direction: int = 1
-
-@export var mouth_pos: NodePath
+var direction: int = 1
+var rotate_up: bool
+var rotation_speed = 100
 # list where each item represents a rect in the minigame circle. first value is size, second is rotation in degrees
 @export var rects_list: Array[Array] = [[.8, 0], [1, 100], [1.2, 200]]
 # speed of the catching minigame arrow
@@ -14,6 +14,7 @@ var default_gravity_scale: float
 @export var min_move_speed: int = 30
 @export var max_spawn_range: float = 1
 @export var min_spawn_range: float = 0
+@export var fish_name: String
 
 
 @export var scene = "res://Scenes/fish_1.tscn"
@@ -63,9 +64,6 @@ func disable_boat_physics():
 func disable_swim_physics():
 	linear_velocity = Vector2.ZERO
 
-func rotate_towards():
-	pass
-
 func enable_swim_physics():
 	gravity_scale = 0
 	set_collision_layer_value(5, false)
@@ -75,6 +73,7 @@ func enable_swim_physics():
 	linear_damp = 0
 	
 func start_drop_game():
+#	AudioManager.stop_playing("res://SFX/rod_reeling.wav")
 	gravity_scale = 0
 	$Hologram.show()
 	drop_game_active = true
@@ -92,6 +91,8 @@ func end_drop_game():
 	enable_in_boat_physics()
 
 func enable_in_boat_physics():
+	if fish_name == "Squid":
+		$AnimatedSprite2D.stop()
 	gravity_scale = 1
 	set_collision_layer_value(5, true)
 	set_collision_mask_value(7, true)
@@ -109,6 +110,8 @@ func _physics_process(delta):
 			linear_velocity = Vector2(drop_game_move_speed, 0)
 		else:
 			linear_velocity = Vector2.ZERO
+	
+				
 
 func _on_mouth_area_body_entered(body):
 	caught.emit(self)
@@ -116,6 +119,18 @@ func _on_mouth_area_body_entered(body):
 
 func launch():
 	linear_velocity = Vector2(0, -500)
+	rotate_up = true
+#	AudioManager.play("res://SFX/rod_reeling.wav")
 	
 func get_mouth():
-	return get_node(mouth_pos)
+	return $MouthPos
+	
+func set_anim_speed(speed):
+	$AnimatedSprite2D.speed_scale = speed
+
+func stop_anim():
+	$AnimatedSprite2D.stop()
+
+func disable_catching():
+	$MouthArea.set_collision_layer_value(6, false)
+	$MouthArea.set_collision_mask_value(4, false)

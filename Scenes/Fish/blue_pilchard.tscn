@@ -112,8 +112,8 @@ collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_cf7j5")
 linear_damp_mode = 1
 script = ExtResource("1_sxnxf")
-mouth_pos = NodePath("MouthPos")
 rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
+fish_name = "Blue Pilchard"
 scene = "res://Scenes/Fish/blue_pilchard.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

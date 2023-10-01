@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4x2par1nitxs"]
+
+[ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="1_l53rr"]
+[ext_resource type="Script" path="res://Scenes/earnings.gd" id="2_u7rua"]
+
+[sub_resource type="Theme" id="Theme_y33vi"]
+default_base_scale = 10.0
+default_font = ExtResource("1_l53rr")
+default_font_size = 100
+
+[node name="Earnings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y33vi")
+script = ExtResource("2_u7rua")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TotalsTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -444.0
+offset_top = -309.0
+offset_right = 444.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Totals:"
+horizontal_alignment = 1
+
+[node name="FishList" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = 120.0
+offset_right = 128.0
+offset_bottom = 214.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+
+[node name="Totals" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 204.0
+offset_top = 120.0
+offset_right = 608.0
+offset_bottom = 214.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+
+[node name="DollarX" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.0
+offset_top = 120.0
+offset_right = 189.0
+offset_bottom = 261.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 2
+
+[node name="FinalTotal" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = 540.0
+offset_right = 128.0
+offset_bottom = 634.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Total: "
+
+[node name="FinalTotalAmount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 540.0
+offset_right = 154.0
+offset_bottom = 634.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 2

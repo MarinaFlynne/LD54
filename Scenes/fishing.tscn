@@ -1,4 +1,4 @@
-[gd_scene load_steps=177 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=186 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/Fish/fish_1.tscn" id="2_3sxi1"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
 [ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
 [ext_resource type="Texture2D" uid="uid://banynmad34o0f" path="res://Sprites/Sky/Night/frame_002_delay-0.2s.png" id="6_2thhj"]
+[ext_resource type="PackedScene" uid="uid://1idkqts1v3ya" path="res://Scenes/Fish/squid.tscn" id="6_qvnqj"]
 [ext_resource type="Texture2D" uid="uid://dknlcakiounox" path="res://Sprites/Sky/Night/frame_003_delay-0.2s.png" id="7_v0v41"]
 [ext_resource type="Texture2D" uid="uid://chq8ed2jo0j03" path="res://Sprites/Sky/Night/frame_004_delay-0.2s.png" id="8_lgorf"]
 [ext_resource type="Texture2D" uid="uid://fy30pu4clpno" path="res://Sprites/Sky/Night/frame_005_delay-0.2s.png" id="9_06gj2"]
@@ -120,7 +121,12 @@
 [ext_resource type="PackedScene" uid="uid://brrda866lga7a" path="res://Scenes/catching_game.tscn" id="113_la3pm"]
 [ext_resource type="Texture2D" uid="uid://ciltc3t40ys5m" path="res://Sprites/Player/main_char_casting.png" id="114_afq0d"]
 [ext_resource type="AudioStream" uid="uid://b2ksdh45eus3g" path="res://Music/song_1.wav" id="114_qeot1"]
+[ext_resource type="Texture2D" uid="uid://nan8sayy73sa" path="res://Sprites/Player/character_catch_fish.png" id="117_3b7ge"]
 [ext_resource type="AudioStream" uid="uid://diey4snpnsbsi" path="res://Music/ocean_ambience.mp3" id="118_1leu4"]
+[ext_resource type="Texture2D" uid="uid://cnwwb5b56ph0j" path="res://Sprites/clock3.png" id="121_hao61"]
+[ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="122_pmvmu"]
+[ext_resource type="Texture2D" uid="uid://d2eydfobm6g2b" path="res://Sprites/boat_full.png" id="125_7dlds"]
+[ext_resource type="AudioStream" uid="uid://gf2x30fplf7o" path="res://SFX/rod_reeling.wav" id="126_ej3k8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -530,9 +536,20 @@ size = Vector2(743, 1509)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sf6t2"]
 size = Vector2(407, 1457)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rluw5"]
+size = Vector2(121, 96.6667)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5k2i"]
 atlas = ExtResource("111_2dggl")
 region = Rect2(0, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq8uq"]
+atlas = ExtResource("117_3b7ge")
+region = Rect2(45, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdcyt"]
+atlas = ExtResource("117_3b7ge")
+region = Rect2(90, 0, 43, 43)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d4587"]
 atlas = ExtResource("111_2dggl")
@@ -656,6 +673,20 @@ region = Rect2(315, 0, 43, 43)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p7xuq"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5k2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq8uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdcyt")
+}],
+"loop": false,
+"name": &"catch_fish",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r5k2i")
@@ -847,7 +878,7 @@ AfternoonAnimPlayers = Array[NodePath]([NodePath("Background/SkyAfternoon/Animat
 AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/AnimationPlayer"), NodePath("Clouds/Cloud2/Afternoon/AnimationPlayer")])
 cloud_speed = 5
 rigid_fish_water_dampen = 12
-fishes = Array[PackedScene]([ExtResource("2_3sxi1"), ExtResource("3_x1m8f"), ExtResource("5_rp5ov"), ExtResource("4_xhs4n")])
+fishes = Array[PackedScene]([ExtResource("2_3sxi1"), ExtResource("3_x1m8f"), ExtResource("5_rp5ov"), ExtResource("4_xhs4n"), ExtResource("6_qvnqj")])
 minigame = ExtResource("113_la3pm")
 charge_speed = 1.2
 
@@ -990,14 +1021,56 @@ shape = SubResource("RectangleShape2D_ygbm8")
 position = Vector2(948.5, 1023.5)
 shape = SubResource("RectangleShape2D_sf6t2")
 
+[node name="FishingLine" type="Line2D" parent="."]
+z_index = 4
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Hook" parent="." instance=ExtResource("5_s578x")]
+z_index = 4
+position = Vector2(800, 200)
+collision_mask = 513
+max_throw_velocity = Vector2(-760, -450)
+underwater_gravity_scale = 0.7
+enter_water_velocity_y = 50.0
+nudge_speed = 80
+AttachPoint = NodePath("../FishingRod/AttachPoint")
+
+[node name="Reload" type="Button" parent="."]
+visible = false
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 81.0
+offset_bottom = 48.0
+text = "Reload"
+
+[node name="30sClock" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="FishTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
+position = Vector2(976, 248)
+collision_mask = 0
+
+[node name="DetectFishOnBoat" type="Area2D" parent="Boat"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat/DetectFishOnBoat"]
+position = Vector2(-1.83334, -39.3333)
+shape = SubResource("RectangleShape2D_rluw5")
+
 [node name="FishingRod" type="AnimatedSprite2D" parent="."]
-position = Vector2(827, 193)
+position = Vector2(846, 204)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_p7xuq")
-animation = &"throw"
+animation = &"catch_fish"
 autoplay = "default"
-frame = 5
-frame_progress = 0.766649
 
 [node name="AttachPoint" type="Node2D" parent="FishingRod"]
 position = Vector2(-9.33331, -2)
@@ -1009,47 +1082,6 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishingRod/Area2D"]
 position = Vector2(-9, 0.666664)
 shape = SubResource("RectangleShape2D_3dynf")
-
-[node name="FishingLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-
-[node name="Hook" parent="." instance=ExtResource("5_s578x")]
-position = Vector2(800, 200)
-collision_mask = 513
-max_throw_velocity = Vector2(-760, -450)
-underwater_gravity_scale = 0.7
-enter_water_velocity_y = 50.0
-nudge_speed = 80
-AttachPoint = NodePath("../FishingRod/AttachPoint")
-
-[node name="Reload" type="Button" parent="."]
-offset_left = 20.0
-offset_top = 17.0
-offset_right = 81.0
-offset_bottom = 48.0
-text = "Reload"
-
-[node name="ThrowProgress" type="ProgressBar" parent="."]
-offset_left = 1040.0
-offset_top = 59.0
-offset_right = 1060.0
-offset_bottom = 179.0
-fill_mode = 3
-show_percentage = false
-
-[node name="30sClock" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
-
-[node name="FishTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
-[node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
-position = Vector2(976, 248)
-collision_mask = 0
 
 [node name="SpawnPaths" type="Node2D" parent="."]
 
@@ -1084,6 +1116,7 @@ position = Vector2(568, 1904)
 shape = SubResource("RectangleShape2D_jb8it")
 
 [node name="MinigameLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="CatchingGame" parent="MinigameLayer" instance=ExtResource("113_la3pm")]
 modulate = Color(1, 1, 1, 0)
@@ -1093,6 +1126,32 @@ position = Vector2(152, 120)
 libraries = {
 "": SubResource("AnimationLibrary_3vms0")
 }
+
+[node name="Clock" type="Sprite2D" parent="MinigameLayer"]
+self_modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(1080, 44)
+scale = Vector2(3, 3)
+texture = ExtResource("121_hao61")
+
+[node name="Label" type="Label" parent="MinigameLayer/Clock"]
+offset_left = -15.3333
+offset_top = -6.0
+offset_right = 179.667
+offset_bottom = 66.0
+scale = Vector2(0.157225, 0.157225)
+theme_override_fonts/font = ExtResource("122_pmvmu")
+theme_override_font_sizes/font_size = 80
+text = "8:00 am"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThrowProgress" type="ProgressBar" parent="MinigameLayer"]
+offset_left = 1068.0
+offset_top = 87.0
+offset_right = 1088.0
+offset_bottom = 207.0
+fill_mode = 3
+show_percentage = false
 
 [node name="FishCatchDetect" type="Area2D" parent="."]
 collision_layer = 0
@@ -1121,7 +1180,7 @@ shape = SubResource("RectangleShape2D_jitlq")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("114_qeot1")
-volume_db = -24.827
+volume_db = -15.434
 autoplay = true
 
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
@@ -1145,14 +1204,31 @@ shape = SubResource("RectangleShape2D_sx3yp")
 position = Vector2(554, 1881)
 shape = SubResource("RectangleShape2D_f6nrs")
 
+[node name="End Day" type="Button" parent="."]
+offset_left = 436.0
+offset_top = 26.0
+offset_right = 507.0
+offset_bottom = 57.0
+text = "End Day"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(976, 248)
+scale = Vector2(3, 3)
+texture = ExtResource("125_7dlds")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("126_ej3k8")
+
 [connection signal="pulling_back" from="." to="." method="_on_pulling_back"]
 [connection signal="throwing" from="." to="." method="_on_throwing"]
 [connection signal="body_entered" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collider_body_exited"]
 [connection signal="body_entered" from="WaterColliders/FishCollider" to="." method="_on_fish_collider_body_entered"]
-[connection signal="body_entered" from="FishingRod/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="Reload" to="." method="_on_reload_pressed"]
 [connection signal="timeout" from="30sClock" to="." method="_on_s_clock_timeout"]
 [connection signal="timeout" from="FishTimer" to="." method="_on_fish_timer_timeout"]
+[connection signal="body_entered" from="FishingRod/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DespawnArea" to="." method="_on_despawn_area_body_entered"]
 [connection signal="area_entered" from="FishCatchDetect" to="." method="_on_fish_catch_detect_area_entered"]
+[connection signal="pressed" from="End Day" to="." method="_on_end_day_pressed"]

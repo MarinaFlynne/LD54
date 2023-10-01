@@ -40,7 +40,7 @@ func _ready():
 	$Hook.set_physics_process(false)
 	$Clouds/Cloud1/Afternoon.modulate = Color(1,1,1,0)
 	$Clouds/Cloud2/Afternoon.modulate = Color(1,1,1,0)
-	$ThrowProgress.hide()
+	$MinigameLayer/ThrowProgress.hide()
 	$CameraMain.enabled = true
 #	$MinigameLayer/CatchingGame.hide()
 
@@ -50,13 +50,13 @@ func _process(delta):
 	move_clouds(delta)
 	
 	if Input.is_action_just_pressed("throw_rod") and throw_enabled:
-		$ThrowProgress.value = 0
-		$ThrowProgress.show()
+		$MinigameLayer/ThrowProgress.value = 0
+		$MinigameLayer/ThrowProgress.show()
 		pulling_back.emit()
 	
 	if throw_charging:
 		if Input.is_action_pressed("throw_rod"):
-			$ThrowProgress.value += charge_speed
+			$MinigameLayer/ThrowProgress.value += charge_speed
 			throw_charging = true
 		else:
 			throw_charging = false
@@ -88,13 +88,13 @@ func throw_rod(power):
 	
 	$Hook.set_physics_process(true)
 	$Hook.throw(power)
-	$ThrowProgress.hide()
+	$MinigameLayer/ThrowProgress.hide()
 	
 #	await get_tree().create_timer(0.1).timeout
 	AudioManager.play("res://SFX/rod_cast_CLICKTRACK.wav")
 	await $Hook.entered_water
 	AudioManager.stop_playing("res://SFX/rod_cast_CLICKTRACK.wav")
-	AudioManager.play("res://SFX/rod_hook_hitting_water.wav")
+	AudioManager.play("res://SFX/rod_hook_hitting_water.wav", -4)
 	
 func update_fishing_line():
 	rod_point = $FishingRod/AttachPoint.get_global_position()
@@ -112,26 +112,46 @@ func _on_area_2d_body_entered(body):
 		$Hook.set_physics_process(false)
 		$Hook.global_position = $FishingRod/AttachPoint.global_position
 		throw_enabled = true
+		AudioManager.stop_playing("res://SFX/rod_reeling.wav")
 		pass # Replace with function body.
 
 
 func _on_s_clock_timeout():
 	time += 30
+	var am_pm
+	if time < 240:
+		am_pm = "am"
+	else:
+		am_pm = "pm"
 	
-	if time == 30:
+	var start_hour = 8
+	var hours = int(time / 60) + start_hour
+	if time < 240:
+		am_pm = "am"
+	else:
+		am_pm = "pm"
+		hours -= 12
+	var minutes = (time % 60)/10
+	
+	$MinigameLayer/Clock/Label.text = str(hours) + ":" + str(minutes) + "0 " + am_pm
+	
+	if time == 240:
 		for path in MorningAnimPlayers:
 			var AniPlayer = get_node(path)
 			AniPlayer.play("Fade")
 		for path in AfternoonCloudPlayers:
 			var Aniplayer = get_node(path)
 			Aniplayer.play_backwards("Fade")
-	if time == 90:
+	if time == 540:
 		for path in AfternoonAnimPlayers:
 			var AniPlayer = get_node(path)
 			AniPlayer.play("Fade")
 		for path in AfternoonCloudPlayers:
 			var Aniplayer = get_node(path)
 			Aniplayer.play("FadeFast")
+	
+	if time == 840:
+		day_end()
 
 
 func _on_fish_collider_body_entered(body):
@@ -181,9 +201,11 @@ func _on_despawn_area_body_entered(body):
 func on_fish_caught(fish):
 	if not $Hook.is_hooked:
 		AudioManager.play("res://SFX/fish_hooked_SMALL.wav", -20)
+		AudioManager.stop_playing("res://SFX/rod_reeling.wav")
 		$Hook.in_catch_mode = false
 		var catch_game = $MinigameLayer/CatchingGame
 		fish.disable_swim_physics()
+		fish.set_anim_speed(2)
 		var mouth = fish.get_mouth()
 	#
 		catch_game.rects_list = fish.rects_list
@@ -194,7 +216,14 @@ func on_fish_caught(fish):
 		$Hook.attach(mouth)
 		var win: bool
 		win = await catch_game.game_end
+		
+		
+		
+#		$FishingRod.play("pull_back")
 		if win:
+			$FishingRod.play("catch_fish")
+			await get_tree().create_timer(0.2).timeout
+			$FishingRod/AttachPoint.position = Vector2(8.666 ,-18)
 			fish.launch()
 			pass
 		else:
@@ -203,21 +232,23 @@ func on_fish_caught(fish):
 			$Hook.set_physics_process(true)
 			$Hook.in_catch_mode = true
 			fish.physics = true
+			fish.stop_anim()
 			fish.enable_in_boat_physics()
+			fish.disable_catching()
 			fish.linear_damp = 0
 
 func start_boat_placement(scene_path: String):
+	
+	$FishingRod.play("default")
 #	await get_tree().create_timer(1).timeout
 	$CameraDrop.make_current()
 	
-	print("START BOAT PLACEMENT")
 	var fish_scene = load(scene_path)
 	var fish = fish_scene.instantiate()
 #	call_deferred("initialize_fish", fish)
 	initialize_fish(fish)
 	
 func initialize_fish(fish):
-	print("initialize")
 #	fish.physics = true
 	fish.global_position = $FishPlacementPos.global_position
 #	call_deferred("add_child", fish)
@@ -261,18 +292,36 @@ func _on_pulling_back():
 func _on_throwing():
 	$FishingRod.play("throw")
 	$FishingRod/AttachPoint.position = Vector2(-17 ,-9)
-	AudioManager.play("res://SFX/rod_cast.wav")
+	AudioManager.play("res://SFX/rod_cast.wav", -6)
 	await get_tree().create_timer(0.15).timeout
 	$Hook.show()
 	$FishingLine.show()
 #	await $FishingRod.animation_finished
-	throw_rod($ThrowProgress.value)
+	throw_rod($MinigameLayer/ThrowProgress.value)
 	await get_tree().create_timer(1).timeout
 	$FishingRod/AttachPoint.position = Vector2(-9.333 ,-2)
 	$FishingRod.play("default")
 
 
 func _on_hook_fish_catch_detect_area_entered(area):
-	print("hook detached")
 	$Hook.is_attached = false
 	
+func get_fish_on_boat() -> Dictionary:
+	var fish_dict = {}
+	for fish in $Boat/DetectFishOnBoat.get_overlapping_bodies():
+		var name = fish.fish_name
+		if name in fish_dict:
+			fish_dict[name] += 1
+		else:
+			fish_dict[name] = 1
+	return fish_dict
+		
+		
+func day_end():
+	var fish_list = get_fish_on_boat()
+	GameData.fish_list = fish_list
+	SceneManager.SwitchScene("earnings")
+
+
+func _on_end_day_pressed():
+	day_end()

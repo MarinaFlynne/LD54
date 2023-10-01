@@ -8,7 +8,7 @@ signal entered_water
 @export var underwater_gravity_scale: float = 0.1
 @export var enter_water_velocity_y: float = 30
 @export var enter_water_velocity_x_scale: float = 0.1
-@export var drag_coefficient = 0.005 # Adjust as needed
+@export var drag_coefficient = 0.000 # Adjust as needed
 @export var drag_coefficient_x = 0.5 # Adjust as needed
 
 @export var nudge_speed = 20
@@ -24,9 +24,10 @@ var is_hooked: bool = false
 var is_attached: bool = false
 var in_catch_mode = true
 var attached_to
+var throw_enabled: bool = true
 
 # to store previous velocity for pulling
-var previous_velocity = 10
+var previous_velocity = 40
 var returning_to_prev_velocity: bool
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -60,7 +61,7 @@ func _physics_process(delta):
 		velocity.y += gravity * gravity_scale * delta 
 
 	if returning_to_prev_velocity and velocity.y <= previous_velocity:
-		velocity.y += 4
+		velocity.y += 20
 	elif returning_to_prev_velocity and velocity.y > previous_velocity:
 		returning_to_prev_velocity = false
 
@@ -69,20 +70,28 @@ func _physics_process(delta):
 		velocity.x = -1 * nudge_speed
 	elif Input.is_action_pressed("nudge_hook_right"):
 		velocity.x = 1 * nudge_speed
-	elif Input.is_action_just_pressed("pull_hook"):
-		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
-		velocity += pull_velocity * delta * direction_of_rod
-	elif Input.is_action_just_pressed("reel_in") and !returning_to_prev_velocity:
+#	elif Input.is_action_pressed("nudge_hook_down"):
+#		velocity.y += 1 * nudge_speed
+#	if Input.is_action_just_pressed("pull_hook"):
+#		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
+#		velocity += pull_velocity * delta * direction_of_rod
+#		AudioManager.play("res://SFX/rod_reeling.wav")
+#	elif Input.is_action_just_pressed("reel_in") and not returning_to_prev_velocity:
 #		previous_velocity = velocity.y
-		previous_velocity = 50
+#		previous_velocity = 300
+	if Input.is_action_just_pressed("reel_in"):
+		AudioManager.play("res://SFX/rod_reeling.wav", -9)
 	if Input.is_action_pressed("reel_in"):
 		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
 		velocity += pull_velocity * delta * direction_of_rod
-	elif Input.is_action_just_released("reel_in"):
+	if Input.is_action_just_released("reel_in"):
 		returning_to_prev_velocity = true
+		
 		pass
+	if (not Input.is_action_pressed("reel_in")) or is_hooked or throw_enabled:
+		AudioManager.stop_playing("res://SFX/rod_reeling.wav")
 	move_and_slide()
-
+	
 
 func _on_water_collision_body_entered(body):
 	in_water = true
@@ -111,10 +120,12 @@ func _process(delta):
 	if is_attached:
 		global_position = attached_to.global_position
 		pass
+	throw_enabled = get_parent().throw_enabled
 
 func unattach():
 	is_attached = false
 	is_hooked = false
 	gravity_on = false
 	is_thrown = false
+	get_node(AttachPoint).position = Vector2(-9.333 ,-2)
 	global_position = get_node(AttachPoint).global_position 
