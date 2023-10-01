@@ -133,7 +133,7 @@ scene = "res://Scenes/scissortail_damselfish.tscn"
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ojpnr")
 autoplay = "default"
-frame_progress = 0.333441
+frame_progress = 0.0503092
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, -6)

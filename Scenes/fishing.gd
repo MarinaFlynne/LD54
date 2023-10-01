@@ -21,8 +21,8 @@ var fishing_minigame_active = false
 @export var fishes: Array[PackedScene]
 @export var minigame: PackedScene
 
-@export var fish_max_speed = 80
-@export var fish_min_speed = 30
+#@export var fish_max_speed = 80
+#@export var fish_min_speed = 30
 
 @export var fish_catch_delay: float = 0.3
 
@@ -158,12 +158,18 @@ func _on_fish_timer_timeout():
 		spawn_location = get_node("SpawnPaths/FishSpawnPath1/FishSpawnLocation")
 	else: 
 		spawn_location = get_node("SpawnPaths/FishSpawnPath2/FishSpawnLocation")
-		
-	spawn_location.progress_ratio = randf()
+	
+	var max_spawn_range = fish.max_spawn_range
+	var min_spawn_range = fish.min_spawn_range
+	
+	spawn_location.progress_ratio = randf_range(min_spawn_range, max_spawn_range)
 	
 	fish.position = spawn_location.position
 	
-	var speed = randi_range(fish_min_speed, fish_max_speed)
+	var max_speed = fish.max_move_speed
+	var min_speed = fish.min_move_speed
+	
+	var speed = randi_range(min_speed, max_speed)
 	fish.init(speed, direction)
 	fish.enable_swim_physics()
 	add_child(fish)

@@ -99,6 +99,9 @@ linear_damp_mode = 1
 script = ExtResource("1_jvwy1")
 mouth_pos = NodePath("MouthPos")
 rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
+max_move_speed = 140
+min_move_speed = 70
+min_spawn_range = 0.8
 scene = "res://Scenes/barred_conger.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

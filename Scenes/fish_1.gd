@@ -10,6 +10,11 @@ var default_gravity_scale: float
 @export var rects_list: Array[Array] = [[.8, 0], [1, 100], [1.2, 200]]
 # speed of the catching minigame arrow
 @export var game_speed: int = 200
+@export var max_move_speed: int = 80
+@export var min_move_speed: int = 30
+@export var max_spawn_range: float = 1
+@export var min_spawn_range: float = 0
+
 
 @export var scene = "res://Scenes/fish_1.tscn"
 
