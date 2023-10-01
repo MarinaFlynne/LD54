@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbts60uiuh4or"]
+
+[ext_resource type="Texture2D" uid="uid://dh2m0m13p2tya" path="res://Sprites/splash.png" id="1_k0c66"]
+[ext_resource type="Script" path="res://Scenes/splash.gd" id="1_u6u6e"]
+
+[sub_resource type="Animation" id="Animation_vtcji"]
+resource_name = "Fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ds3nd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cph5b"]
+_data = {
+"Fade": SubResource("Animation_vtcji"),
+"RESET": SubResource("Animation_ds3nd")
+}
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u6u6e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("1_k0c66")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+root_node = NodePath("../../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_cph5b")
+}

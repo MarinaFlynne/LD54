@@ -34,11 +34,13 @@ func RemoveScene(sceneAlias : String) -> void:
 # Parameter sceneAlias: The scene alias of the scene to switch to
 func SwitchScene(sceneAlias : String, fade = true) -> void:
 	var fadeNode = get_node(fadePath)
-	fadeNode.play("Fade")
-	await fadeNode.animation_finished
+	if fade:
+		fadeNode.play("Fade")
+		await fadeNode.animation_finished
 	get_tree().change_scene_to_file(Scenes[sceneAlias])
-	await get_tree().create_timer(0.7).timeout
-	fadeNode.play_backwards("Fade")
+	if fade:
+		await get_tree().create_timer(0.7).timeout
+		fadeNode.play_backwards("Fade")
  
 # Description: Restart the current scene
 func RestartScene() -> void:
