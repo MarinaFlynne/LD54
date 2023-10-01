@@ -26,6 +26,8 @@ var fishing_minigame_active = false
 
 @export var fish_catch_delay: float = 0.3
 
+@export var charge_speed: float = 2
+
 var camera_limit_top = 324
 var camera_limit_bottom = 1428
 
@@ -54,7 +56,7 @@ func _process(delta):
 	
 	if throw_charging:
 		if Input.is_action_pressed("throw_rod"):
-			$ThrowProgress.value += 2
+			$ThrowProgress.value += charge_speed
 			throw_charging = true
 		else:
 			throw_charging = false
@@ -221,6 +223,7 @@ func initialize_fish(fish):
 	fishing_minigame_active = false
 	throw_enabled = true
 	$CameraMain.make_current()
+	$Hook.in_catch_mode = true
 	
 
 func _on_fish_catch_detect_area_entered(area):

@@ -846,6 +846,7 @@ cloud_speed = 5
 rigid_fish_water_dampen = 12
 fishes = Array[PackedScene]([ExtResource("111_1kvje")])
 minigame = ExtResource("113_la3pm")
+charge_speed = 1.2
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -1138,7 +1139,7 @@ position = Vector2(1157, 944)
 shape = SubResource("RectangleShape2D_sx3yp")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(554.75, 1863)
+position = Vector2(554, 1881)
 shape = SubResource("RectangleShape2D_f6nrs")
 
 [connection signal="pulling_back" from="." to="." method="_on_pulling_back"]
