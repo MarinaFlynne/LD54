@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwa7oabme2q85"
-path="res://.godot/imported/Icon.png-33e63688031d53466d4d656c73cf10ca.ctex"
+uid="uid://cdo3oh80h71ao"
+path="res://.godot/imported/scissortail_damselfish_STATIC.png-7414efec19879d1420c409f50cc2b425.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Icon.png"
-dest_files=["res://.godot/imported/Icon.png-33e63688031d53466d4d656c73cf10ca.ctex"]
+source_file="res://Sprites/Fish/scissortail_damselfish_STATIC.png"
+dest_files=["res://.godot/imported/scissortail_damselfish_STATIC.png-7414efec19879d1420c409f50cc2b425.ctex"]
 
 [params]
 

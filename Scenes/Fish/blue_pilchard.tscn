@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b1yfg28dvtske"]
+[gd_scene load_steps=20 format=3 uid="uid://b1yfg28dvtske"]
 
 [ext_resource type="Texture2D" uid="uid://bho06ps7logjm" path="res://Sprites/Fish/fish_blue_pilchard_0.2s.png" id="1_hylqh"]
 [ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_sxnxf"]
+[ext_resource type="Texture2D" uid="uid://druw5ofidtk1j" path="res://Sprites/Fish/blue_pilchard_STATIC.png" id="3_bypy5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cf7j5"]
 bounce = 0.4
@@ -113,7 +114,7 @@ linear_damp_mode = 1
 script = ExtResource("1_sxnxf")
 mouth_pos = NodePath("MouthPos")
 rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
-scene = "res://Scenes/blue_pilchard.tscn"
+scene = "res://Scenes/Fish/blue_pilchard.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -136,5 +137,11 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
 position = Vector2(-17, -3)
 shape = SubResource("CircleShape2D_elpsm")
+
+[node name="Hologram" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.478431)
+position = Vector2(0, 77)
+scale = Vector2(3, 3)
+texture = ExtResource("3_bypy5")
 
 [connection signal="body_entered" from="MouthArea" to="." method="_on_mouth_area_body_entered"]

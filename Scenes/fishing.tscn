@@ -1,12 +1,13 @@
 [gd_scene load_steps=177 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
+[ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/Fish/fish_1.tscn" id="2_3sxi1"]
 [ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
-[ext_resource type="PackedScene" uid="uid://b1yfg28dvtske" path="res://Scenes/blue_pilchard.tscn" id="3_f5a2d"]
 [ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/Sky/sky_morning.png" id="3_nd2gq"]
-[ext_resource type="PackedScene" uid="uid://bbhv08wxwa3cr" path="res://Scenes/barred_conger.tscn" id="4_7xn48"]
+[ext_resource type="PackedScene" uid="uid://bbhv08wxwa3cr" path="res://Scenes/Fish/barred_conger.tscn" id="3_x1m8f"]
 [ext_resource type="Texture2D" uid="uid://b4l5v5dy4jf4m" path="res://Sprites/Sky/Night/frame_000_delay-0.2s.png" id="4_e07kt"]
-[ext_resource type="PackedScene" uid="uid://cemaeeauarxiu" path="res://Scenes/scissortail_damselfish.tscn" id="5_043yd"]
+[ext_resource type="PackedScene" uid="uid://cemaeeauarxiu" path="res://Scenes/Fish/scissortail_damselfish.tscn" id="4_xhs4n"]
+[ext_resource type="PackedScene" uid="uid://b1yfg28dvtske" path="res://Scenes/Fish/blue_pilchard.tscn" id="5_rp5ov"]
 [ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
 [ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
 [ext_resource type="Texture2D" uid="uid://banynmad34o0f" path="res://Sprites/Sky/Night/frame_002_delay-0.2s.png" id="6_2thhj"]
@@ -112,7 +113,6 @@
 [ext_resource type="Texture2D" uid="uid://b07q7x5tfeud6" path="res://Sprites/Ocean/long_ocean_night.png" id="107_0ciuu"]
 [ext_resource type="Texture2D" uid="uid://bquis7s2x308k" path="res://Sprites/Ocean/long_ocean_afternoon.png" id="108_xbq4q"]
 [ext_resource type="Texture2D" uid="uid://bbl3ada4fsklo" path="res://Sprites/Ocean/long_ocean_morning.png" id="109_5nlyq"]
-[ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/fish_1.tscn" id="111_1kvje"]
 [ext_resource type="Texture2D" uid="uid://c505kxk5o2wca" path="res://Sprites/Player/main_char_fishing.png" id="111_2dggl"]
 [ext_resource type="Texture2D" uid="uid://b7ddlkknyu25v" path="res://Sprites/Player/main_char_windup_gif.png" id="112_2hf37"]
 [ext_resource type="PackedScene" uid="uid://dcw5nev1y8mrt" path="res://Scenes/boat.tscn" id="112_pcy6c"]
@@ -847,7 +847,7 @@ AfternoonAnimPlayers = Array[NodePath]([NodePath("Background/SkyAfternoon/Animat
 AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/AnimationPlayer"), NodePath("Clouds/Cloud2/Afternoon/AnimationPlayer")])
 cloud_speed = 5
 rigid_fish_water_dampen = 12
-fishes = Array[PackedScene]([ExtResource("111_1kvje"), ExtResource("3_f5a2d"), ExtResource("4_7xn48"), ExtResource("5_043yd")])
+fishes = Array[PackedScene]([ExtResource("2_3sxi1"), ExtResource("3_x1m8f"), ExtResource("5_rp5ov"), ExtResource("4_xhs4n")])
 minigame = ExtResource("113_la3pm")
 charge_speed = 1.2
 
@@ -1103,7 +1103,7 @@ position = Vector2(581, -31)
 shape = SubResource("RectangleShape2D_oi662")
 
 [node name="FishPlacementPos" type="Node2D" parent="."]
-position = Vector2(992, 32)
+position = Vector2(992, -40)
 
 [node name="DropGameBarrier" type="StaticBody2D" parent="."]
 visible = false

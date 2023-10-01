@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbhv08wxwa3cr"]
+[gd_scene load_steps=18 format=3 uid="uid://bbhv08wxwa3cr"]
 
 [ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_jvwy1"]
 [ext_resource type="Texture2D" uid="uid://cclgn48jhfc35" path="res://Sprites/Fish/barred_conger.png" id="2_y12fk"]
+[ext_resource type="Texture2D" uid="uid://c82atatbtlf3c" path="res://Sprites/Fish/barred_conger_STATIC.png" id="3_2ah37"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4plte"]
 bounce = 0.4
@@ -102,7 +103,7 @@ rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
 max_move_speed = 140
 min_move_speed = 70
 min_spawn_range = 0.8
-scene = "res://Scenes/barred_conger.tscn"
+scene = "res://Scenes/Fish/barred_conger.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -125,5 +126,11 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
 position = Vector2(-57, -3)
 shape = SubResource("CircleShape2D_elpsm")
+
+[node name="Hologram" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.478431)
+position = Vector2(0, 77)
+scale = Vector2(3, 3)
+texture = ExtResource("3_2ah37")
 
 [connection signal="body_entered" from="MouthArea" to="." method="_on_mouth_area_body_entered"]

@@ -30,7 +30,6 @@ signal drop_game_end()
 func _ready():
 	default_gravity_scale = gravity_scale
 #	disable_boat_physics()
-	$Hologram.hide()
 
 func enable_placement_physics():
 	# TODO
@@ -44,9 +43,8 @@ func init(speed, dir):
 
 func flip():
 	$AnimatedSprite2D.flip_h = not $AnimatedSprite2D.flip_h
-	$Hologram.flip_h = not $Hologram.flip_h
 	for child in get_children():
-		if child != $AnimatedSprite2D and child != $Hologram:
+		if child != $AnimatedSprite2D:
 			child.position.x *=-1
 	$MouthArea/CollisionShape2D.position.x *=-1
 #	$CollisionShape2D.position.x *= -1
@@ -76,7 +74,6 @@ func enable_swim_physics():
 	
 func start_drop_game():
 	gravity_scale = 0
-	$Hologram.show()
 	drop_game_active = true
 	set_collision_mask_value(9, true)
 	set_collision_mask_value(5, true)
@@ -85,7 +82,6 @@ func start_drop_game():
 	end_drop_game()
 
 func end_drop_game():
-	$Hologram.hide()
 	drop_game_end.emit()
 	drop_game_active = false
 	set_collision_mask_value(9, false)
