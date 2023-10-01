@@ -79,6 +79,7 @@ drop_game_right={
 2d_physics/layer_7="Boat"
 2d_physics/layer_8="Despawn"
 2d_physics/layer_9="drop game barrier"
+2d_physics/layer_10="World Border"
 
 [rendering]
 

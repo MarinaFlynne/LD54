@@ -8,6 +8,8 @@ var throw_enabled = true # true iff throwing the rod is currently enabled
 # represents the current time since the fishing began, in intervals of 30s
 var time = 0
 
+var fishing_minigame_active = false
+
 @export var MorningAnimPlayers: Array[NodePath]
 @export var AfternoonAnimPlayers: Array[NodePath]
 @export var AfternoonCloudPlayers: Array[NodePath]
@@ -193,23 +195,34 @@ func start_boat_placement(scene_path: String):
 	print("START BOAT PLACEMENT")
 	var fish_scene = load(scene_path)
 	var fish = fish_scene.instantiate()
-	fish.physics = true
+#	call_deferred("initialize_fish", fish)
+	initialize_fish(fish)
+	
+func initialize_fish(fish):
+	print("initialize")
+#	fish.physics = true
 	fish.global_position = $FishPlacementPos.global_position
-	add_child(fish)
+#	call_deferred("add_child", fish)
+	call_deferred("add_child", fish)
+	await get_tree().create_timer(0.1).timeout
 	fish.start_drop_game()
 	await fish.drop_game_end
 	await get_tree().create_timer(1).timeout
+	fishing_minigame_active = false
 	throw_enabled = true
 	$CameraMain.make_current()
-#	fish.enable_in_boat_physics()
-#	fish.position = 
-	pass
+	
 
 func _on_fish_catch_detect_area_entered(area):
+	if not fishing_minigame_active:
+		var scene_path = area.get_parent().scene
+		area.get_parent().queue_free()
+	#	var body = area.get_parent()
+		$Hook.unattach()
+		
+	#	var scene_path = area.get_parent().scene
+		start_boat_placement(scene_path)
+#		call_deferred("start_boat_placement", scene_path)
+#		start_boat_placement(scene_path)
+		fishing_minigame_active = true
 	
-#	var body = area.get_parent()
-	$Hook.unattach()
-	
-	var scene_path = area.get_parent().scene
-	start_boat_placement(scene_path)
-	area.get_parent().queue_free()

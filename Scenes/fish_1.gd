@@ -69,6 +69,7 @@ func start_drop_game():
 	set_collision_mask_value(9, true)
 	set_collision_mask_value(5, true)
 	await get_tree().create_timer(drop_game_length).timeout
+	physics = true
 	end_drop_game()
 
 func end_drop_game():
