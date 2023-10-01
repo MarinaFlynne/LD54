@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=135 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
@@ -113,6 +113,7 @@
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/fish_1.tscn" id="111_1kvje"]
 [ext_resource type="PackedScene" uid="uid://dcw5nev1y8mrt" path="res://Scenes/boat.tscn" id="112_pcy6c"]
 [ext_resource type="PackedScene" uid="uid://brrda866lga7a" path="res://Scenes/catching_game.tscn" id="113_la3pm"]
+[ext_resource type="AudioStream" uid="uid://bskonal7ri7je" path="res://SFX/fish_hooked_SMALL.wav" id="114_cypdp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -851,7 +852,8 @@ position = Vector2(176, -64)
 shape = SubResource("RectangleShape2D_jitlq")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-volume_db = 0.075
+stream = ExtResource("114_cypdp")
+volume_db = -3.525
 
 [connection signal="body_entered" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collider_body_exited"]

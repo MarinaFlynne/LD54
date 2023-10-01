@@ -155,7 +155,7 @@ func _on_despawn_area_body_entered(body):
 
 func on_fish_caught(fish):
 	if not $Hook.is_hooked:
-		AudioManager.play("res://SFX/fish_hooked_SMALL.wav")
+		AudioManager.play("res://SFX/fish_hooked_SMALL.wav", -20)
 		$Hook.in_catch_mode = false
 		var catch_game = $MinigameLayer/CatchingGame
 		fish.disable_swim_physics()

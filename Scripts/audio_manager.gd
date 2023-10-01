@@ -26,12 +26,11 @@ func _on_stream_finished(stream):
 	available.append(stream)
 	in_use.remove_at(in_use.find(stream))
 	
-func play(sound_path: String):
-	queue.append(sound_path)
+func play(sound_path: String, volume = 0):
+	print(volume)
+	queue.append([sound_path, volume])
 	if not available.is_empty():
 		return available[0]
-
-#func play_volume(sound_path: String, volume: float)
 
 func stop_playing(sound_path: String):
 	if not in_use.is_empty():
@@ -45,10 +44,12 @@ func stop_playing(sound_path: String):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if available.is_empty():
-		print("AVAILABLE EMPTY")
+		print("WARNING: NO AVAILABLE SOUND PLAYERS")
 	# Play queued sound if any players are available.
 	if not queue.is_empty() and not available.is_empty():
 		# Louds sound from the queue into our sound player's stream
-		available[0].stream = load(queue.pop_front())
+		var sound = queue.pop_front()
+		available[0].stream = load(sound[0])
+		available[0].volume_db = sound[1]
 		available[0].play()
 		in_use.append(available.pop_front())
