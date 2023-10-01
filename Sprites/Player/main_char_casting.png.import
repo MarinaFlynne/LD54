@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c505kxk5o2wca"
-path="res://.godot/imported/main_char_fishing.png-0d40427f81c838099b85aa520780dfbc.ctex"
+uid="uid://ciltc3t40ys5m"
+path="res://.godot/imported/main_char_casting.png-4979020976cb46035b219dbda63eb7f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/main_char_fishing.png"
-dest_files=["res://.godot/imported/main_char_fishing.png-0d40427f81c838099b85aa520780dfbc.ctex"]
+source_file="res://Sprites/Player/main_char_casting.png"
+dest_files=["res://.godot/imported/main_char_casting.png-4979020976cb46035b219dbda63eb7f1.ctex"]
 
 [params]
 

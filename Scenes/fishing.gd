@@ -27,6 +27,10 @@ var fishing_minigame_active = false
 var camera_limit_top = 324
 var camera_limit_bottom = 1428
 
+signal pulling_back()
+signal throwing()
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Hook.set_physics_process(false)
@@ -44,7 +48,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("throw_rod") and throw_enabled:
 		$ThrowProgress.value = 0
 		$ThrowProgress.show()
-		throw_charging = true
+		pulling_back.emit()
 	
 	if throw_charging:
 		if Input.is_action_pressed("throw_rod"):
@@ -53,9 +57,11 @@ func _process(delta):
 		else:
 			throw_charging = false
 			throw_enabled = false
-			throw_rod($ThrowProgress.value)
+			throwing.emit()
+			
 	elif Input.is_action_just_pressed("throw_rod") and throw_enabled:
 		throw_charging = true
+
 	
 		pass
 	$CameraMain.position.y = $Hook.position.y
@@ -74,10 +80,12 @@ func move_clouds(delta):
 	
 
 func throw_rod(power):
+	
+	
 	$Hook.set_physics_process(true)
 	$Hook.throw(power)
 	$ThrowProgress.hide()
-	AudioManager.play("res://SFX/rod_cast.wav")
+	
 #	await get_tree().create_timer(0.1).timeout
 	AudioManager.play("res://SFX/rod_cast_CLICKTRACK.wav")
 	await $Hook.entered_water
@@ -226,3 +234,24 @@ func _on_fish_catch_detect_area_entered(area):
 #		start_boat_placement(scene_path)
 		fishing_minigame_active = true
 	
+
+
+func _on_pulling_back():
+	$Hook.hide()
+	$FishingLine.hide()
+	$FishingRod.play("pull_back")
+	pass # Replace with function body.
+
+
+func _on_throwing():
+	$FishingRod.play("throw")
+	$FishingRod/AttachPoint.position = Vector2(-17 ,-9)
+	AudioManager.play("res://SFX/rod_cast.wav")
+	await get_tree().create_timer(0.15).timeout
+	$Hook.show()
+	$FishingLine.show()
+#	await $FishingRod.animation_finished
+	throw_rod($ThrowProgress.value)
+	await get_tree().create_timer(1).timeout
+	$FishingRod/AttachPoint.position = Vector2(-9.333 ,-2)
+	$FishingRod.play("default")
