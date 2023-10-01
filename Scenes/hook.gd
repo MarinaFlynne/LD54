@@ -26,7 +26,7 @@ var in_catch_mode = true
 var attached_to
 
 # to store previous velocity for pulling
-var previous_velocity = 0
+var previous_velocity = 10
 var returning_to_prev_velocity: bool
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

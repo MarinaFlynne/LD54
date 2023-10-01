@@ -699,8 +699,12 @@ libraries = {
 "": SubResource("AnimationLibrary_bkraw")
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CameraMain" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+
+[node name="CameraDrop" type="Camera2D" parent="."]
+position = Vector2(864, 160)
+zoom = Vector2(2, 2)
 
 [node name="WaterColliders" type="Node2D" parent="."]
 
@@ -845,6 +849,9 @@ shape = SubResource("RectangleShape2D_jitlq")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DropGameBarrier"]
 position = Vector2(176, -64)
 shape = SubResource("RectangleShape2D_jitlq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 0.075
 
 [connection signal="body_entered" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collider_body_exited"]

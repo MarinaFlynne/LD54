@@ -28,6 +28,7 @@ func _ready():
 	$Clouds/Cloud1/Afternoon.modulate = Color(1,1,1,0)
 	$Clouds/Cloud2/Afternoon.modulate = Color(1,1,1,0)
 	$ThrowProgress.hide()
+	$CameraMain.enabled = true
 #	$MinigameLayer/CatchingGame.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -154,6 +155,7 @@ func _on_despawn_area_body_entered(body):
 
 func on_fish_caught(fish):
 	if not $Hook.is_hooked:
+		AudioManager.play("res://SFX/fish_hooked_SMALL.wav")
 		$Hook.in_catch_mode = false
 		var catch_game = $MinigameLayer/CatchingGame
 		fish.disable_swim_physics()
@@ -181,6 +183,8 @@ func on_fish_caught(fish):
 
 func start_boat_placement(scene_path: String):
 	await get_tree().create_timer(1).timeout
+	$CameraDrop.make_current()
+	
 	print("START BOAT PLACEMENT")
 	var fish_scene = load(scene_path)
 	var fish = fish_scene.instantiate()
@@ -189,7 +193,9 @@ func start_boat_placement(scene_path: String):
 	add_child(fish)
 	fish.start_drop_game()
 	await fish.drop_game_end
+	await get_tree().create_timer(1).timeout
 	throw_enabled = true
+	$CameraMain.make_current()
 #	fish.enable_in_boat_physics()
 #	fish.position = 
 	pass

@@ -31,6 +31,8 @@ func play(sound_path: String):
 	if not available.is_empty():
 		return available[0]
 
+#func play_volume(sound_path: String, volume: float)
+
 func stop_playing(sound_path: String):
 	if not in_use.is_empty():
 		for player in in_use:
