@@ -738,8 +738,10 @@ libraries = {
 
 [node name="CameraMain" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+position_smoothing_enabled = true
 
 [node name="CameraDrop" type="Camera2D" parent="."]
+visible = false
 position = Vector2(864, 160)
 zoom = Vector2(2, 2)
 

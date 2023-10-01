@@ -22,6 +22,9 @@ var time = 0
 @export var fish_max_speed = 80
 @export var fish_min_speed = 30
 
+var camera_limit_top = 324
+var camera_limit_bottom = 1428
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Hook.set_physics_process(false)
@@ -53,6 +56,8 @@ func _process(delta):
 		throw_charging = true
 	
 		pass
+	$CameraMain.position.y = $Hook.position.y
+	$CameraMain.position.y = clamp($CameraMain.position.y, camera_limit_top, camera_limit_bottom)
 
 func move_clouds(delta):
 	var cloud1_pos = $Clouds/Cloud1.position.x
