@@ -182,7 +182,7 @@ func on_fish_caught(fish):
 			fish.linear_damp = 0
 
 func start_boat_placement(scene_path: String):
-	await get_tree().create_timer(1).timeout
+#	await get_tree().create_timer(1).timeout
 	$CameraDrop.make_current()
 	
 	print("START BOAT PLACEMENT")

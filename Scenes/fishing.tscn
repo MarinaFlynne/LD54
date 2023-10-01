@@ -1,9 +1,8 @@
-[gd_scene load_steps=135 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=139 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
 [ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/Sky/sky_morning.png" id="3_nd2gq"]
-[ext_resource type="Texture2D" uid="uid://p4kkwxmpuwro" path="res://Sprites/CatchingGame/rod.png" id="3_psujj"]
 [ext_resource type="Texture2D" uid="uid://b4l5v5dy4jf4m" path="res://Sprites/Sky/Night/frame_000_delay-0.2s.png" id="4_e07kt"]
 [ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
 [ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
@@ -111,9 +110,10 @@
 [ext_resource type="Texture2D" uid="uid://bquis7s2x308k" path="res://Sprites/Ocean/long_ocean_afternoon.png" id="108_xbq4q"]
 [ext_resource type="Texture2D" uid="uid://bbl3ada4fsklo" path="res://Sprites/Ocean/long_ocean_morning.png" id="109_5nlyq"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/fish_1.tscn" id="111_1kvje"]
+[ext_resource type="Texture2D" uid="uid://c505kxk5o2wca" path="res://Sprites/main_char_fishing.png" id="111_6s3lg"]
 [ext_resource type="PackedScene" uid="uid://dcw5nev1y8mrt" path="res://Scenes/boat.tscn" id="112_pcy6c"]
 [ext_resource type="PackedScene" uid="uid://brrda866lga7a" path="res://Scenes/catching_game.tscn" id="113_la3pm"]
-[ext_resource type="AudioStream" uid="uid://bskonal7ri7je" path="res://SFX/fish_hooked_SMALL.wav" id="114_cypdp"]
+[ext_resource type="AudioStream" uid="uid://b2ksdh45eus3g" path="res://Music/song_1.wav" id="114_qeot1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -523,8 +523,44 @@ size = Vector2(743, 1509)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sf6t2"]
 size = Vector2(407, 1457)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_43qyr"]
+atlas = ExtResource("111_6s3lg")
+region = Rect2(0, 0, 43, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mua0u"]
+atlas = ExtResource("111_6s3lg")
+region = Rect2(45, 0, 43, 43)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wfrvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43qyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mua0u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.5
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p7xuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43qyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mua0u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.5
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dynf"]
-size = Vector2(16.5001, 27.6667)
+size = Vector2(16.5001, 26.8333)
 
 [sub_resource type="Curve2D" id="Curve2D_hqej8"]
 _data = {
@@ -731,20 +767,28 @@ shape = SubResource("RectangleShape2D_ygbm8")
 position = Vector2(948.5, 1023.5)
 shape = SubResource("RectangleShape2D_sf6t2")
 
-[node name="FishingRod" type="Sprite2D" parent="."]
-position = Vector2(840, 208)
+[node name="MainCharacter" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(824, 200)
 scale = Vector2(3, 3)
-texture = ExtResource("3_psujj")
+sprite_frames = SubResource("SpriteFrames_wfrvb")
+frame_progress = 0.642758
+
+[node name="FishingRod" type="AnimatedSprite2D" parent="."]
+position = Vector2(828, 203)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_p7xuq")
+autoplay = "default"
 
 [node name="AttachPoint" type="Node2D" parent="FishingRod"]
-position = Vector2(-16, -3.33334)
+position = Vector2(-9.33331, -2)
 
 [node name="Area2D" type="Area2D" parent="FishingRod"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishingRod/Area2D"]
-position = Vector2(-16.2501, -2.16667)
+position = Vector2(-9, 0.666664)
 shape = SubResource("RectangleShape2D_3dynf")
 
 [node name="FishingLine" type="Line2D" parent="."]
@@ -753,7 +797,7 @@ width = 2.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="Hook" parent="." instance=ExtResource("5_s578x")]
-position = Vector2(792, 200)
+position = Vector2(800, 200)
 collision_mask = 1
 max_throw_velocity = Vector2(-760, -450)
 underwater_gravity_scale = 0.7
@@ -762,6 +806,7 @@ nudge_speed = 40
 AttachPoint = NodePath("../FishingRod/AttachPoint")
 
 [node name="Reload" type="Button" parent="."]
+visible = false
 offset_left = 20.0
 offset_top = 17.0
 offset_right = 81.0
@@ -781,7 +826,7 @@ wait_time = 30.0
 autostart = true
 
 [node name="FishTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 autostart = true
 
 [node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
@@ -839,6 +884,7 @@ shape = SubResource("RectangleShape2D_oi662")
 position = Vector2(992, 32)
 
 [node name="DropGameBarrier" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(968, 112)
 collision_layer = 256
 collision_mask = 0
@@ -851,9 +897,10 @@ shape = SubResource("RectangleShape2D_jitlq")
 position = Vector2(176, -64)
 shape = SubResource("RectangleShape2D_jitlq")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("114_cypdp")
-volume_db = -3.525
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("114_qeot1")
+volume_db = -14.762
+autoplay = true
 
 [connection signal="body_entered" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collision_body_entered"]
 [connection signal="body_exited" from="WaterColliders/WaterCollider" to="Hook" method="_on_water_collider_body_exited"]

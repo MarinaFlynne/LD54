@@ -73,7 +73,8 @@ func _physics_process(delta):
 		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
 		velocity += pull_velocity * delta * direction_of_rod
 	elif Input.is_action_just_pressed("reel_in") and !returning_to_prev_velocity:
-		previous_velocity = velocity.y
+#		previous_velocity = velocity.y
+		previous_velocity = 50
 	if Input.is_action_pressed("reel_in"):
 		var direction_of_rod: Vector2 = (get_node(AttachPoint).global_position - global_position).normalized()
 		velocity += pull_velocity * delta * direction_of_rod

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_y12k8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wvaan"]
-bounce = 0.4
+bounce = 0.3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fu8x"]
 atlas = ExtResource("1_qqssx")

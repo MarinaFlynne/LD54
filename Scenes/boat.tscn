@@ -16,14 +16,17 @@ collision_layer = 64
 collision_mask = 16
 
 [node name="RectangleCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(2.66667, 5.33333)
 shape = SubResource("RectangleShape2D_l0nox")
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-50.6667, 0)
 shape = SubResource("CapsuleShape2D_rf3w7")
 
 [node name="WallCollision2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(53.3333, 0)
 shape = SubResource("CapsuleShape2D_rf3w7")
 
