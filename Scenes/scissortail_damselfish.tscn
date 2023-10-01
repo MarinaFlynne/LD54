@@ -1,0 +1,154 @@
+[gd_scene load_steps=21 format=3 uid="uid://cemaeeauarxiu"]
+
+[ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_1awis"]
+[ext_resource type="Texture2D" uid="uid://cric56k5y17me" path="res://Sprites/Fish/scissortail_damselfish.png" id="2_mk8a0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4plte"]
+bounce = 0.4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dee4l"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(0, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ms0ux"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(31, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xckwk"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(62, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgc7w"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(93, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qggw"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(124, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5t2c"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(155, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq40p"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(186, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nmwa"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(217, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceccx"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(248, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh65f"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(279, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehmb4"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(310, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tmxu"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(341, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q760e"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(372, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1552k"]
+atlas = ExtResource("2_mk8a0")
+region = Rect2(403, 0, 29, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ojpnr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dee4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ms0ux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xckwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgc7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qggw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5t2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq40p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nmwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceccx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh65f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehmb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tmxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q760e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1552k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hbtrf"]
+radius = 8.0
+height = 42.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elpsm"]
+radius = 13.0
+
+[node name="ScissortailDamselfish" type="RigidBody2D"]
+collision_layer = 128
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_4plte")
+linear_damp_mode = 1
+script = ExtResource("1_1awis")
+mouth_pos = NodePath("MouthPos")
+rects_list = Array[Array]([[1.0, 20], [1.0, 40.0], [1.0, 60.0]])
+scene = "res://Scenes/scissortail_damselfish.tscn"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ojpnr")
+autoplay = "default"
+frame_progress = 0.333441
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hbtrf")
+
+[node name="MouthPos" type="Node2D" parent="."]
+position = Vector2(-12, -5)
+
+[node name="MouthArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
+position = Vector2(-8, -5)
+shape = SubResource("CircleShape2D_elpsm")
+
+[connection signal="body_entered" from="MouthArea" to="." method="_on_mouth_area_body_entered"]
