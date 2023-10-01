@@ -24,6 +24,8 @@ var fishing_minigame_active = false
 @export var fish_max_speed = 80
 @export var fish_min_speed = 30
 
+@export var fish_catch_delay: float = 0.3
+
 var camera_limit_top = 324
 var camera_limit_bottom = 1428
 
@@ -222,12 +224,13 @@ func initialize_fish(fish):
 	
 
 func _on_fish_catch_detect_area_entered(area):
+	await get_tree().create_timer(fish_catch_delay).timeout
 	if not fishing_minigame_active:
 		var scene_path = area.get_parent().scene
 		area.get_parent().queue_free()
-	#	var body = area.get_parent()
-		$Hook.unattach()
 		
+		$Hook.unattach()
+	#	var body = area.get_parent()
 	#	var scene_path = area.get_parent().scene
 		start_boat_placement(scene_path)
 #		call_deferred("start_boat_placement", scene_path)
@@ -240,6 +243,9 @@ func _on_pulling_back():
 	$Hook.hide()
 	$FishingLine.hide()
 	$FishingRod.play("pull_back")
+	await $FishingRod.animation_finished
+	if throw_charging == true:
+		$FishingRod.play("pull_back_loop")
 	pass # Replace with function body.
 
 
@@ -255,3 +261,9 @@ func _on_throwing():
 	await get_tree().create_timer(1).timeout
 	$FishingRod/AttachPoint.position = Vector2(-9.333 ,-2)
 	$FishingRod.play("default")
+
+
+func _on_hook_fish_catch_detect_area_entered(area):
+	print("hook detached")
+	$Hook.is_attached = false
+	

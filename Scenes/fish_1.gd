@@ -16,7 +16,7 @@ var default_gravity_scale: float
 var physics = false
 var drop_game_active: bool = false
 var drop_game_move_speed = 60
-var drop_game_length = 3 # length of the game in secs
+var drop_game_length = 1.5 # length of the game in secs
 
 signal caught(body)
 signal drop_game_end()
@@ -102,7 +102,7 @@ func _on_mouth_area_body_entered(body):
 	pass # Replace with function body.
 
 func launch():
-	linear_velocity = Vector2(20, -500)
+	linear_velocity = Vector2(0, -500)
 	
 func get_mouth():
 	return get_node(mouth_pos)
