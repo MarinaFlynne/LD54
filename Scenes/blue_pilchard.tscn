@@ -1,0 +1,140 @@
+[gd_scene load_steps=19 format=3 uid="uid://b1yfg28dvtske"]
+
+[ext_resource type="Texture2D" uid="uid://bho06ps7logjm" path="res://Sprites/Fish/fish_blue_pilchard_0.2s.png" id="1_hylqh"]
+[ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_sxnxf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cf7j5"]
+bounce = 0.4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kbtn"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(0, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nbs4"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(31, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeqy4"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(62, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mafg8"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(93, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qem6u"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(124, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1odt"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(155, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k8nq"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(186, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u76gl"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(217, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl35k"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(248, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3aq6"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(279, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2torw"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(310, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx1x4"]
+atlas = ExtResource("1_hylqh")
+region = Rect2(341, 0, 29, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ojpnr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kbtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nbs4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeqy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mafg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qem6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1odt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4k8nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u76gl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl35k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3aq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2torw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx1x4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hbtrf"]
+radius = 7.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elpsm"]
+radius = 8.0
+
+[node name="blue_pilchard" type="RigidBody2D"]
+collision_layer = 128
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_cf7j5")
+linear_damp_mode = 1
+script = ExtResource("1_sxnxf")
+mouth_pos = NodePath("MouthPos")
+rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
+scene = "res://Scenes/blue_pilchard.tscn"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ojpnr")
+autoplay = "default"
+frame_progress = 0.934304
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hbtrf")
+
+[node name="MouthPos" type="Node2D" parent="."]
+position = Vector2(-19, 0)
+
+[node name="MouthArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
+position = Vector2(-17, -3)
+shape = SubResource("CircleShape2D_elpsm")
+
+[connection signal="body_entered" from="MouthArea" to="." method="_on_mouth_area_body_entered"]

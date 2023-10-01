@@ -38,10 +38,14 @@ func init(speed, dir):
 
 func flip():
 	$AnimatedSprite2D.flip_h = not $AnimatedSprite2D.flip_h
-	$CollisionShape2D.position.x *= -1
-	$CollisionShape2D2.position.x *= -1
-	$MouthArea/CollisionShape2D.position.x *= -1
-	$MouthPos.position.x *= -1
+	for child in get_children():
+		if child != $AnimatedSprite2D:
+			child.position.x *=-1
+	$MouthArea/CollisionShape2D.position.x *=-1
+#	$CollisionShape2D.position.x *= -1
+#	$CollisionShape2D2.position.x *= -1
+#	$MouthArea/CollisionShape2D.position.x *= -1
+#	$MouthPos.position.x *= -1
 
 func disable_boat_physics():
 	gravity_scale = 0

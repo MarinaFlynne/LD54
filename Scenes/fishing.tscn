@@ -1,8 +1,10 @@
-[gd_scene load_steps=174 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=176 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="Texture2D" uid="uid://b6hk6ecx8jbyh" path="res://Sprites/Sky/sky_afternoon.png" id="2_oqc3f"]
+[ext_resource type="PackedScene" uid="uid://b1yfg28dvtske" path="res://Scenes/blue_pilchard.tscn" id="3_f5a2d"]
 [ext_resource type="Texture2D" uid="uid://qtrrr3batvfh" path="res://Sprites/Sky/sky_morning.png" id="3_nd2gq"]
+[ext_resource type="PackedScene" uid="uid://bbhv08wxwa3cr" path="res://Scenes/barred_conger.tscn" id="4_7xn48"]
 [ext_resource type="Texture2D" uid="uid://b4l5v5dy4jf4m" path="res://Sprites/Sky/Night/frame_000_delay-0.2s.png" id="4_e07kt"]
 [ext_resource type="PackedScene" uid="uid://dfpv3brm5hokc" path="res://Scenes/hook.tscn" id="5_s578x"]
 [ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
@@ -844,7 +846,7 @@ AfternoonAnimPlayers = Array[NodePath]([NodePath("Background/SkyAfternoon/Animat
 AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/AnimationPlayer"), NodePath("Clouds/Cloud2/Afternoon/AnimationPlayer")])
 cloud_speed = 5
 rigid_fish_water_dampen = 12
-fishes = Array[PackedScene]([ExtResource("111_1kvje")])
+fishes = Array[PackedScene]([ExtResource("111_1kvje"), ExtResource("3_f5a2d"), ExtResource("4_7xn48")])
 minigame = ExtResource("113_la3pm")
 charge_speed = 1.2
 

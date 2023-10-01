@@ -1,0 +1,126 @@
+[gd_scene load_steps=17 format=3 uid="uid://bbhv08wxwa3cr"]
+
+[ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_jvwy1"]
+[ext_resource type="Texture2D" uid="uid://cclgn48jhfc35" path="res://Sprites/Fish/barred_conger.png" id="2_y12fk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4plte"]
+bounce = 0.4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvpba"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(0, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vctvi"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(60, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dwfd"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(120, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c14e0"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(180, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsul2"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(240, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhbmb"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(300, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f18wj"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(360, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wvgg"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(420, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpca4"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(480, 0, 58, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vak10"]
+atlas = ExtResource("2_y12fk")
+region = Rect2(540, 0, 58, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ojpnr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvpba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vctvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dwfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c14e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsul2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhbmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f18wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wvgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpca4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vak10")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hbtrf"]
+radius = 8.0
+height = 138.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elpsm"]
+radius = 13.0
+
+[node name="barred_conger" type="RigidBody2D"]
+collision_layer = 128
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_4plte")
+linear_damp_mode = 1
+script = ExtResource("1_jvwy1")
+mouth_pos = NodePath("MouthPos")
+rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
+scene = "res://Scenes/barred_conger.tscn"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ojpnr")
+autoplay = "default"
+frame_progress = 0.408889
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hbtrf")
+
+[node name="MouthPos" type="Node2D" parent="."]
+position = Vector2(-59, 0)
+
+[node name="MouthArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
+position = Vector2(-57, -3)
+shape = SubResource("CircleShape2D_elpsm")
+
+[connection signal="body_entered" from="MouthArea" to="." method="_on_mouth_area_body_entered"]
