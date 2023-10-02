@@ -179,7 +179,9 @@ func _on_s_clock_timeout():
 		$MusicPlayer.play()
 		if GameData.day == 3:
 			$MinigameLayer/SharkSpotted/AnimationPlayer.play("Fade")
-		
+	if time == 810:
+		$MusicPlayer/AnimationPlayer.play("Fade")	
+	
 	if time == 840:
 		day_end()
 
@@ -199,8 +201,10 @@ func _on_fish_timer_timeout():
 	if GameData.day == 3 and time >= 540:
 #	if GameData.day == 3:
 		index = randi_range(0, fishes.size()-1)
-	else:
+	elif GameData.day >= 2:
 		index = randi_range(0, fishes.size()-2)
+	else:
+		index = randi_range(0, fishes.size()-3)
 		
 	# choose which direction our fish will come from
 	var direction = randi_range(0, 1)
