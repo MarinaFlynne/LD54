@@ -1,0 +1,303 @@
+[gd_scene load_steps=31 format=3 uid="uid://c5do55x2rhm8g"]
+
+[ext_resource type="Texture2D" uid="uid://depk7vq8qjkqi" path="res://Sprites/mermaid_shop_art/mermaid shop ROOM.png" id="1_4dsiy"]
+[ext_resource type="Script" path="res://Scenes/shop.gd" id="1_matrl"]
+[ext_resource type="Texture2D" uid="uid://8kbuaycq46sj" path="res://Sprites/mermaid_shop_art/mermaid_STATIC.png" id="3_c0ryi"]
+[ext_resource type="Texture2D" uid="uid://d3gir26fl62bk" path="res://Sprites/mermaid_shop_art/mermaid_HAPPY_ANIMATION.png" id="4_ro8om"]
+[ext_resource type="Texture2D" uid="uid://b3jt24mwg8qlw" path="res://Sprites/mermaid_shop_art/shop_bottle_small.png" id="5_yx0nc"]
+[ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="6_vkfjp"]
+[ext_resource type="Texture2D" uid="uid://bt1oimk5i0tc0" path="res://Sprites/mermaid_shop_art/shop_bottle_large.png" id="6_vsdn8"]
+[ext_resource type="Texture2D" uid="uid://pejhy5385tht" path="res://Sprites/mermaid_shop_art/shop_rod_fast.png" id="7_jfw5r"]
+[ext_resource type="Texture2D" uid="uid://ci6uhp4d57omb" path="res://Sprites/mermaid_shop_art/shop_rod_light.png" id="8_l3t17"]
+
+[sub_resource type="Theme" id="Theme_4c52f"]
+default_font = ExtResource("6_vkfjp")
+default_font_size = 60
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkuv2"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(0, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qtvl"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(386, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7oolr"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(772, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmv8r"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(1158, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu1ea"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(1544, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi5ta"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(1930, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enm85"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(2316, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tajl7"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(2702, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ucmc"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(3088, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmcyj"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(3474, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmnll"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(3860, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe5yn"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(4246, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0ta2"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(4632, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfgig"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(5018, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orjsc"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(5404, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejybg"]
+atlas = ExtResource("4_ro8om")
+region = Rect2(5790, 0, 384, 216)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vliy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c0ryi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkuv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qtvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7oolr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmv8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu1ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi5ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enm85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tajl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ucmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmcyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmnll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe5yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0ta2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfgig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orjsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejybg")
+}],
+"loop": false,
+"name": &"purchase",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2rj7"]
+size = Vector2(20, 32.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymxkc"]
+size = Vector2(43.3333, 102.667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnqol"]
+size = Vector2(41.3333, 106)
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_4c52f")
+script = ExtResource("1_matrl")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("1_4dsiy")
+
+[node name="Mermaid" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_vliy8")
+
+[node name="Boat1" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("5_yx0nc")
+
+[node name="Boat1Area" type="Area2D" parent="Boat1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat1/Boat1Area"]
+position = Vector2(-107, -2.5)
+shape = SubResource("RectangleShape2D_a2rj7")
+
+[node name="Price" type="Label" parent="Boat1"]
+offset_left = -128.0
+offset_top = 8.33334
+offset_right = -88.0
+offset_bottom = 31.3333
+theme_override_fonts/font = ExtResource("6_vkfjp")
+text = "Big Boat
+$200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Boat2" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("6_vsdn8")
+
+[node name="Boat2Area" type="Area2D" parent="Boat2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat2/Boat2Area"]
+position = Vector2(-56, -0.333328)
+shape = SubResource("RectangleShape2D_a2rj7")
+
+[node name="Price" type="Label" parent="Boat2"]
+offset_left = -82.3333
+offset_top = 10.6667
+offset_right = -29.3333
+offset_bottom = 44.6667
+theme_override_fonts/font = ExtResource("6_vkfjp")
+text = "Huge Boat
+$400"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rod1" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("8_l3t17")
+
+[node name="Rod1Area" type="Area2D" parent="Rod1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rod1/Rod1Area"]
+position = Vector2(88.3333, 47.3333)
+shape = SubResource("RectangleShape2D_ymxkc")
+
+[node name="Price" type="Label" parent="Rod1"]
+visible = false
+offset_left = 51.0
+offset_top = 10.3333
+offset_right = 118.0
+offset_bottom = 44.3333
+theme_override_fonts/font = ExtResource("6_vkfjp")
+text = "Slow Fish Fall
+$250"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Label" parent="Rod1"]
+visible = false
+offset_left = 51.0
+offset_top = 10.3333
+offset_right = 118.0
+offset_bottom = 44.3333
+theme_override_fonts/font = ExtResource("6_vkfjp")
+text = "Slow Fish Fall"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rod2" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("7_jfw5r")
+
+[node name="Rod2Area" type="Area2D" parent="Rod2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rod2/Rod2Area"]
+position = Vector2(141, 46.3333)
+shape = SubResource("RectangleShape2D_fnqol")
+
+[node name="Price" type="Label" parent="Rod2"]
+visible = false
+offset_left = 83.3333
+offset_top = 5.33334
+offset_right = 156.333
+offset_bottom = 56.3333
+theme_override_fonts/font = ExtResource("6_vkfjp")
+text = "Heavier
+Hook
+$400"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Label" parent="Rod2"]
+visible = false
+offset_left = 83.3333
+offset_top = 5.33334
+offset_right = 156.333
+offset_bottom = 56.3333
+theme_override_fonts/font = ExtResource("6_vkfjp")
+text = "Heavier
+Hook"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 956.0
+offset_top = 43.0
+offset_right = 1129.0
+offset_bottom = 103.0
+text = "Continue"
+
+[connection signal="mouse_entered" from="Boat1/Boat1Area" to="." method="_on_boat_1_area_mouse_entered"]
+[connection signal="mouse_exited" from="Boat1/Boat1Area" to="." method="_on_boat_1_area_mouse_exited"]
+[connection signal="mouse_entered" from="Boat2/Boat2Area" to="." method="_on_boat_2_area_mouse_entered"]
+[connection signal="mouse_exited" from="Boat2/Boat2Area" to="." method="_on_boat_2_area_mouse_exited"]
+[connection signal="mouse_entered" from="Rod1/Rod1Area" to="." method="_on_rod_1_area_mouse_entered"]
+[connection signal="mouse_exited" from="Rod1/Rod1Area" to="." method="_on_rod_1_area_mouse_exited"]
+[connection signal="mouse_entered" from="Rod2/Rod2Area" to="." method="_on_rod_2_area_mouse_entered"]
+[connection signal="mouse_exited" from="Rod2/Rod2Area" to="." method="_on_rod_2_area_mouse_exited"]

@@ -26,7 +26,7 @@ func move_clouds(delta):
 func _on_play_pressed():
 	AudioManager.play("res://SFX/titlestart.wav", -8)
 	print("play")
-	SceneManager.SwitchScene("fishing")
+	SceneManager.SwitchScene("day_1_start")
 
 
 func _on_blink_timer_timeout():

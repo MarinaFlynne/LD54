@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=185 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/Fish/fish_1.tscn" id="2_3sxi1"]
@@ -536,9 +536,6 @@ size = Vector2(743, 1509)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sf6t2"]
 size = Vector2(407, 1457)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rluw5"]
-size = Vector2(121, 96.6667)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5k2i"]
 atlas = ExtResource("111_2dggl")
 region = Rect2(0, 0, 43, 43)
@@ -1034,7 +1031,7 @@ collision_mask = 513
 max_throw_velocity = Vector2(-760, -450)
 underwater_gravity_scale = 0.7
 enter_water_velocity_y = 50.0
-nudge_speed = 80
+nudge_speed = 160
 AttachPoint = NodePath("../FishingRod/AttachPoint")
 
 [node name="Reload" type="Button" parent="."]
@@ -1056,14 +1053,6 @@ autostart = true
 [node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
 position = Vector2(976, 248)
 collision_mask = 0
-
-[node name="DetectFishOnBoat" type="Area2D" parent="Boat"]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat/DetectFishOnBoat"]
-position = Vector2(-1.83334, -39.3333)
-shape = SubResource("RectangleShape2D_rluw5")
 
 [node name="FishingRod" type="AnimatedSprite2D" parent="."]
 position = Vector2(846, 204)

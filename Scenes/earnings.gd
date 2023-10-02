@@ -5,12 +5,14 @@ extends Control
 func _ready():
 	var fish_list = GameData.fish_list
 	var fish_list_worth = GameData.fish_list_worth
-	var day = GameData.current_day
+	var day = GameData.day
 	var fish_list_string = ""
 	var totals_string = ""
 	var dollarx_string = ""
 	var final_total_amount_string = ""
 	var total = 0
+	
+	$EarningsTitle.text = "Day " + str(day) + " Earnings:"
 	
 	await get_tree().create_timer(2).timeout
 	
@@ -30,6 +32,7 @@ func _ready():
 	await get_tree().create_timer(0.5).timeout
 	final_total_amount_string = "$" + str(total)
 	$FinalTotalAmount.text = final_total_amount_string
+	GameData.money += total
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

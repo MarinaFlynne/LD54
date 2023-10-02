@@ -28,6 +28,10 @@ var fishing_minigame_active = false
 
 @export var charge_speed: float = 2
 
+@export var boat1: PackedScene
+@export var boat2: PackedScene
+@export var boat3: PackedScene
+
 var camera_limit_top = 324
 var camera_limit_bottom = 1428
 
@@ -42,6 +46,8 @@ func _ready():
 	$Clouds/Cloud2/Afternoon.modulate = Color(1,1,1,0)
 	$MinigameLayer/ThrowProgress.hide()
 	$CameraMain.enabled = true
+	
+	
 #	$MinigameLayer/CatchingGame.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -130,7 +136,8 @@ func _on_s_clock_timeout():
 		am_pm = "am"
 	else:
 		am_pm = "pm"
-		hours -= 12
+		if hours != 12:
+			hours -= 12
 	var minutes = (time % 60)/10
 	
 	$MinigameLayer/Clock/Label.text = str(hours) + ":" + str(minutes) + "0 " + am_pm

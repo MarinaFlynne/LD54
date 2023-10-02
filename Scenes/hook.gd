@@ -11,7 +11,8 @@ signal entered_water
 @export var drag_coefficient = 0.000 # Adjust as needed
 @export var drag_coefficient_x = 0.5 # Adjust as needed
 
-@export var nudge_speed = 20
+@export var nudge_speed = 80
+@export var nudge_speed2 = 40
 @export var pull_velocity = 200
 @export var AttachPoint: NodePath
 
@@ -28,12 +29,20 @@ var throw_enabled: bool = true
 
 # to store previous velocity for pulling
 var previous_velocity = 40
+@export var previous_velocity_rod1 = 40
+@export var previous_velocity_rod2 = 80
+@export var previous_velocity_rod3 = 40
 var returning_to_prev_velocity: bool
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	if GameData.rod == 1:
+		previous_velocity = previous_velocity_rod1
+	elif GameData.rod == 2:
+		previous_velocity = previous_velocity_rod2
+		
 	pass
 
 func _physics_process(delta):
@@ -100,6 +109,8 @@ func _on_water_collision_body_entered(body):
 	velocity.x *= enter_water_velocity_x_scale
 	velocity.y = enter_water_velocity_y
 	entered_water.emit()
+	await get_tree().create_timer(0.2).timeout
+	returning_to_prev_velocity = true
 
 
 func _on_water_collider_body_exited(body):

@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TotalsTitle" type="Label" parent="."]
+[node name="EarningsTitle" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -40,7 +40,7 @@ offset_right = 444.0
 offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Totals:"
+text = "Earnings"
 horizontal_alignment = 1
 
 [node name="FishList" type="Label" parent="."]
