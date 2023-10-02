@@ -160,7 +160,7 @@ game_speed = 400
 max_move_speed = 40
 min_move_speed = 20
 min_spawn_range = 0.5
-spawn_chance = 0.4
+spawn_chance = 0.2
 fish_name = "Squid"
 scene = "res://Scenes/Fish/squid.tscn"
 

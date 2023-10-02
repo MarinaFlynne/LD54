@@ -103,7 +103,7 @@ game_speed = 300
 max_move_speed = 140
 min_move_speed = 70
 min_spawn_range = 0.8
-spawn_chance = 0.3
+spawn_chance = 0.5
 fish_name = "Barred Conger"
 scene = "res://Scenes/Fish/barred_conger.tscn"
 
