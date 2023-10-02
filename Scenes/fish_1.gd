@@ -107,7 +107,7 @@ func enable_in_boat_physics():
 	set_collision_mask_value(5, true)
 	if GameData.rod_selected == 2:
 		await get_tree().create_timer(5).timeout
-		gravity_scale = default_gravity_scale
+		gravity_scale = 1
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

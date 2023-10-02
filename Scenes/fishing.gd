@@ -203,6 +203,7 @@ func _on_fish_timer_timeout():
 		index = randi_range(0, fishes.size()-1)
 	elif GameData.day >= 2:
 		index = randi_range(0, fishes.size()-2)
+		print("sailfish spawn")
 	else:
 		index = randi_range(0, fishes.size()-3)
 		
@@ -367,6 +368,8 @@ func get_fish_on_boat() -> Dictionary:
 		
 		
 func day_end():
+	AudioManager.stop_playing("res://SFX/rod_cast_CLICKTRACK.wav")
+	AudioManager.stop_playing("res://SFX/rod_reeling.wav")
 	var fish_list = get_fish_on_boat()
 	GameData.fish_list = fish_list
 	GameData.day += 1
