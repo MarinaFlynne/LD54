@@ -6,7 +6,7 @@ var transition_enabled = false
 func _ready():
 	var fish_list = GameData.fish_list
 	var fish_list_worth = GameData.fish_list_worth
-	var day = GameData.day
+	var day = GameData.day -1
 	var fish_list_string = ""
 	var totals_string = ""
 	var dollarx_string = ""
