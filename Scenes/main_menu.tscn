@@ -1,6 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn0q0u4olxp6s"]
+[gd_scene load_steps=12 format=3 uid="uid://dn0q0u4olxp6s"]
 
 [ext_resource type="Script" path="res://Scenes/main_menu.gd" id="1_piws3"]
+[ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="2_2fo7r"]
+[ext_resource type="Texture2D" uid="uid://d1cd6asrqixwo" path="res://Sprites/title.png" id="2_tj45h"]
+[ext_resource type="Texture2D" uid="uid://c82atatbtlf3c" path="res://Sprites/Fish/barred_conger_STATIC.png" id="7_rsx2m"]
+[ext_resource type="Texture2D" uid="uid://de00qi0a5n5jc" path="res://Sprites/fishpile4.png" id="9_k7jbd"]
+[ext_resource type="Texture2D" uid="uid://d2eydfobm6g2b" path="res://Sprites/boat_full.png" id="10_kibq0"]
+[ext_resource type="Texture2D" uid="uid://i8tr2mx8glp2" path="res://Sprites/Sky/clouds_morning.png" id="11_p2bfe"]
+[ext_resource type="Texture2D" uid="uid://dvr7tpks6x0ng" path="res://Sprites/titlechar.png" id="12_tv48x"]
+[ext_resource type="AudioStream" uid="uid://diey4snpnsbsi" path="res://Music/ocean_ambience.mp3" id="13_pggi4"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_xg7ov"]
 action = &"play"
@@ -24,13 +32,77 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -15.5
-offset_right = 20.5
-offset_bottom = 15.5
+offset_left = -340.0
+offset_top = 90.0
+offset_right = -197.0
+offset_bottom = 167.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2fo7r")
+theme_override_font_sizes/font_size = 80
 shortcut = SubResource("Shortcut_p7ml4")
-text = "Play"
+text = "PLAY"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("2_tj45h")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(308, 240)
+scale = Vector2(0.553542, 0.553542)
+texture = ExtResource("9_k7jbd")
+
+[node name="Clouds" type="Sprite2D" parent="."]
+position = Vector2(0, 123)
+scale = Vector2(3, 3)
+texture = ExtResource("11_p2bfe")
+
+[node name="Clouds2" type="Sprite2D" parent="."]
+position = Vector2(2303, 123)
+scale = Vector2(3, 3)
+texture = ExtResource("11_p2bfe")
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(604, 213)
+scale = Vector2(3, 3)
+texture = ExtResource("12_tv48x")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1014, 362)
+rotation = 0.504452
+scale = Vector2(3, 3)
+texture = ExtResource("7_rsx2m")
+
+[node name="Sprite2D9" type="Sprite2D" parent="."]
+position = Vector2(913.508, 394.477)
+scale = Vector2(3, 3)
+texture = ExtResource("10_kibq0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_pggi4")
+autoplay = true
+
+[node name="Press Space" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -472.0
+offset_top = -279.0
+offset_right = -56.0
+offset_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_2fo7r")
+theme_override_font_sizes/font_size = 60
+text = "Press Space"
+horizontal_alignment = 1
+
+[node name="BlinkTimer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

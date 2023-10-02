@@ -50,6 +50,7 @@ Scenes = {
 fadePath = NodePath("CanvasLayer/ColorRect/Fade")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 8
