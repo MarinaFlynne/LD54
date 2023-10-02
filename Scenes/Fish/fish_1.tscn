@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Scenes/fish_1.gd" id="1_y12k8"]
 [ext_resource type="Texture2D" uid="uid://bwa7oabme2q85" path="res://Sprites/Fish/minaFish.png" id="3_stexn"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wvaan"]
-bounce = 0.3
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6hmt5"]
+bounce = 0.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fu8x"]
 atlas = ExtResource("1_qqssx")
@@ -114,7 +114,7 @@ radius = 15.0
 z_index = 1
 collision_layer = 128
 collision_mask = 0
-physics_material_override = SubResource("PhysicsMaterial_wvaan")
+physics_material_override = SubResource("PhysicsMaterial_6hmt5")
 linear_damp_mode = 1
 script = ExtResource("1_y12k8")
 game_speed = 300
