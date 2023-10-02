@@ -124,11 +124,11 @@
 [ext_resource type="Texture2D" uid="uid://bdpxlatuo2u0m" path="res://Sprites/Player/main_char_windup_loop.png" id="113_5sxce"]
 [ext_resource type="PackedScene" uid="uid://brrda866lga7a" path="res://Scenes/catching_game.tscn" id="113_la3pm"]
 [ext_resource type="Texture2D" uid="uid://ciltc3t40ys5m" path="res://Sprites/Player/main_char_casting.png" id="114_afq0d"]
-[ext_resource type="AudioStream" uid="uid://b2ksdh45eus3g" path="res://Music/song_1.wav" id="114_qeot1"]
 [ext_resource type="Texture2D" uid="uid://nan8sayy73sa" path="res://Sprites/Player/character_catch_fish.png" id="117_3b7ge"]
 [ext_resource type="AudioStream" uid="uid://diey4snpnsbsi" path="res://Music/ocean_ambience.mp3" id="118_1leu4"]
 [ext_resource type="Texture2D" uid="uid://cnwwb5b56ph0j" path="res://Sprites/clock3.png" id="121_hao61"]
 [ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="122_pmvmu"]
+[ext_resource type="AudioStream" uid="uid://k4jn6dtnxrir" path="res://Music/song_2.wav" id="128_tjali"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -1265,7 +1265,7 @@ position = Vector2(176, -64)
 shape = SubResource("RectangleShape2D_jitlq")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("114_qeot1")
+stream = ExtResource("128_tjali")
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MusicPlayer"]

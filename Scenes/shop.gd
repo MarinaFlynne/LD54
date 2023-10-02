@@ -34,7 +34,8 @@ func _process(delta):
 		if mouse_on_boat1 and GameData.boat1_avail and GameData.money >= boat1price:
 			$Boat1.hide()
 			GameData.boat1_avail = false
-			GameData.boat = 2
+			if GameData.boat2_avail:
+				GameData.boat = 2
 			purchased(boat1price)
 		elif mouse_on_boat2 and GameData.boat2_avail and GameData.money >= boat2price:
 			$Boat2.hide()

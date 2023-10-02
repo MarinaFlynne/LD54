@@ -53,8 +53,20 @@ position = Vector2(308, 240.529)
 scale = Vector2(0.553542, 0.553542)
 texture = ExtResource("9_k7jbd")
 
+[node name="Sprite2D10" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(773, 241)
+scale = Vector2(0.553542, 0.553542)
+texture = ExtResource("9_k7jbd")
+
 [node name="Clouds" type="Sprite2D" parent="."]
 position = Vector2(0, 123)
+scale = Vector2(3, 3)
+texture = ExtResource("11_p2bfe")
+
+[node name="Clouds3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(515, 125)
 scale = Vector2(3, 3)
 texture = ExtResource("11_p2bfe")
 
@@ -84,6 +96,7 @@ stream = ExtResource("13_pggi4")
 autoplay = true
 
 [node name="Press Space" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

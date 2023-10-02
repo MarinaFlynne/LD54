@@ -177,7 +177,8 @@ func _on_s_clock_timeout():
 		$MusicPlayer.stream = load("res://Music/song_2.wav")
 		$MusicPlayer.volume_db = 0
 		$MusicPlayer.play()
-		$MinigameLayer/SharkSpotted/AnimationPlayer.play("Fade")
+		if GameData.day == 3:
+			$MinigameLayer/SharkSpotted/AnimationPlayer.play("Fade")
 		
 	if time == 840:
 		day_end()
