@@ -1036,8 +1036,7 @@ position = Vector2(576, 324)
 position_smoothing_enabled = true
 
 [node name="CameraDrop" type="Camera2D" parent="."]
-visible = false
-position = Vector2(864, 160)
+position = Vector2(864, 162)
 zoom = Vector2(2, 2)
 
 [node name="WaterColliders" type="Node2D" parent="."]
@@ -1045,7 +1044,7 @@ zoom = Vector2(2, 2)
 [node name="WaterCollider" type="Area2D" parent="WaterColliders"]
 visible = false
 collision_layer = 0
-collision_mask = 8
+collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterColliders/WaterCollider"]
 position = Vector2(575, 996)
@@ -1077,7 +1076,8 @@ collision_mask = 513
 max_throw_velocity = Vector2(-760, -450)
 underwater_gravity_scale = 0.7
 enter_water_velocity_y = 50.0
-nudge_speed = 160
+nudge_speed = 80
+nudge_speed2 = 160
 AttachPoint = NodePath("../FishingRod/AttachPoint")
 
 [node name="Reload" type="Button" parent="."]

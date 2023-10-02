@@ -1,5 +1,6 @@
 extends Control
 
+var transition_enabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +36,14 @@ func _ready():
 	$FinalTotalAmount.text = final_total_amount_string
 	GameData.money += total
 	AudioManager.play("res://SFX/Coin.wav", -10)
+	transition_enabled = true
+	await get_tree().create_timer(0.5).timeout
+	$"Press Space".show()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if transition_enabled:
+		if Input.is_action_just_pressed("play"):
+			AudioManager.play("res://SFX/titlestart.wav")
+			SceneManager.SwitchScene("bedroom")

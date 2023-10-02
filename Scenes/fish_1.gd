@@ -16,6 +16,7 @@ var rotation_speed = 100
 @export var min_spawn_range: float = 0
 @export var spawn_chance: float = 1 # between 0 and 1. percentage chance that the fish will spawn
 @export var fish_name: String
+var rod_2_gravity_scale = 0.4
 
 
 @export var scene = "res://Scenes/fish_1.tscn"
@@ -74,6 +75,7 @@ func enable_swim_physics():
 	linear_damp = 0
 	
 func start_drop_game():
+	
 #	AudioManager.stop_playing("res://SFX/rod_reeling.wav")
 	gravity_scale = 0
 	$Hologram.show()
@@ -92,12 +94,19 @@ func end_drop_game():
 	enable_in_boat_physics()
 
 func enable_in_boat_physics():
+	if GameData.rod_selected == 2:
+		gravity_scale = rod_2_gravity_scale
+	else:
+		gravity_scale = 1
 	if fish_name == "Squid":
 		$AnimatedSprite2D.stop()
-	gravity_scale = 1
+#	gravity_scale = 1
 	set_collision_layer_value(5, true)
 	set_collision_mask_value(7, true)
 	set_collision_mask_value(5, true)
+	if GameData.rod_selected == 2:
+		await get_tree().create_timer(5).timeout
+		gravity_scale = default_gravity_scale
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

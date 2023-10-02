@@ -53,7 +53,6 @@ func _ready():
 	
 	if GameData.boat == 1:
 		boat = boat1.instantiate()
-		add_child(boat)
 		pass
 	if GameData.boat == 2:
 		boat = boat2.instantiate()
@@ -62,6 +61,8 @@ func _ready():
 		boat = boat3.instantiate()
 		pass
 	add_child(boat)
+	
+	
 #	$MinigameLayer/CatchingGame.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -111,10 +112,10 @@ func throw_rod(power):
 	$MinigameLayer/ThrowProgress.hide()
 	
 #	await get_tree().create_timer(0.1).timeout
-	AudioManager.play("res://SFX/rod_cast_CLICKTRACK.wav")
+	AudioManager.play("res://SFX/rod_cast_CLICKTRACK.wav", 4)
 	await $Hook.entered_water
 	AudioManager.stop_playing("res://SFX/rod_cast_CLICKTRACK.wav")
-	AudioManager.play("res://SFX/rod_hook_hitting_water.wav", -4)
+	AudioManager.play("res://SFX/rod_hook_hitting_water.wav", 0)
 	
 func update_fishing_line():
 	rod_point = $FishingRod/AttachPoint.get_global_position()
@@ -172,9 +173,9 @@ func _on_s_clock_timeout():
 			Aniplayer.play("FadeFast")
 		$MusicPlayer/AnimationPlayer.play("Fade")
 		await $MusicPlayer/AnimationPlayer.animation_finished
-		await get_tree().create_timer(20)
+		await get_tree().create_timer(20).timeout
 		$MusicPlayer.stream = load("res://Music/song_2.wav")
-		$MusicPlayer.volume_db = -10
+		$MusicPlayer.volume_db = 0
 		$MusicPlayer.play()
 		
 	if time == 840:
@@ -192,7 +193,12 @@ func _on_fish_collider_body_entered(body):
 # Spawn a fish
 func _on_fish_timer_timeout():
 	# Choose a random fish from the list
-	var index = randi_range(0, fishes.size()-1)
+	var index
+	if GameData.day == 3:
+		index = randi_range(0, fishes.size()-1)
+	else:
+		index = randi_range(0, fishes.size()-2)
+		
 	# choose which direction our fish will come from
 	var direction = randi_range(0, 1)
 	if direction == 0: direction = -1
@@ -352,6 +358,7 @@ func get_fish_on_boat() -> Dictionary:
 func day_end():
 	var fish_list = get_fish_on_boat()
 	GameData.fish_list = fish_list
+	GameData.day += 1
 	SceneManager.SwitchScene("earnings")
 
 

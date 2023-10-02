@@ -15,6 +15,10 @@ var rod2price = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	if GameData.boat1_avail == false:
+		$Boat1.hide()
+	if GameData.boat2_avail == false:
+		$Boat2.hide()
 	
 	$Boat1/Price.hide()
 	$Boat2/Price.hide()
@@ -114,3 +118,7 @@ func _on_rod_1_area_mouse_exited():
 	$Rod1/Desc.hide()
 
 
+
+
+func _on_continue_pressed():
+	SceneManager.SwitchScene("fishing")

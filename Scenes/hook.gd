@@ -11,8 +11,8 @@ signal entered_water
 @export var drag_coefficient = 0.000 # Adjust as needed
 @export var drag_coefficient_x = 0.5 # Adjust as needed
 
-@export var nudge_speed = 80
-@export var nudge_speed2 = 40
+@export var nudge_speed = 40
+@export var nudge_speed2 = 80
 @export var pull_velocity = 200
 @export var AttachPoint: NodePath
 
@@ -38,10 +38,13 @@ var returning_to_prev_velocity: bool
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	if GameData.rod == 1:
-		previous_velocity = previous_velocity_rod1
-	elif GameData.rod == 2:
+	if GameData.rod_selected == 0:
+		previous_velocity = previous_velocity_rod1 
+	elif GameData.rod_selected == 1:
 		previous_velocity = previous_velocity_rod2
+		nudge_speed = nudge_speed2
+	elif GameData.rod_selected == 2:
+		previous_velocity = previous_velocity_rod1
 		
 	pass
 
@@ -115,6 +118,8 @@ func _on_water_collision_body_entered(body):
 
 func _on_water_collider_body_exited(body):
 	in_water = false
+	if is_hooked:
+		AudioManager.play("res://SFX/splash_from_water.wav", -10)
 
 func throw(power):
 	velocity = Vector2(max_throw_velocity.x * (power/100), max_throw_velocity.y * (power/100))

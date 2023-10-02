@@ -109,7 +109,7 @@ scene = "res://Scenes/Fish/sailfish.tscn"
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_lrh04")
 autoplay = "default"
-frame_progress = 0.125383
+frame_progress = 0.0590123
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, 13)

@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://d4ms0artm7010"]
+
+[ext_resource type="Texture2D" uid="uid://cs31k2tj0cdsf" path="res://Sprites/sleepyroom.png" id="1_0rhl6"]
+[ext_resource type="Script" path="res://Scenes/bedroom.gd" id="1_5xfoe"]
+[ext_resource type="AudioStream" uid="uid://uq7htiqm0kp2" path="res://SFX/snoring.mp3" id="2_1prfq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3td6"]
+atlas = ExtResource("1_0rhl6")
+region = Rect2(0, 0, 384, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lotff"]
+atlas = ExtResource("1_0rhl6")
+region = Rect2(386, 0, 384, 216)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xlswc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3td6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lotff")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="Animation" id="Animation_hdssl"]
+resource_name = "Fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.676]
+}
+
+[sub_resource type="Animation" id="Animation_ncqoj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xie3"]
+_data = {
+"Fade": SubResource("Animation_hdssl"),
+"RESET": SubResource("Animation_ncqoj")
+}
+
+[node name="Bedroom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5xfoe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xlswc")
+autoplay = "default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1prfq")
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AudioStreamPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_4xie3")
+}

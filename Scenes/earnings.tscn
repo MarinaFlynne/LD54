@@ -93,6 +93,21 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
 text = "Total: "
 
+[node name="Press Space" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 53.0
+offset_top = 540.0
+offset_right = 457.0
+offset_bottom = 634.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Press Space"
+horizontal_alignment = 2
+
 [node name="FinalTotalAmount" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
