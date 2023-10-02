@@ -337,7 +337,7 @@ offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
-text = "Press Space to continue"
+text = "Press Space to embark"
 
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
 [connection signal="mouse_entered" from="Boat1/Boat1Area" to="." method="_on_boat_1_area_mouse_entered"]
