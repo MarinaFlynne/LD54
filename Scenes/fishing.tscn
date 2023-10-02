@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=193 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/Fish/fish_1.tscn" id="2_3sxi1"]
@@ -129,7 +129,6 @@
 [ext_resource type="AudioStream" uid="uid://diey4snpnsbsi" path="res://Music/ocean_ambience.mp3" id="118_1leu4"]
 [ext_resource type="Texture2D" uid="uid://cnwwb5b56ph0j" path="res://Sprites/clock3.png" id="121_hao61"]
 [ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="122_pmvmu"]
-[ext_resource type="Texture2D" uid="uid://d2eydfobm6g2b" path="res://Sprites/boat_full.png" id="125_7dlds"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -806,15 +805,15 @@ size = Vector2(16.5001, 26.8333)
 
 [sub_resource type="Curve2D" id="Curve2D_hqej8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -64, 408, 0, 0, 0, 0, -64, 1680)
+"points": PackedVector2Array(0, 0, 0, 0, -127, 404, 0, 0, 0, 0, -126, 1676)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_786e1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1216, 376, 0, 0, 0, 0, 1216, 1680)
+"points": PackedVector2Array(0, 0, 0, 0, 1265, 378, 0, 0, 0, 0, 1265, 887, 0, 0, 0, 0, 1267, 1676)
 }
-point_count = 2
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukvqj"]
 size = Vector2(96, 1764)
@@ -857,6 +856,43 @@ tracks/0/keys = {
 _data = {
 "Fade_in": SubResource("Animation_teevs"),
 "RESET": SubResource("Animation_754rp")
+}
+
+[sub_resource type="Animation" id="Animation_l2sev"]
+resource_name = "Fade"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 9, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pt08c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sp60i"]
+_data = {
+"Fade": SubResource("Animation_l2sev"),
+"RESET": SubResource("Animation_pt08c")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oi662"]
@@ -932,7 +968,7 @@ sprite_frames = SubResource("SpriteFrames_4yu7h")
 autoplay = "default"
 
 [node name="SkyAfternoon" type="Sprite2D" parent="Background"]
-position = Vector2(576, 324)
+position = Vector2(576, 232)
 scale = Vector2(3, 3)
 texture = ExtResource("2_oqc3f")
 
@@ -942,7 +978,7 @@ libraries = {
 }
 
 [node name="SkyMorning" type="Sprite2D" parent="Background"]
-position = Vector2(576, 324)
+position = Vector2(576, 232)
 scale = Vector2(3, 3)
 texture = ExtResource("3_nd2gq")
 
@@ -1036,8 +1072,8 @@ position = Vector2(576, 324)
 position_smoothing_enabled = true
 
 [node name="CameraDrop" type="Camera2D" parent="."]
-position = Vector2(864, 162)
-zoom = Vector2(2, 2)
+position = Vector2(792, 111)
+zoom = Vector2(1.6, 1.6)
 
 [node name="WaterColliders" type="Node2D" parent="."]
 
@@ -1089,7 +1125,7 @@ offset_bottom = 48.0
 text = "Reload"
 
 [node name="30sClock" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 15.0
 autostart = true
 
 [node name="FishTimer" type="Timer" parent="."]
@@ -1120,14 +1156,14 @@ shape = SubResource("RectangleShape2D_3dynf")
 curve = SubResource("Curve2D_hqej8")
 
 [node name="FishSpawnLocation" type="PathFollow2D" parent="SpawnPaths/FishSpawnPath1"]
-position = Vector2(-64, 408)
-rotation = 1.5708
+position = Vector2(-127, 404)
+rotation = 1.57001
 
 [node name="FishSpawnPath2" type="Path2D" parent="SpawnPaths"]
 curve = SubResource("Curve2D_786e1")
 
 [node name="FishSpawnLocation" type="PathFollow2D" parent="SpawnPaths/FishSpawnPath2"]
-position = Vector2(1216, 376)
+position = Vector2(1265, 378)
 rotation = 1.5708
 
 [node name="DespawnArea" type="Area2D" parent="."]
@@ -1184,16 +1220,35 @@ offset_bottom = 207.0
 fill_mode = 3
 show_percentage = false
 
+[node name="SharkSpotted" type="Label" parent="MinigameLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -472.0
+offset_top = 18.0
+offset_right = 472.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("122_pmvmu")
+theme_override_font_sizes/font_size = 60
+text = "A great shark has been spotted nearby!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MinigameLayer/SharkSpotted"]
+libraries = {
+"": SubResource("AnimationLibrary_sp60i")
+}
+
 [node name="FishCatchDetect" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishCatchDetect"]
-position = Vector2(588, -189)
+position = Vector2(588, -284)
 shape = SubResource("RectangleShape2D_oi662")
 
 [node name="FishPlacementPos" type="Node2D" parent="."]
-position = Vector2(993, -76)
+position = Vector2(1001, -146)
 
 [node name="DropGameBarrier" type="StaticBody2D" parent="."]
 visible = false
@@ -1221,7 +1276,6 @@ libraries = {
 
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("118_1leu4")
-volume_db = -8.723
 autoplay = true
 
 [node name="WorldBorder" type="StaticBody2D" parent="."]
@@ -1246,13 +1300,6 @@ offset_top = 26.0
 offset_right = 507.0
 offset_bottom = 57.0
 text = "End Day"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-z_index = 3
-position = Vector2(976, 248)
-scale = Vector2(3, 3)
-texture = ExtResource("125_7dlds")
 
 [connection signal="pulling_back" from="." to="." method="_on_pulling_back"]
 [connection signal="throwing" from="." to="." method="_on_throwing"]

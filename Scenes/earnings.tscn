@@ -86,12 +86,25 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -276.0
-offset_top = 540.0
+offset_top = 515.0
 offset_right = 128.0
-offset_bottom = 634.0
+offset_bottom = 609.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
-text = "Total: "
+text = "Total Earned:"
+
+[node name="FinalBalance" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = 548.0
+offset_right = 128.0
+offset_bottom = 642.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Balance:"
 
 [node name="Press Space" type="Label" parent="."]
 visible = false
@@ -114,9 +127,22 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -250.0
-offset_top = 540.0
+offset_top = 515.0
 offset_right = 154.0
-offset_bottom = 634.0
+offset_bottom = 609.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 2
+
+[node name="FinalBalanceAmount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 548.0
+offset_right = 154.0
+offset_bottom = 642.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 2

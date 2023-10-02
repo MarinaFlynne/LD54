@@ -15,6 +15,7 @@ var rotation_speed = 100
 @export var max_spawn_range: float = 1
 @export var min_spawn_range: float = 0
 @export var spawn_chance: float = 1 # between 0 and 1. percentage chance that the fish will spawn
+@export var catch_fill_percent = 20
 @export var fish_name: String
 var rod_2_gravity_scale = 0.4
 
@@ -24,7 +25,7 @@ var rod_2_gravity_scale = 0.4
 var physics = false
 var drop_game_active: bool = false
 var drop_game_move_speed = 60
-var drop_game_length = 1.5 # length of the game in secs
+var drop_game_length = 2.5 # length of the game in secs
 
 signal caught(body)
 signal drop_game_end()

@@ -97,11 +97,11 @@ linear_damp_mode = 1
 script = ExtResource("1_0s04h")
 rects_list = Array[Array]([[1.0, 290], [1.0, 20.0], [1.0, 180.0]])
 game_speed = 500
-max_move_speed = 160
-min_move_speed = 130
-max_spawn_range = 0.5
+max_move_speed = 200
+min_move_speed = 150
+max_spawn_range = 0.6
 min_spawn_range = 0.25
-spawn_chance = 0.2
+spawn_chance = 0.1
 fish_name = "Sailfish"
 scene = "res://Scenes/Fish/sailfish.tscn"
 
@@ -135,7 +135,7 @@ shape = SubResource("CircleShape2D_elpsm")
 
 [node name="Hologram" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
-position = Vector2(0, 77)
+position = Vector2(0, 108)
 scale = Vector2(3, 3)
 texture = ExtResource("3_4rc65")
 

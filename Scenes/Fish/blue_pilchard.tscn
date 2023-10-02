@@ -113,6 +113,10 @@ physics_material_override = SubResource("PhysicsMaterial_cf7j5")
 linear_damp_mode = 1
 script = ExtResource("1_sxnxf")
 rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
+max_move_speed = 100
+min_move_speed = 50
+max_spawn_range = 0.6
+spawn_chance = 0.8
 fish_name = "Blue Pilchard"
 scene = "res://Scenes/Fish/blue_pilchard.tscn"
 
@@ -140,7 +144,7 @@ shape = SubResource("CircleShape2D_elpsm")
 
 [node name="Hologram" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
-position = Vector2(0, 77)
+position = Vector2(0, 95)
 scale = Vector2(3, 3)
 texture = ExtResource("3_bypy5")
 

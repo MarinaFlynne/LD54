@@ -120,37 +120,43 @@ collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_4plte")
 linear_damp_mode = 1
 script = ExtResource("1_0ftt5")
-rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
-max_move_speed = 140
-min_move_speed = 70
+rects_list = Array[Array]([[0.8, 0], [0.8, 90.0], [0.8, 180.0], [0.8, 270.0]])
+game_speed = 350
+max_move_speed = 150
+min_move_speed = 80
+min_spawn_range = 0.5
+spawn_chance = 0.3
+catch_fill_percent = 10
 fish_name = "Blue Shark"
 scene = "res://Scenes/Fish/blahaj.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -39)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ojpnr")
 autoplay = "default"
 frame_progress = 0.520843
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(69, 11)
+position = Vector2(69, -28)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hbtrf")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(1, 17)
+position = Vector2(1, -22)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_y71ih")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-62, 13)
+position = Vector2(-62, -26)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_x4a00")
 
 [node name="MouthPos" type="Node2D" parent="."]
-position = Vector2(-115, 33)
+position = Vector2(-115, -6)
 
 [node name="MouthArea" type="Area2D" parent="."]
+position = Vector2(0, -39)
 collision_layer = 32
 collision_mask = 8
 
@@ -160,7 +166,7 @@ shape = SubResource("CircleShape2D_elpsm")
 
 [node name="Hologram" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
-position = Vector2(0, 86)
+position = Vector2(0, 123)
 scale = Vector2(3, 3)
 texture = ExtResource("3_fpwyf")
 

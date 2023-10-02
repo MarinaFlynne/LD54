@@ -6,7 +6,8 @@ extends Node2D
 @export var heart_fill_percent = 20
 # the percentage that the heart will deplete each unsuccessful action
 @export var heart_deplete_percent = 20
-
+var progress_bar_start = 1
+var blahaj_game = false
 # list where each item represents a rect in the circle. first value is size, second is length
 @export var rects_list: Array[Array] = []
 
@@ -25,9 +26,12 @@ func _ready():
 	pass
 
 
-func init():
+func init(blahaj = false):
 	$AnimationPlayer.play("Fade_in")
 	$ProgressBar.value = 1
+	if blahaj:
+		$ProgressBar.value = 15
+		blahaj_game = true
 	$ArrowPivot.rotation = 0
 	for rect in $Rects.get_children():
 		rect.queue_free()
@@ -83,18 +87,26 @@ func _on_arrow_collider_area_exited(area):
 
 
 func _on_progress_bar_value_changed(value):
-	if $ProgressBar.value == 100:
+	if $ProgressBar.value >= 100:
 		AudioManager.play("res://SFX/fish_CAUGHT.wav", -13)
+		blahaj_game = false
 		game_end.emit(true)
 		
 		game_on = false
 		# play sound effect
 		$AnimationPlayer.play_backwards("Fade_in")
-	if $ProgressBar.value == 0:
+	if $ProgressBar.value <= 0:
 		AudioManager.play("res://SFX/SlamFX.wav", -17)
+		blahaj_game = false
 		game_end.emit(false)
 		game_on = false
 		# play lose sound effect
 		$AnimationPlayer.play_backwards("Fade_in")
 	
+		
+
+
+func _on_timer_timeout():
+	if blahaj_game:
+		$ProgressBar.value -= 1
 		

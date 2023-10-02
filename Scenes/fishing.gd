@@ -177,6 +177,7 @@ func _on_s_clock_timeout():
 		$MusicPlayer.stream = load("res://Music/song_2.wav")
 		$MusicPlayer.volume_db = 0
 		$MusicPlayer.play()
+		$MinigameLayer/SharkSpotted/AnimationPlayer.play("Fade")
 		
 	if time == 840:
 		day_end()
@@ -194,6 +195,7 @@ func _on_fish_collider_body_entered(body):
 func _on_fish_timer_timeout():
 	# Choose a random fish from the list
 	var index
+#	if GameData.day == 3 and time >= 540:
 	if GameData.day == 3:
 		index = randi_range(0, fishes.size()-1)
 	else:
@@ -247,8 +249,12 @@ func on_fish_caught(fish):
 	#
 		catch_game.rects_list = fish.rects_list
 		catch_game.rotation_speed = fish.game_speed
-		
-		catch_game.init()
+		catch_game.heart_fill_percent = fish.catch_fill_percent
+		if fish.fish_name == "Blue Shark":
+			#If blahaj, then use the blahaj version of catch game
+			catch_game.init(true)
+		else:
+			catch_game.init()
 		
 		$Hook.attach(mouth)
 		var win: bool
@@ -279,7 +285,7 @@ func start_boat_placement(scene_path: String):
 	$FishingRod.play("default")
 #	await get_tree().create_timer(1).timeout
 	$CameraDrop.make_current()
-	$Boat/BoatOutside.modulate = Color(1,1,1, 0.5)
+	$Boat/BoatOutside.modulate = Color(1,1,1, 0.2)
 	var fish_scene = load(scene_path)
 	var fish = fish_scene.instantiate()
 #	call_deferred("initialize_fish", fish)

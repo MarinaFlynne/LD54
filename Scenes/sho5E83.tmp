@@ -320,8 +320,6 @@ offset_bottom = -98.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "You have $400"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PressSpace" type="Label" parent="."]
 layout_mode = 1

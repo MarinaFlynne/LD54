@@ -99,10 +99,11 @@ physics_material_override = SubResource("PhysicsMaterial_4plte")
 linear_damp_mode = 1
 script = ExtResource("1_jvwy1")
 rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
+game_speed = 300
 max_move_speed = 140
 min_move_speed = 70
 min_spawn_range = 0.8
-spawn_chance = 0.7
+spawn_chance = 0.3
 fish_name = "Barred Conger"
 scene = "res://Scenes/Fish/barred_conger.tscn"
 
@@ -130,7 +131,7 @@ shape = SubResource("CircleShape2D_elpsm")
 
 [node name="Hologram" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
-position = Vector2(0, 77)
+position = Vector2(0, 100)
 scale = Vector2(3, 3)
 texture = ExtResource("3_2ah37")
 

@@ -12,7 +12,7 @@ func _ready():
 	var dollarx_string = ""
 	var final_total_amount_string = ""
 	var total = 0
-	
+	$FinalBalanceAmount.text = "$" + str(GameData.money)
 	$EarningsTitle.text = "Day " + str(day) + " Earnings:"
 	
 	await get_tree().create_timer(2).timeout
@@ -35,6 +35,8 @@ func _ready():
 	final_total_amount_string = "$" + str(total)
 	$FinalTotalAmount.text = final_total_amount_string
 	GameData.money += total
+	GameData.points += total
+	$FinalBalanceAmount.text = "$" + str(GameData.money)
 	AudioManager.play("res://SFX/Coin.wav", -10)
 	transition_enabled = true
 	await get_tree().create_timer(0.5).timeout

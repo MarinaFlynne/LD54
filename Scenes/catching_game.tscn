@@ -60,6 +60,11 @@ fill_mode = 3
 texture_under = ExtResource("6_jqkgm")
 texture_progress = ExtResource("7_ulxp7")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="area_entered" from="ArrowPivot/ArrowCollider" to="." method="_on_arrow_collider_area_entered"]
 [connection signal="area_exited" from="ArrowPivot/ArrowCollider" to="." method="_on_arrow_collider_area_exited"]
 [connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
