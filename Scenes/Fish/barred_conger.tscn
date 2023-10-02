@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c82atatbtlf3c" path="res://Sprites/Fish/barred_conger_STATIC.png" id="3_2ah37"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4plte"]
-bounce = 0.4
+bounce = 0.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvpba"]
 atlas = ExtResource("2_y12fk")
@@ -102,6 +102,7 @@ rects_list = Array[Array]([[0.5, 45], [0.5, 180.0], [0.5, 270.0]])
 max_move_speed = 140
 min_move_speed = 70
 min_spawn_range = 0.8
+spawn_chance = 0.7
 fish_name = "Barred Conger"
 scene = "res://Scenes/Fish/barred_conger.tscn"
 

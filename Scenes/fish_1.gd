@@ -14,6 +14,7 @@ var rotation_speed = 100
 @export var min_move_speed: int = 30
 @export var max_spawn_range: float = 1
 @export var min_spawn_range: float = 0
+@export var spawn_chance: float = 1 # between 0 and 1. percentage chance that the fish will spawn
 @export var fish_name: String
 
 

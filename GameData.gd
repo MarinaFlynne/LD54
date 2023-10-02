@@ -5,7 +5,7 @@ var fish_list: Dictionary
 var money: int = 0
 var points: int = 0
 var day = 1
-var boat = 1
+var boat = 3
 var rod = 1
 @export var fish_list_worth: Dictionary
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=3 uid="uid://oufcurw8k2ex"]
+[gd_scene load_steps=191 format=3 uid="uid://oufcurw8k2ex"]
 
 [ext_resource type="Script" path="res://Scenes/fishing.gd" id="1_cb4ro"]
 [ext_resource type="PackedScene" uid="uid://g5frwl5ljc6t" path="res://Scenes/Fish/fish_1.tscn" id="2_3sxi1"]
@@ -12,9 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://twd3gohcrcss" path="res://Sprites/Sky/Night/frame_001_delay-0.2s.png" id="5_tvkf7"]
 [ext_resource type="Texture2D" uid="uid://banynmad34o0f" path="res://Sprites/Sky/Night/frame_002_delay-0.2s.png" id="6_2thhj"]
 [ext_resource type="PackedScene" uid="uid://1idkqts1v3ya" path="res://Scenes/Fish/squid.tscn" id="6_qvnqj"]
+[ext_resource type="PackedScene" uid="uid://b3pi64p320qew" path="res://Scenes/Fish/sailfish.tscn" id="7_7p5km"]
 [ext_resource type="Texture2D" uid="uid://dknlcakiounox" path="res://Sprites/Sky/Night/frame_003_delay-0.2s.png" id="7_v0v41"]
+[ext_resource type="PackedScene" uid="uid://def86r4jyv44x" path="res://Scenes/Fish/blahaj.tscn" id="8_ildvq"]
 [ext_resource type="Texture2D" uid="uid://chq8ed2jo0j03" path="res://Sprites/Sky/Night/frame_004_delay-0.2s.png" id="8_lgorf"]
 [ext_resource type="Texture2D" uid="uid://fy30pu4clpno" path="res://Sprites/Sky/Night/frame_005_delay-0.2s.png" id="9_06gj2"]
+[ext_resource type="PackedScene" uid="uid://cvtr7rdhqcm61" path="res://Scenes/boat2.tscn" id="9_33xah"]
+[ext_resource type="PackedScene" uid="uid://bbu586r4fmcqo" path="res://Scenes/boat3.tscn" id="10_5ob7e"]
 [ext_resource type="Texture2D" uid="uid://by76btbgtf1n0" path="res://Sprites/Sky/clouds_afternoon.png" id="10_c2qv7"]
 [ext_resource type="Texture2D" uid="uid://4ysgp5ke6p0b" path="res://Sprites/Sky/Night/frame_006_delay-0.2s.png" id="10_jp8tj"]
 [ext_resource type="Texture2D" uid="uid://bai7upim01vc8" path="res://Sprites/Sky/Night/frame_007_delay-0.2s.png" id="11_ulgsx"]
@@ -126,7 +130,6 @@
 [ext_resource type="Texture2D" uid="uid://cnwwb5b56ph0j" path="res://Sprites/clock3.png" id="121_hao61"]
 [ext_resource type="FontFile" uid="uid://dy4tbf17p4n8q" path="res://Fonts/CelticTime.ttf" id="122_pmvmu"]
 [ext_resource type="Texture2D" uid="uid://d2eydfobm6g2b" path="res://Sprites/boat_full.png" id="125_7dlds"]
-[ext_resource type="AudioStream" uid="uid://gf2x30fplf7o" path="res://SFX/rod_reeling.wav" id="126_ej3k8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yu7h"]
 animations = [{
@@ -817,7 +820,7 @@ point_count = 2
 size = Vector2(96, 1764)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jb8it"]
-size = Vector2(1520, 242)
+size = Vector2(2058, 242)
 
 [sub_resource type="Animation" id="Animation_teevs"]
 resource_name = "Fade_in"
@@ -862,6 +865,43 @@ size = Vector2(1154, 90)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jitlq"]
 size = Vector2(20, 98)
 
+[sub_resource type="Animation" id="Animation_4qcfv"]
+resource_name = "Fade"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-14.964, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_377pn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldwog"]
+_data = {
+"Fade": SubResource("Animation_4qcfv"),
+"RESET": SubResource("Animation_377pn")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx3yp"]
 size = Vector2(26, 1786)
 
@@ -875,11 +915,15 @@ AfternoonAnimPlayers = Array[NodePath]([NodePath("Background/SkyAfternoon/Animat
 AfternoonCloudPlayers = Array[NodePath]([NodePath("Clouds/Cloud1/Afternoon/AnimationPlayer"), NodePath("Clouds/Cloud2/Afternoon/AnimationPlayer")])
 cloud_speed = 5
 rigid_fish_water_dampen = 12
-fishes = Array[PackedScene]([ExtResource("2_3sxi1"), ExtResource("3_x1m8f"), ExtResource("5_rp5ov"), ExtResource("4_xhs4n"), ExtResource("6_qvnqj")])
+fishes = Array[PackedScene]([ExtResource("2_3sxi1"), ExtResource("3_x1m8f"), ExtResource("5_rp5ov"), ExtResource("4_xhs4n"), ExtResource("6_qvnqj"), ExtResource("7_7p5km"), ExtResource("8_ildvq")])
 minigame = ExtResource("113_la3pm")
 charge_speed = 1.2
+boat1 = ExtResource("112_pcy6c")
+boat2 = ExtResource("9_33xah")
+boat3 = ExtResource("10_5ob7e")
 
 [node name="Background" type="Node2D" parent="."]
+z_index = -2
 
 [node name="SkyNight" type="AnimatedSprite2D" parent="Background"]
 position = Vector2(576, 232)
@@ -908,6 +952,7 @@ libraries = {
 }
 
 [node name="Clouds" type="Node2D" parent="."]
+z_index = -2
 
 [node name="Cloud1" type="Node2D" parent="Clouds"]
 
@@ -959,6 +1004,7 @@ libraries = {
 }
 
 [node name="Ocean" type="Node2D" parent="."]
+z_index = -2
 
 [node name="OceanNight" type="Sprite2D" parent="Ocean"]
 position = Vector2(577, 875)
@@ -1043,16 +1089,12 @@ offset_bottom = 48.0
 text = "Reload"
 
 [node name="30sClock" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
 autostart = true
 
 [node name="FishTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
-
-[node name="Boat" parent="." instance=ExtResource("112_pcy6c")]
-position = Vector2(976, 248)
-collision_mask = 0
 
 [node name="FishingRod" type="AnimatedSprite2D" parent="."]
 position = Vector2(846, 204)
@@ -1093,15 +1135,15 @@ collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnArea"]
-position = Vector2(-184, 880)
+position = Vector2(-390, 878)
 shape = SubResource("RectangleShape2D_ukvqj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DespawnArea"]
-position = Vector2(1344, 880)
+position = Vector2(1505, 863)
 shape = SubResource("RectangleShape2D_ukvqj")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="DespawnArea"]
-position = Vector2(568, 1904)
+position = Vector2(533, 1904)
 shape = SubResource("RectangleShape2D_jb8it")
 
 [node name="MinigameLayer" type="CanvasLayer" parent="."]
@@ -1147,11 +1189,11 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishCatchDetect"]
-position = Vector2(581, -31)
+position = Vector2(588, -189)
 shape = SubResource("RectangleShape2D_oi662")
 
 [node name="FishPlacementPos" type="Node2D" parent="."]
-position = Vector2(992, -40)
+position = Vector2(993, -76)
 
 [node name="DropGameBarrier" type="StaticBody2D" parent="."]
 visible = false
@@ -1169,8 +1211,13 @@ shape = SubResource("RectangleShape2D_jitlq")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("114_qeot1")
-volume_db = -15.434
 autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MusicPlayer"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_ldwog")
+}
 
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("118_1leu4")
@@ -1201,13 +1248,11 @@ offset_bottom = 57.0
 text = "End Day"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = 3
 position = Vector2(976, 248)
 scale = Vector2(3, 3)
 texture = ExtResource("125_7dlds")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("126_ej3k8")
 
 [connection signal="pulling_back" from="." to="." method="_on_pulling_back"]
 [connection signal="throwing" from="." to="." method="_on_throwing"]

@@ -19,6 +19,7 @@ func _ready():
 	
 	for fish in fish_list:
 		await get_tree().create_timer(0.5).timeout
+		AudioManager.play("res://SFX/earningsappear.wav", -9)
 		var count = fish_list[fish]
 		var worth = fish_list_worth[fish]
 		total += count * worth
@@ -33,6 +34,7 @@ func _ready():
 	final_total_amount_string = "$" + str(total)
 	$FinalTotalAmount.text = final_total_amount_string
 	GameData.money += total
+	AudioManager.play("res://SFX/Coin.wav", -10)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

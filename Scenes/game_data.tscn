@@ -5,9 +5,11 @@
 [node name="GameData" type="Node"]
 script = ExtResource("1_tt837")
 fish_list_worth = {
-"Barred Conger": 60,
+"Barred Conger": 80,
 "Blue Pilchard": 15,
-"Minafish": 40,
+"Blue Shark": 1000,
+"Minafish": 60,
+"Sailfish": 65,
 "Scissortail Damselfish": 10,
 "Squid": 80
 }

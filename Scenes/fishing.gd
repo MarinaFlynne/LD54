@@ -47,7 +47,21 @@ func _ready():
 	$MinigameLayer/ThrowProgress.hide()
 	$CameraMain.enabled = true
 	
+	$MusicPlayer.volume_db = -10
 	
+	var boat
+	
+	if GameData.boat == 1:
+		boat = boat1.instantiate()
+		add_child(boat)
+		pass
+	if GameData.boat == 2:
+		boat = boat2.instantiate()
+		pass
+	if GameData.boat == 3:
+		boat = boat3.instantiate()
+		pass
+	add_child(boat)
 #	$MinigameLayer/CatchingGame.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -156,7 +170,13 @@ func _on_s_clock_timeout():
 		for path in AfternoonCloudPlayers:
 			var Aniplayer = get_node(path)
 			Aniplayer.play("FadeFast")
-	
+		$MusicPlayer/AnimationPlayer.play("Fade")
+		await $MusicPlayer/AnimationPlayer.animation_finished
+		await get_tree().create_timer(20)
+		$MusicPlayer.stream = load("res://Music/song_2.wav")
+		$MusicPlayer.volume_db = -10
+		$MusicPlayer.play()
+		
 	if time == 840:
 		day_end()
 
@@ -178,29 +198,33 @@ func _on_fish_timer_timeout():
 	if direction == 0: direction = -1
 	# Instantiate our fish
 	var fish = fishes[index].instantiate()
-	
-	# Choose a random location on the Path2D corresponding to the direction
-	var spawn_location
-	if direction == 1:
-		spawn_location = get_node("SpawnPaths/FishSpawnPath1/FishSpawnLocation")
-	else: 
-		spawn_location = get_node("SpawnPaths/FishSpawnPath2/FishSpawnLocation")
-	
-	var max_spawn_range = fish.max_spawn_range
-	var min_spawn_range = fish.min_spawn_range
-	
-	spawn_location.progress_ratio = randf_range(min_spawn_range, max_spawn_range)
-	
-	fish.position = spawn_location.position
-	
-	var max_speed = fish.max_move_speed
-	var min_speed = fish.min_move_speed
-	
-	var speed = randi_range(min_speed, max_speed)
-	fish.init(speed, direction)
-	fish.enable_swim_physics()
-	add_child(fish)
-	fish.caught.connect(on_fish_caught)
+	var spawn_chance = fish.spawn_chance
+	var rand_num = randf()
+	if rand_num <= spawn_chance:
+		# Choose a random location on the Path2D corresponding to the direction
+		var spawn_location
+		if direction == 1:
+			spawn_location = get_node("SpawnPaths/FishSpawnPath1/FishSpawnLocation")
+		else: 
+			spawn_location = get_node("SpawnPaths/FishSpawnPath2/FishSpawnLocation")
+		
+		var max_spawn_range = fish.max_spawn_range
+		var min_spawn_range = fish.min_spawn_range
+		
+		spawn_location.progress_ratio = randf_range(min_spawn_range, max_spawn_range)
+		
+		fish.position = spawn_location.position
+		
+		var max_speed = fish.max_move_speed
+		var min_speed = fish.min_move_speed
+		
+		var speed = randi_range(min_speed, max_speed)
+		fish.init(speed, direction)
+		fish.enable_swim_physics()
+		add_child(fish)
+		fish.caught.connect(on_fish_caught)
+	else:
+		fish.queue_free()
 
 func _on_despawn_area_body_entered(body):
 	body.queue_free()
@@ -249,7 +273,7 @@ func start_boat_placement(scene_path: String):
 	$FishingRod.play("default")
 #	await get_tree().create_timer(1).timeout
 	$CameraDrop.make_current()
-	
+	$Boat/BoatOutside.modulate = Color(1,1,1, 0.5)
 	var fish_scene = load(scene_path)
 	var fish = fish_scene.instantiate()
 #	call_deferred("initialize_fish", fish)
@@ -266,6 +290,7 @@ func initialize_fish(fish):
 	await get_tree().create_timer(1).timeout
 	fishing_minigame_active = false
 	throw_enabled = true
+	$Boat/BoatOutside.modulate = Color(1,1,1, 1)
 	$CameraMain.make_current()
 	$Hook.in_catch_mode = true
 	
